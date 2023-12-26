@@ -1,0 +1,18 @@
+local function map(mode, lhs, rhs, opts)
+    default_opts = {silent = true, noremap = false}
+    for k, v in pairs(opts) do default_opts[k] = v end
+    vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+
+map("", "<leader>wh", "<C-w>h", {desc = "Move to Left Window"})
+map("", "<leader>wj", "<C-w>j", {desc = "Move to Down Window"})
+map("", "<leader>wk", "<C-w>k", {desc = "Move to Up Window"})
+map("", "<leader>wl", "<C-w>l", {desc = "Move to Right Window"})
+map("", "<leader>sh", ":vsplit<CR>", {desc = "Split Window to the Left"})
+map("", "<leader>sj", ":split<CR><C-w>j", {desc = "Split Window to the Bottom"})
+map("", "<leader>sk", ":split<CR>", {desc = "Split Window to the Top"})
+map("", "<leader>sl", ":vsplit<CR><C-w>l", {desc = "Split Window to the Right"})
+map("", "<leader>wc", "<C-w>c", {desc = "Close Window"})
+map("", "<leader>wo", "<C-w>o", {desc = "Maximize Window"})
+
