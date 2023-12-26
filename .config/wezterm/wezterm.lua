@@ -17,6 +17,12 @@ config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("Agave Nerd Font Mono")
 config.font_size = 14.0
 config.window_background_opacity = 0.8
+config.window_padding = {
+    left = '0px',
+    right = '0px',
+    top = '0px',
+    bottom = '0px',
+}
 
 config.disable_default_key_bindings = true
 local act = wezterm.action
