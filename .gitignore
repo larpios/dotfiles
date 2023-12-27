@@ -1,0 +1,8 @@
+Downloads
+rpmbuild
+.viminfo
+.ssh
+.local
+.var/app
+.cache
+.bash_history

@@ -14,8 +14,12 @@ end
 -- For example, changing the color scheme:
 config.default_prog = { "/bin/fish" }
 config.color_scheme = "Catppuccin Mocha"
-config.font = wezterm.font("Agave Nerd Font Mono")
-config.font_size = 14.0
+config.font = wezterm.font_with_fallback({
+    "CaskaydiaCove Nerd Font",
+    "Helvetica",
+    "Arial",
+})
+config.font_size = 13.0
 config.window_padding = {
     left = '0px',
     right = '0px',
@@ -36,6 +40,11 @@ config.keys = {
     { key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
     { key = "w", mods = "CTRL|SHIFT", action = act.CloseCurrentPane({ confirm = true }) },
     { key = "Enter", mods = "CTRL", action = act.SpawnWindow },
+    { key = "C", mods = "CTRL", action = act.CopyTo("ClipboardAndPrimarySelection") },
+    { key = 'V', mods = 'CTRL', action = act.PasteFrom 'Clipboard' },
+    { key = 'V', mods = 'CTRL', action = act.PasteFrom 'PrimarySelection' },
+    { key = 'PageUp', mods = 'SHIFT', action = act.ScrollByPage(-0.5) },
+    { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(0.5) },
 }
 
 for direction, key in pairs(dirs) do
