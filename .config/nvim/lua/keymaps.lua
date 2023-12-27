@@ -16,3 +16,5 @@ map("", "<leader>sl", ":vsplit<CR><C-w>l", {desc = "Split Window to the Right"})
 map("", "<leader>wc", "<C-w>c", {desc = "Close Window"})
 map("", "<leader>wo", "<C-w>o", {desc = "Maximize Window"})
 
+
+map("", "<leader>qq", ":confirm qa<CR>", {desc = "Exit NeoVim"})
