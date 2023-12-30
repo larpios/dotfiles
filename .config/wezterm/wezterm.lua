@@ -12,14 +12,24 @@ end
 
 -- This is where you actually apply your config choices
 -- For example, changing the color scheme:
+
+-- Default shell
 config.default_prog = { "/bin/fish" }
+
+-- Colorscheme
 config.color_scheme = "Catppuccin Mocha"
+
+-- Font
 config.font = wezterm.font_with_fallback({
     "CaskaydiaCove Nerd Font",
     "Helvetica",
     "Arial",
 })
 config.font_size = 13.0
+  -- Ligature
+config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+
+-- Window
 config.window_padding = {
     left = '0px',
     right = '0px',
@@ -28,6 +38,7 @@ config.window_padding = {
 }
 config.window_background_opacity = 0.9
 
+-- Keybindings
 config.disable_default_key_bindings = true
 local act = wezterm.action
 local dirs = { Left = "h", Down = "j", Up = "k", Right = "l" }

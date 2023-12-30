@@ -3,3 +3,5 @@ if status is-interactive
 end
 
 alias vim='nvim'
+alias ls="ls -a --color"
+alias ll="ls -al --color"
