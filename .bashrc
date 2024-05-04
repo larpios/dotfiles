@@ -77,14 +77,6 @@ _open_files_for_editing() {
 
 #------------------------------------------------------------
 
-## Aliases for the functions above.
-## Uncomment an alias if you want to use it.
-##
-
-# alias ef='_open_files_for_editing'     # 'ef' opens given file(s) for editing
-# alias pacdiff=eos-pacdiff
-
-alias ls = 'ls -a'
-alias ll = 'll -al'
-alias vim = 'nvim'
-################################################################################
+if [ -f ~/.bash_local ]; then
+    source ~/.bash_local
+fi
