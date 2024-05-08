@@ -2,5 +2,7 @@
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [user]
-	email = kjwdev01@gmail.com
-	name = kjw
+	email = larpios@protonmail.com
+	name = kjwsl
+[color]
+	ui = auto

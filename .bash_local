@@ -1,3 +1,6 @@
 #!/usr/bin/bash
 
-alias nvim='flatpak run io.neovim.nvim'
+
+if [ -f ~/scripts/mount_remote_server.sh ]; then
+    ~/scripts/mount_remote_server.sh
+fi
