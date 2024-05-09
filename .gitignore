@@ -6,3 +6,4 @@ rpmbuild
 .var/app
 .cache
 .bash_history
+.gitconfig
