@@ -8,3 +8,5 @@ fi
 if [ -f ~/scripts/mount_mat.sh ]; then
     ~/scripts/mount_mat.sh
 fi
+
+eval "$(zoxide init bash)"
