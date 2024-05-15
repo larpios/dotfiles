@@ -1,6 +1,6 @@
 [Default Applications]
-x-scheme-handler/http=io.gitlab.librewolf-community.desktop
-x-scheme-handler/https=io.gitlab.librewolf-community.desktop
+x-scheme-handler/http=re.sonny.Junction.desktop
+x-scheme-handler/https=re.sonny.Junction.desktop
 audio/3gpp=org.videolan.VLC.desktop
 audio/3gpp2=org.videolan.VLC.desktop
 audio/AMR=org.videolan.VLC.desktop
@@ -77,9 +77,12 @@ audio/wave=org.videolan.VLC.desktop
 audio/x-mpeg-3=org.videolan.VLC.desktop
 audio/x-ogg=org.videolan.VLC.desktop
 audio/x-oggflac=org.videolan.VLC.desktop
+text/html=brave-browser.desktop
+x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/unknown=brave-browser.desktop
 
 [Added Associations]
-x-scheme-handler/http=io.gitlab.librewolf-community.desktop;
+x-scheme-handler/http=io.gitlab.librewolf-community.desktop;re.sonny.Junction.desktop;
 audio/3gpp=org.videolan.VLC.desktop;
 audio/3gpp2=org.videolan.VLC.desktop;
 audio/AMR=org.videolan.VLC.desktop;
@@ -156,3 +159,4 @@ audio/wave=org.videolan.VLC.desktop;
 audio/x-mpeg-3=org.videolan.VLC.desktop;
 audio/x-ogg=org.videolan.VLC.desktop;
 audio/x-oggflac=org.videolan.VLC.desktop;
+x-scheme-handler/https=re.sonny.Junction.desktop;
