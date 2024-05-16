@@ -34,5 +34,10 @@ map("v", "K", function ()
     return ":m '<" .. (vim.v.count > 1 and -vim.v.count-1 or -2) .."<CR>gv=gv"
 end, { expr = true, desc = "Move Selected Line Up" })
 
+
+-- File
+map("n", "<leader>bw", "<CMD>w<CR>", {desc = "[B]uffer [W]rite"})
+map("i", "kjl", "<Esc>")
+
 -- Palindrome Support! lol
 map("v", "<leader>lp", "y:set revins<CR>gvA<C-r>\"<Esc>x:set norevins<CR>", { desc = "Palindromify Selection" })
