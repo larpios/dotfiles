@@ -30,4 +30,5 @@ return {
 
     -- see below for full list of options 👇
   },
+  enabled = false,
 }
