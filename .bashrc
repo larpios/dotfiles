@@ -23,3 +23,7 @@ if [ -d ~/.bashrc.d ]; then
     done
 fi
 unset rc
+
+if [ -f ~/.bash_local ]; then
+    . ~/.bash_local
+fi
