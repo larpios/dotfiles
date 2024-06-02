@@ -5,4 +5,4 @@ eval "$(zoxide init bash)"
 export VISUAL="/usr/bin/nvim"
 export EDITOR="$VISUAL"
 
-set -o vi
+alias vim='nvim'
