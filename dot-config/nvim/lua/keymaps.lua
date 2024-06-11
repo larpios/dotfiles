@@ -26,6 +26,7 @@ map("", "<leader>qq", "<cmd>confirm qa<cr>", { desc = "Exit NeoVim" })
 map("", "<leader>oc", "<cmd>e ~/.config/nvim<cr>", { desc = "Open Neovim Config" })
 
 -- Editing
+map("", "<leader>y", "\"+y", { desc = "Yank to Clipboard" })
 map("i", "<C-C>", "<ESC>")
 map("v", "J", function ()
     return ":m '>" .. (vim.v.count > 1 and vim.v.count or 1) .."<CR>gv=gv"
