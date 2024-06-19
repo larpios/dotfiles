@@ -5,3 +5,6 @@
 [submodule "submodules/oh-my-bash"]
 	path = submodules/oh-my-bash
 	url = https://github.com/ohmybash/oh-my-bash
+[submodule "dot-config/nvim-config"]
+	path = dot-config/nvim-config
+	url = https://github.com/kjwsl/nvim-config
