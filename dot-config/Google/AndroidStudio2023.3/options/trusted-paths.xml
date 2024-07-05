@@ -1,0 +1,21 @@
+<application>
+  <component name="Trusted.Paths">
+    <option name="TRUSTED_PROJECT_PATHS">
+      <map>
+        <entry key="/home/cur_proj/aosp/android.ipr" value="true" />
+        <entry key="$USER_HOME$/projects/plain_aosp/android.ipr" value="true" />
+        <entry key="$USER_HOME$/projects/rpi5/aosp" value="true" />
+        <entry key="$USER_HOME$/projects/rpi5/aosp-r34/android.ipr" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="Trusted.Paths.Settings">
+    <option name="TRUSTED_PATHS">
+      <list>
+        <option value="/home/cur_proj/aosp" />
+        <option value="$USER_HOME$/projects/rpi5" />
+        <option value="$USER_HOME$/projects/plain_aosp" />
+      </list>
+    </option>
+  </component>
+</application>

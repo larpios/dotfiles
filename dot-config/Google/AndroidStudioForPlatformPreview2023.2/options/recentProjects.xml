@@ -1,0 +1,27 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="additionalInfo">
+      <map>
+        <entry key="$USER_HOME$/AsfpProjects/aosp">
+          <value>
+            <RecentProjectMetaInfo frameTitle="aosp – Placeholder.java [framework.source]" opened="true" projectWorkspaceId="2iApmNQs5govfFLTGlhYXlxrACn">
+              <option name="activationTimestamp" value="1719204727243" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="AI-232.10227.8.2321.11275306" />
+              <option name="buildTimestamp" value="1704399543955" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="7" />
+              </option>
+              <option name="eap" value="true" />
+              <frame x="1188" y="549" width="1400" height="1000" extendedState="6" />
+              <option name="productionCode" value="AI" />
+              <option name="projectOpenTimestamp" value="1718943395322" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastOpenedProject" value="$USER_HOME$/AsfpProjects/aosp" />
+    <option name="lastProjectLocation" value="$USER_HOME$/AsfpProjects" />
+  </component>
+</application>

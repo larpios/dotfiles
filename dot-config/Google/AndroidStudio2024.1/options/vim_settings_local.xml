@@ -1,0 +1,158 @@
+<application>
+  <component name="VimJumpsSettings">
+    <project id="/home/cur_proj/aosp">
+      <jump line="2" column="13" filename="/home/cur_proj/aosp/external/robolectric-shadows/processor/src/test/resources/mock-source/org/robolectric/shadow/api/Shadow.java" />
+      <jump line="6" column="13" filename="/home/cur_proj/aosp/out/soong/.intermediates/hardware/interfaces/gnss/aidl/android.hardware.gnss-V2-java-source/gen/android/hardware/gnss/BlocklistedSource.java" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/android/hardware/sensors/AdditionalInfo.aidl" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="26" column="9" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="27" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="30" column="51" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="36" column="55" filename="/home/cur_proj/aosp/prebuilts/vndk/v32/x86_64/include/frameworks/native/libs/binder/ndk/include_platform/android/binder_manager.h" />
+      <jump line="32" column="29" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="14" column="2" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="31" column="27" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/file_contexts" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensors.cpp" />
+      <jump line="41" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensors.cpp" />
+      <jump line="77" column="30" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensors.cpp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="8" column="1" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="21" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="26" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="31" column="11" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="40" column="18" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="16" column="28" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="22" column="26" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="30" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="58" column="4" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="38" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="50" column="22" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="49" column="38" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="48" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/health/aidl/aidl_api/android.hardware.health/current/android/hardware/health/BatteryCapacityLevel.aidl" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="28" column="10" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="26" column="23" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="22" column="53" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="25" column="15" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="35" column="14" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="29" column="11" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="33" column="15" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="57" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="31" column="26" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="32" column="5" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="27" column="13" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="46" column="19" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="44" column="8" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/Android.bp" />
+      <jump line="4" column="0" filename="/home/cur_proj/aosp/Android.bp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" />
+      <jump line="25" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" />
+      <jump line="16" column="22" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" />
+      <jump line="19" column="14" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" />
+      <jump line="0" column="0" filename="/usr/include/inttypes.h" />
+      <jump line="42" column="10" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" />
+      <jump line="33" column="34" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/Gnss.cpp" />
+      <jump line="49" column="24" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/Gnss.cpp" />
+      <jump line="54" column="4" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/Gnss.cpp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/gnss-default.rc" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/Gnss.h" />
+      <jump line="31" column="15" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/Gnss.h" />
+      <jump line="59" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/Gnss.h" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/GnssAntennaInfo.cpp" />
+      <jump line="75" column="24" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/GnssAntennaInfo.cpp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/GnssBatching.cpp" />
+      <jump line="128" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/GnssBatching.cpp" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/GnssConfiguration.h" />
+      <jump line="0" column="0" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="22" column="33" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="45" column="0" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="40" column="13" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="47" column="12" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="49" column="13" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="70" column="8" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="72" column="20" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="105" column="40" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="93" column="17" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+      <jump line="100" column="25" filename="/home/cur_proj/aosp/hardware/libhardware/Android.bp" />
+    </project>
+    <project id="android">
+      <jump line="26" column="9" filename="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" />
+      <jump line="37" column="5" filename="/home/cur_proj/aosp/prebuilts/vndk/v32/x86_64/include/frameworks/native/libs/binder/ndk/include_platform/android/binder_process.h" />
+      <jump line="33" column="33" filename="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" />
+    </project>
+  </component>
+  <component name="VimMarksSettings">
+    <globalmarks />
+    <localmarks>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/main.cpp" timestamp="1718940828527">
+        <mark key="&quot;" line="31" column="27" />
+        <mark key="'" line="26" column="9" />
+        <mark key="[" line="20" column="35" />
+        <mark key="]" line="21" column="10" />
+        <mark key="." line="21" column="9" />
+        <mark key="^" line="21" column="10" />
+      </file>
+      <file name="/home/cur_proj/aosp/out/soong/.intermediates/hardware/interfaces/gnss/aidl/android.hardware.gnss-V2-java-source/gen/android/hardware/gnss/BlocklistedSource.java" timestamp="1718939404911">
+        <mark key="&quot;" line="6" column="13" />
+      </file>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/default/AGnss.cpp" timestamp="1718940846881">
+        <mark key="'" line="33" column="33" />
+      </file>
+      <file name="/home/cur_proj/aosp/prebuilts/vndk/v32/x86_64/include/frameworks/native/libs/binder/ndk/include_platform/android/binder_manager.h" timestamp="1718940912137">
+        <mark key="&quot;" line="36" column="55" />
+      </file>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/android/hardware/sensors/AdditionalInfo.aidl" timestamp="1718940823792">
+        <mark key="&quot;" line="0" column="0" />
+      </file>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensors.cpp" timestamp="1718940887411">
+        <mark key="&quot;" line="77" column="30" />
+      </file>
+      <file name="/home/cur_proj/aosp/Android.bp" timestamp="1718940974584">
+        <mark key="&quot;" line="4" column="0" />
+      </file>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/Sensor.cpp" timestamp="1718940937741">
+        <mark key="&quot;" line="48" column="0" />
+      </file>
+      <file name="/home/cur_proj/aosp/prebuilts/vndk/v32/x86_64/include/frameworks/native/libs/binder/ndk/include_platform/android/binder_process.h" timestamp="1718940913656">
+        <mark key="&quot;" line="37" column="5" />
+      </file>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/sensors/aidl/default/file_contexts" timestamp="1718940861119">
+        <mark key="&quot;" line="0" column="0" />
+      </file>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/gnss/aidl/Android.bp" timestamp="1718940955187">
+        <mark key="&quot;" line="44" column="8" />
+      </file>
+      <file name="/home/cur_proj/aosp/hardware/interfaces/health/aidl/aidl_api/android.hardware.health/current/android/hardware/health/BatteryCapacityLevel.aidl" timestamp="1718940950314">
+        <mark key="&quot;" line="0" column="0" />
+      </file>
+      <file name="/home/cur_proj/aosp/external/robolectric-shadows/processor/src/test/resources/mock-source/org/robolectric/shadow/api/Shadow.java" timestamp="1718939321910">
+        <mark key="&quot;" line="2" column="13" />
+      </file>
+    </localmarks>
+  </component>
+  <component name="VimRegisterSettings">
+    <registers>
+      <register name="1" type="LINE_WISE">
+        <text encoding="base64">I2luY2x1ZGUgPAo=</text>
+      </register>
+      <register name="&quot;" type="LINE_WISE">
+        <text encoding="base64">I2luY2x1ZGUgPAo=</text>
+      </register>
+      <register name="." type="CHARACTER_WISE">
+        <text encoding="base64">I2luY2x1ZGUgSzw8</text>
+      </register>
+    </registers>
+  </component>
+  <component name="VimSearchSettings">
+    <search>
+      <last-dir encoding="base64">MQ==</last-dir>
+      <show-last encoding="base64">ZmFsc2U=</show-last>
+    </search>
+  </component>
+  <component name="VimVariables">
+    <vim-variables />
+  </component>
+</application>

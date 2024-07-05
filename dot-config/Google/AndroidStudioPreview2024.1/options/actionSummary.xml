@@ -1,0 +1,16 @@
+<application>
+  <component name="ActionsLocalSummary">
+    <e n="ShowSettings">
+      <i c="2" l="1719198123568" />
+    </e>
+    <e n="WelcomeScreen.OpenProject">
+      <i c="1" l="1719198057677" />
+    </e>
+    <e n="com.intellij.openapi.wm.impl.welcomeScreen.WelcomeScreenComponentFactory$4">
+      <i c="1" l="1719198041336" />
+    </e>
+    <e n="com.intellij.toolWindow.ShowMoreToolWindowsAction">
+      <i c="2" l="1719198110254" />
+    </e>
+  </component>
+</application>

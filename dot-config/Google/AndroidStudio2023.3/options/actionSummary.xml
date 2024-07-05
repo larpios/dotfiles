@@ -1,0 +1,190 @@
+<application>
+  <component name="ActionsLocalSummary">
+    <e n="$Copy">
+      <i c="1" l="1719817790097" />
+    </e>
+    <e n="$Delete">
+      <i c="1" l="1719818437682" />
+    </e>
+    <e n="$Paste">
+      <i c="2" l="1719817799101" />
+    </e>
+    <e n="$SelectAll">
+      <i c="8" l="1719820077200" />
+    </e>
+    <e n="AB.make">
+      <i c="1" l="1719207986113" />
+    </e>
+    <e n="ActivateServicesToolWindow">
+      <i c="1" l="1719207807739" />
+    </e>
+    <e n="ActivateStructureToolWindow">
+      <i c="1" l="1719208285418" />
+    </e>
+    <e n="AndroidConnectDebuggerAction">
+      <i c="5" l="1719213070410" />
+    </e>
+    <e n="AutoIndentLines">
+      <i c="3" l="1719893968719" />
+    </e>
+    <e n="Back">
+      <i c="10" l="1719210096385" />
+    </e>
+    <e n="ChooseRunConfiguration">
+      <i c="1" l="1719208449131" />
+    </e>
+    <e n="CodeCompletion">
+      <i c="4" l="1718934768979" />
+    </e>
+    <e n="EditorBackSpace">
+      <i c="47" l="1719893906173" />
+    </e>
+    <e n="EditorCopy">
+      <i c="1" l="1718941375943" />
+    </e>
+    <e n="EditorEnter">
+      <i c="11" l="1719893902113" />
+    </e>
+    <e n="EditorEscape">
+      <i c="46" l="1719893974289" />
+    </e>
+    <e n="EditorPageDown">
+      <i c="48" l="1718934781642" />
+    </e>
+    <e n="EditorPaste">
+      <i c="4" l="1719211599357" />
+    </e>
+    <e n="FileChooser.Refresh">
+      <i c="3" l="1719206152622" />
+    </e>
+    <e n="FindPrevious">
+      <i c="1" l="1719814753372" />
+    </e>
+    <e n="FindUsages">
+      <i c="3" l="1719818653603" />
+    </e>
+    <e n="GotoDeclaration">
+      <i c="95" l="1719821239832" />
+    </e>
+    <e n="GotoNextError">
+      <i c="1" l="1719814660529" />
+    </e>
+    <e n="OpenFile">
+      <i c="2" l="1719812181073" />
+    </e>
+    <e n="PluginSettingAction">
+      <i c="1" l="1718938665430" />
+    </e>
+    <e n="QuickJavaDoc">
+      <i c="5" l="1718940986470" />
+    </e>
+    <e n="RedesignedRunConfigurationSelector">
+      <i c="11" l="1719213067008" />
+    </e>
+    <e n="Refactorings.QuickListPopupAction">
+      <i c="1" l="1718935583152" />
+    </e>
+    <e n="ReformatCode">
+      <i c="1" l="1719814759974" />
+    </e>
+    <e n="SaveAll">
+      <i c="11" l="1719893975212" />
+    </e>
+    <e n="SearchEverywhere">
+      <i c="4" l="1719820073639" />
+    </e>
+    <e n="SettingsEntryPoint">
+      <i c="4" l="1719461942368" />
+    </e>
+    <e n="ShowIntentionActions">
+      <i c="1" l="1718939486748" />
+    </e>
+    <e n="ShowProjectStructureSettings">
+      <i c="7" l="1719211584369" />
+    </e>
+    <e n="ShowSettings">
+      <i c="9" l="1719462280947" />
+    </e>
+    <e n="ToggleLineBreakpoint">
+      <i c="7" l="1719820093892" />
+    </e>
+    <e n="WelcomeScreen.CreateNewProject">
+      <i c="1" l="1718934304015" />
+    </e>
+    <e n="WelcomeScreen.OpenProject">
+      <i c="2" l="1719460653666" />
+    </e>
+    <e n="com.android.tools.adtui.actions.DropDownAction">
+      <i c="1" l="1719462288505" />
+    </e>
+    <e n="com.android.tools.idea.devicemanagerv2.DeviceManagerPanel$toAnAction$2">
+      <i c="1" l="1719462293447" />
+    </e>
+    <e n="com.android.tools.idea.streaming.core.StreamingToolWindowManager$NewTabAction">
+      <i c="1" l="1719210696705" />
+    </e>
+    <e n="com.android.tools.idea.streaming.core.StreamingToolWindowManager$StartAvdAction">
+      <i c="1" l="1719210699805" />
+    </e>
+    <e n="com.intellij.ide.ReopenProjectAction">
+      <i c="1" l="1718939078865" />
+    </e>
+    <e n="com.intellij.ide.actions.SettingsEntryPointAction$2">
+      <i c="2" l="1719461943813" />
+    </e>
+    <e n="com.intellij.notification.NotificationAction$Simple">
+      <i c="1" l="1719815250718" />
+    </e>
+    <e n="com.intellij.openapi.actionSystem.AnActionWrapper">
+      <i c="410" l="1719893906169" />
+    </e>
+    <e n="com.intellij.openapi.fileEditor.impl.tabActions.CloseTab">
+      <i c="1" l="1719207326323" />
+    </e>
+    <e n="com.intellij.openapi.project.DumbAwareAction$SimpleDumbAwareAction">
+      <i c="3" l="1719207769745" />
+    </e>
+    <e n="com.intellij.openapi.wm.impl.SquareAnActionButton">
+      <i c="36" l="1719462261475" />
+    </e>
+    <e n="com.intellij.openapi.wm.impl.customFrameDecorations.header.toolbar.MainMenuButton$ShowMenuAction">
+      <i c="15" l="1719207812137" />
+    </e>
+    <e n="com.intellij.toolWindow.ShowMoreToolWindowsAction">
+      <i c="1" l="1718934339050" />
+    </e>
+    <e n="com.intellij.toolWindow.ToolWindowHeader$HideAction">
+      <i c="1" l="1719207510998" />
+    </e>
+    <e n="com.intellij.toolWindow.ToolWindowHeader$ShowOptionsAction">
+      <i c="1" l="1719462274564" />
+    </e>
+    <e n="com.intellij.ui.AnActionButton$AnActionButtonWrapper">
+      <i c="4" l="1719211278772" />
+    </e>
+    <e n="com.intellij.ui.CommonActionsPanel$AddButton">
+      <i c="1" l="1719211350413" />
+    </e>
+    <e n="com.intellij.ui.NotificationBalloonActionProvider$3">
+      <i c="2" l="1719205223148" />
+    </e>
+    <e n="com.intellij.ui.ScrollingUtil$ListMoveDownAction">
+      <i c="6" l="1719207289313" />
+    </e>
+    <e n="com.itcodebox.notebooks.action.EditorAddNoteAction">
+      <i c="1" l="1719209088394" />
+    </e>
+    <e n="com.itcodebox.notebooks.action.SearchRecordAction">
+      <i c="1" l="1719821296562" />
+    </e>
+    <e n="com.maddyhome.idea.vim.ui.ex.ExShortcutKeyAction">
+      <i c="15" l="1719893975207" />
+    </e>
+    <e n="context.load">
+      <i c="1" l="1719814756996" />
+    </e>
+    <e n="editRunConfigurations">
+      <i c="3" l="1719207203867" />
+    </e>
+  </component>
+</application>

@@ -1,0 +1,73 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="additionalInfo">
+      <map>
+        <entry key="/home/cur_proj/aosp/android.ipr">
+          <value>
+            <RecentProjectMetaInfo frameTitle="android" projectWorkspaceId="2iAXOlOEV2aqilKth7TDgP28Auu">
+              <option name="activationTimestamp" value="1719206313582" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="AI-241.15989.150.2411.11948838" />
+              <option name="buildTimestamp" value="1718045640000" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="8" />
+              </option>
+              <frame x="-32" y="-31" width="3904" height="2140" extendedState="6" />
+              <option name="productionCode" value="AI" />
+              <option name="projectOpenTimestamp" value="1718934331979" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/projects/rpi5/aosp">
+          <value>
+            <RecentProjectMetaInfo frameTitle="aosp" opened="true" projectWorkspaceId="2iJQhDB7LqyOmfvb3oDgBGqVcel">
+              <option name="activationTimestamp" value="1719214832352" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="AI-233.14808.21.2331.11842104" />
+              <option name="buildTimestamp" value="1715734140000" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="0" />
+              </option>
+              <frame x="1529" y="479" width="1400" height="1000" extendedState="6" />
+              <option name="productionCode" value="AI" />
+              <option name="projectOpenTimestamp" value="1719206316485" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/projects/plain_aosp/android.ipr">
+          <value>
+            <RecentProjectMetaInfo frameTitle="android" projectWorkspaceId="2iRkGudxYKcQGCTn3rYOK47B1T7">
+              <option name="activationTimestamp" value="1719812204362" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="AI-233.14808.21.2331.11842104" />
+              <option name="buildTimestamp" value="1715734140000" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="1" />
+              </option>
+              <frame x="-32" y="-32" width="3904" height="2140" extendedState="6" />
+              <option name="productionCode" value="AI" />
+              <option name="projectOpenTimestamp" value="1719460692681" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/projects/rpi5/aosp-r34/android.ipr">
+          <value>
+            <RecentProjectMetaInfo frameTitle="android – HidParser.cpp" opened="true" projectWorkspaceId="2idElr9aZ5VJuWFz6T1S14pkX6F">
+              <option name="activationTimestamp" value="1719893640748" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="build" value="AI-233.14808.21.2331.11842104" />
+              <option name="buildTimestamp" value="1715734140000" />
+              <option name="colorInfo">
+                <RecentProjectColorInfo associatedIndex="2" />
+              </option>
+              <frame x="2754" y="514" width="1598" height="1201" />
+              <option name="productionCode" value="AI" />
+              <option name="projectOpenTimestamp" value="1719812212652" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastOpenedProject" value="$USER_HOME$/projects/rpi5/aosp-r34/android.ipr" />
+  </component>
+</application>

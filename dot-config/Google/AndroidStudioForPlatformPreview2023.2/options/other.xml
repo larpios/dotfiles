@@ -1,0 +1,65 @@
+<application>
+  <component name="NotRoamableUiSettings">
+    <option name="fontSize" value="13.0" />
+    <option name="ideScale" value="1.75" />
+    <option name="presentationModeIdeScale" value="1.75" />
+    <option name="overrideLafFontsWasMigrated" value="true" />
+  </component>
+  <component name="PropertyService"><![CDATA[{
+  "keyToString": {
+    "LAST_CALCULATED_COLOR_INDEX_KEY": "7",
+    "NextRunPlatformUpdateBuild": "AI-241.15989.150.2411.11932844",
+    "NextRunPlatformUpdateVersion": "Koala | 2024.1.1 RC 2",
+    "PluginConfigurable.selectionTab": "1",
+    "RunOnceActivity.cidr.test.framework.showIndexingAsTask": "true",
+    "SAVED_ANDROID_NPW_LANGUAGE": "Kotlin",
+    "SAVED_LUNCH_TARGET": "aosp_rpi5-ap1a-userdebug",
+    "SAVED_REPO_ROOT": "/home/projects/rpi5/aosp",
+    "Source Code Editor With PreviewLayout": "Editor only",
+    "android.sdk.path": "/home/ray/Android/Sdk",
+    "appcds.runOnSecondStart": "AI-232.10227.8.2321.11275306-788362b9ee21f057f7f29fd0bdccc93f13c7eaad8246c3316dd02d553283ee96",
+    "build.toolwindow.Build Output.selection.state": "com.intellij.build.BuildTreeConsoleView",
+    "bundled.plugins.list.saved.version": "AI-232.10227.8.2321.11275306",
+    "com.developerphil.adbidea.previousversion": "1.6.14",
+    "com.intellij.openapi.roots.ui.configuration.TabbedModuleEditor.selectedEditor": "Sources",
+    "defaultJdkConfigured": "true",
+    "experimental.ui.used.version": "232.10227.8.2321.11275306",
+    "file.gist.reindex.count": "18",
+    "fileTypeChangedCounter": "3",
+    "fontSizeToResetConsole": "13.0",
+    "fontSizeToResetEditor": "13.0",
+    "ideavim.statistics.timestamp": "1719190833183",
+    "ignore.essential-highlighting.mode": "true",
+    "input.method.disabler.muted": "true",
+    "installed.kotlin.plugin.version": "232-1.9.0-release-358-AS10227.8.2321.11275306",
+    "last_opened_file_path": "/home/ray/Android/Sdk",
+    "migrated.non.roamable.values.from.general.settings": "true",
+    "previousColorScheme": "_@user_Dark",
+    "qualified.names.node.provider.file.structure.state": "true",
+    "registry.to.advanced.settings.migration.build": "AI-232.10227.8.2321.11275306",
+    "structure.view.defaults.are.configured": "true",
+    "tasks.pass.word.conversion.enforced": "true"
+  },
+  "keyToStringList": {
+    "file.chooser.recent.files": [
+      "/home/ray/cur_proj/aosp",
+      "/home/ray/AsfpProjects/aosp",
+      "/home/ray/Android/Sdk",
+      "/home/ray/projects/rpi5/aosp/prebuilts/sdk/tools/linux/lib64",
+      "/home/ray/projects/rpi5/aosp/sdk",
+      "/home/ray/projects/rpi5/aosp/prebuilts/jdk/jdk21/linux-x86",
+      "/home/ray/projects/rpi5/aosp/prebuilts/sdk/35",
+      "/home/projects/rpi5/aosp/out/asfp-test",
+      "/home/ray/projects/rpi5/aosp",
+      "/home/projects/rpi5/aosp"
+    ],
+    "fileTypeDetectors": [
+      "com.intellij.ide.scratch.ScratchFileServiceImpl$Detector",
+      "com.jetbrains.cidr.lang.OCHeaderFileTypeDetector",
+      "com.android.tools.idea.sqlite.fileType.SqliteFileTypeDetector",
+      "com.android.tools.idea.profilers.capture.MemoryCaptureFileType$Detector",
+      "org.jetbrains.plugins.textmate.TextMateFileType$TextMateFileDetector"
+    ]
+  }
+}]]></component>
+</application>
