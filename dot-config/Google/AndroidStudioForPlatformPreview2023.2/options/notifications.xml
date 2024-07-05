@@ -1,5 +1,0 @@
-<application>
-  <component name="NotificationConfiguration">
-    <notification groupId="Update Kotlin code style" displayType="NONE" shouldLog="false" />
-  </component>
-</application>
