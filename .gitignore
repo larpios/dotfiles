@@ -9,3 +9,4 @@ rpmbuild
 .gitconfig
 .config/dconf/user
 dot-config/gh/
+dot-config/nvim/lazy-lock.json
