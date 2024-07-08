@@ -26,6 +26,7 @@ map("", "<leader>qq", "<cmd>confirm qa<cr>", { desc = "Exit NeoVim" })
 map("", "<leader>oc", "<cmd>e ~/.config/nvim<cr>", { desc = "Open Neovim Config" })
 map("", "<leader>wb", "<cmd>w<cr>", { desc = "Write to Buffer" })
 map("", "<leader>wa", "<cmd>wa<cr>", { desc = "Write All" })
+map("", "<leader>wq", "<cmd>wq<cr>", { desc = "Write and Quit" })
 
 -- Editing
 map("", "<leader>y", "\"+y", { desc = "Yank to Clipboard" })
@@ -46,4 +47,5 @@ map("i", "kjl", "<Esc>")
 
 -- LSP
 map("n", "<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
-map("n", "<leader>ch", vim.lsp.buf.hover, {desc = "Code Action"})
+map("n", "<leader>ch", vim.diagnostic.open_float, {desc = "Show Diagnostic Message"})
+map("n", "<leader>cr", vim.lsp.buf.rename, {desc = "Rename Symbol"})
