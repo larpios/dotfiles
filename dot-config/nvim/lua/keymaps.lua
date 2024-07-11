@@ -10,10 +10,10 @@ end
 
 
 -- Windows
-map("", "<C-h>", "<C-w>h", { desc = "Move to Left Window" })
-map("", "<C-j>", "<C-w>j", { desc = "Move to Down Window" })
-map("", "<C-k>", "<C-w>k", { desc = "Move to Up Window" })
-map("", "<C-l>", "<C-w>l", { desc = "Move to Right Window" })
+-- map("", "<C-h>", "<C-w>h", { desc = "Move to Left Window" })
+-- map("", "<C-j>", "<C-w>j", { desc = "Move to Down Window" })
+-- map("", "<C-k>", "<C-w>k", { desc = "Move to Up Window" })
+-- map("", "<C-l>", "<C-w>l", { desc = "Move to Right Window" })
 map("", "<leader>pc", "<C-w>c", { desc = "Close Window" })
 map("", "<leader>pm", "<C-w>o", { desc = "Maximize Window" })
 map("", "<leader>sh", ":vsplit<CR>", { desc = "Split Window to the Left" })
