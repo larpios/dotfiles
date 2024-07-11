@@ -43,7 +43,7 @@ end, { expr = true, desc = "Move Selected Line Up" })
 
 -- File
 map("n", "<leader>bw", "<cmd>w<cr>", {desc = "[B]uffer [W]rite"})
-map("i", "kjl", "<Esc>")
+map("i", "jk", "<Esc>")
 
 -- LSP
 map("n", "<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
