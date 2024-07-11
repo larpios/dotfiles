@@ -10,3 +10,4 @@ rpmbuild
 .config/dconf/user
 dot-config/gh/
 dot-config/nvim/lazy-lock.json
+dot-config/mimeapps.list

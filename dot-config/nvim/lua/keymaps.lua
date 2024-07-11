@@ -1,5 +1,5 @@
 local function map(mode, lhs, rhs, opts)
-    local default_opts = { silent = true, noremap = true }
+    local default_opts = { silent = true, noremap = false }
 
     if opts ~= nil then
         for k, v in pairs(opts) do default_opts[k] = v end
