@@ -49,3 +49,9 @@ map("i", "jk", "<Esc>")
 map("n", "<leader>ca", vim.lsp.buf.code_action, {desc = "Code Action"})
 map("n", "<leader>ch", vim.diagnostic.open_float, {desc = "Show Diagnostic Message"})
 map("n", "<leader>cr", vim.lsp.buf.rename, {desc = "Rename Symbol"})
+map("n", "gd", vim.lsp.buf.definition, {desc = "Go to Definition"})
+map("n", "gD", vim.lsp.buf.declaration, {desc = "Go to Declaration"})
+map("n", "gr", vim.lsp.buf.references, {desc = "Go to References"})
+map("n", "<C-r><C-w>", ":%s/\\<<C-r><C-w>\\>//g<left><left>", {desc = "Rename All Occurrences"})
+
+
