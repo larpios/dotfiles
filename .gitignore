@@ -11,3 +11,5 @@ rpmbuild
 dot-config/gh/
 dot-config/nvim/lazy-lock.json
 dot-config/mimeapps.list
+dot-fonts/CascadiaCode/.uuid
+dot-fonts/.uuid
