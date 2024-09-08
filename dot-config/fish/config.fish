@@ -1,12 +1,1 @@
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-end
-
-alias ls="ls -a --color"
-alias ll="ls -al --color"
-alias vim="nvim"
-alias v="nvim"
-
-zoxide init fish | source
-
-fastfetch
+/nix/store/hcd21mvrn7qk0qq1zrwc20phksmirl98-home-manager-files/.config/fish/config.fish
