@@ -10,9 +10,11 @@
     flake-utils = {
         url = "github:numtide/flake-utils";
     };
+    darwin.url = "github:lnl7/nix-darwin/master";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, flake-utils, darwin, ... }@inputs:
   let
       name = "ray";
   in
@@ -29,6 +31,7 @@
                     inherit name;
                     home = "/home/${name}";
                 };
+                inherit inputs;
             };
         };
         "${name}@darwin" = home-manager.lib.homeManagerConfiguration {
@@ -38,10 +41,12 @@
                 ./darwin.nix
             ];
             extraSpecialArgs = {
+                security.pam.enableSudoTouchIdAuth = true;
                 userConfig = {
                     inherit name;
                     home = "/Users/${name}";
                 };
+                inherit inputs;
             };
         };
 

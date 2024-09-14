@@ -39,6 +39,26 @@
 
       };
     };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+      shellAliases = {
+        v = "nvim";
+      };
+      history = {
+        size = 10000;
+        path = "${config.xdg.dataHome}/zsh/history";
+      };
+      zplug = {
+        enable = true;
+        plugins = [
+          { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
+          { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
+        ];
+      };
+    };
     git = {
       enable = true;
       userEmail = "kjwdev01@gmail.com";
@@ -106,12 +126,24 @@
 
     neovim = {
       enable = true;
+      # plugins = with pkgs; [
+      #         vimPlugins.nvim-treesitter
+      #     	    vimPlugins.nvim-treesitter.withAllGrammars
+      #     	    vimPlugins.nvim-treesitter-context
+      #     	    vimPlugins.nvim-treesitter-refactor
+      #     	    vimPlugins.nvim-treesitter-endwise
+      #     	    vimPlugins.completion-treesitter
+      #     	    luajitPackages.luarocks-build-treesitter-parser
+      # ];
     };
   };
 
   home.shellAliases = {
     v = "nvim";
     vim = "nvim";
+    g = "git";
+    ls = "ls -ah --color";
+    ll = "ls -lah --color";
   };
 
   home.packages = with pkgs; [
