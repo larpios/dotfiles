@@ -1,7 +1,7 @@
 { config, pkgs, userConfig, home-manager, ... }:
 
 {
-    homebrew = {
-        enable = true;
-    };
+    home.packages = with pkgs; [
+        xcode-install
+    ];
 }
