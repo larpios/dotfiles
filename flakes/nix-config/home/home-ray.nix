@@ -1,10 +1,10 @@
-{ config, pkgs, userConfig, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = userConfig.name;
-  home.homeDirectory = userConfig.home;
+  home.username = lib.mkDefault "ray";
+  home.homeDirectory = lib.mkDefault "/Users/ray";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -56,7 +56,7 @@
         plugins = [
           { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
           { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
-          { name = "zsh-users/zsh-syntax-highlighting"; tags = [ "as:completion" ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
+          { name = "zsh-users/zsh-syntax-highlighting"; } # Installations with additional options. For the list of options, please refer to Zplug README.
           { name = "catppuccin/zsh-syntax-highlighting"; }
           { name = "zsh-users/zsh-autosuggestions"; }
           { name = "zsh-users/zsh-completions"; }
@@ -163,6 +163,8 @@
     rustup
     fastfetch
     bat
+
+    #fish
     oh-my-fish
     fishPlugins.fzf
     fishPlugins.done
