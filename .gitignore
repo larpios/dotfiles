@@ -14,3 +14,4 @@ dot-config/mimeapps.list
 dot-fonts/CascadiaCode/.uuid
 dot-fonts/.uuid
 dot-config/tmux/plugins
+.config/github-copilot/versions.json
