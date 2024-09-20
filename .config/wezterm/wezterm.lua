@@ -48,8 +48,8 @@ config.window_padding = {
 }
 config.window_background_image = wezterm.config_dir .. "/bg.jpg"
 config.window_background_image_hsb = {
-	brightness = 0.2,
-    saturation = 0.8,
+	brightness = 0.1,
+	saturation = 1,
 }
 config.window_background_opacity = 0.9
 
