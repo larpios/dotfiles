@@ -1,0 +1,55 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.files]
+LICENSE = ""
+"Microsoft.PowerShell_profile.ps1" = ""
+aerospace = "~/.config/aerospace"
+alacritty = "~/.config/alacritty"
+btop = "~/.config/btop"
+dev = ""
+docker = "~/docker"
+doom = "~/.config/doom"
+fastfetch = "~/.config/fastfetch"
+ghostty = "~/.config/ghostty"
+helix = ""
+
+
+hypr = ""
+jj = ""
+kitty = ""
+"komorebi.bar.json" = ""
+"komorebi.json" = ""
+lazygit = ""
+modules = ""
+nix = ""
+nushell = ""
+nvim = ""
+"powershell.config.json" = ""
+scripts = ""
+"setup.ps1" = ""
+shell = ""
+sketchybar = ""
+"starship.toml" = ""
+tmux = ""
+tridactyl = ""
+vim = ""
+waybar = ""
+wezterm = ""
+whkdrc = ""
+yasb = ""
+yazi = ""
+zed = "~/.config/zed"
+zellij = ""
+zsh = ""
+
+[default.variables]
+
+[settings]
+default_target_type = "automatic"
+
+[git.files]
+git = "~/.config/git"
+gitignore = ""
