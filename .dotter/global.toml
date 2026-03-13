@@ -1,0 +1,20 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.files]
+LICENSE = ""
+"README.md" = ""
+dev = ""
+mac = ""
+scripts = ""
+shell = ""
+windows = ""
+dev/nvim = "~/.config/nvim"
+dev/vim = "~/.config/vim"
+
+[default.variables]
+
+[settings]
+default_target_type = "automatic"
