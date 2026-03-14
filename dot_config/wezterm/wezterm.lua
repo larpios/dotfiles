@@ -155,7 +155,7 @@ config.keys = {
 		action = act.QuickSelectArgs({
 			label = "open",
 			patterns = {
-				"\\b[\\w\\-_\\./]+\\b",
+				"\\b[\\w\\-_\\./=\\?#]+\\b",
 			},
 			action = wezterm.action_callback(function(window, pane)
 				local text = window:get_selection_text_for_pane(pane)
