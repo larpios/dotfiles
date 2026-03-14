@@ -29,23 +29,23 @@ local preload = {
 	quickselect_patterns = {
 		{
 			name = "http",
-			pattern = "^https://\\S+?",
+			pattern = "https?://[^%s]+",
 			open = function(text)
 				wezterm.open_with(text)
 			end,
 		},
 		{
 			name = "github_auth_code",
-			pattern = "^[A-Z0-9]{4}-[A-Z0-9]{4}$",
+			pattern = "^%u%u%u%u%-%u%u%u%u$",
 			open = function(text, window)
 				window:copy_to_clipboard(text)
 			end,
 		},
 		{
 			name = "github_url",
-			pattern = "[\\w\\d\\-_]+/[\\w\\d\\-_\\.]+",
+			pattern = "[%w_%-]+/[%w_%-%.]+",
 			open = function(text)
-				local url = "https://" .. text
+				local url = "https://github.com/" .. text
 				wezterm.open_with(url)
 			end,
 		},
@@ -155,7 +155,7 @@ config.keys = {
 		action = act.QuickSelectArgs({
 			label = "open",
 			patterns = {
-				"\\b[\\w\\-_\\./=\\?#]+\\b",
+				"\\b[\\d\\w\\-_\\./=\\?#:\\\\]+\\b",
 			},
 			action = wezterm.action_callback(function(window, pane)
 				local text = window:get_selection_text_for_pane(pane)
