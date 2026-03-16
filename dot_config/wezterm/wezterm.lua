@@ -64,8 +64,10 @@ wezterm.on("toggle-opacity", function(window, pane)
 end)
 
 -- Default shell
-local is_windows = current_os == "Windows"
-local default_shell = is_windows or "pwsh.exe" and os.getenv("SHELL")
+local default_shell = os.getenv("SHELL")
+if current_os == "Windows" then
+    default_shell = "pwsh.exe"
+end
 config.default_prog = { default_shell }
 
 -- Colorscheme
