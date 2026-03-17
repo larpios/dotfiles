@@ -1,0 +1,50 @@
+[aliases]
+b = ["bookmark"]
+df = ["diff"]
+dfp = ["diff", "-r", "@-"]
+lg = ["log"]
+lga = ["log-all"]
+log-all = ["log", "-r", "all()"]
+n = ["new"]
+show-last = ["show", "-r", "@-"]
+sl = ["show-last"]
+
+[diff.tool.difftastic]
+command = ["difft", "--color=always"]
+
+[fsmonitor]
+backend = "watchman"
+
+[git]
+abandon-locally-abandoned = true
+default-branch = "main"
+push-bookmark-prefix = "jj/"
+
+[merge-tools.nvim]
+diff-args = ["-d", "$left", "$right"]
+edit-args = ["-d", "$left", "$right"]
+merge-args = ["-d", "$left", "$output", "$right"]
+
+[merge-tools.nvim-ext]
+diff-args = ["-c", "DiffEditor $left $right $output"]
+edit-args = ["-c", "DiffEditor $left $right $output"]
+merge-args = ["-c", "DiffEditor $left $right $output"]
+program = "nvim"
+
+[revset-aliases]
+HEAD = "@-"
+
+[snapshot]
+auto-update-stale = true
+
+[ui]
+color = "always"
+default-command = "log"
+diff-editor = "nvim-ext"
+diff-formatter = ":git"
+editor = "nvim"
+pager = "delta"
+
+[user]
+email = "kjwdev01@gmail.com"
+name = "nixos"
