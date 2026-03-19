@@ -16,3 +16,21 @@
 #
 # You can remove these comments if you want or leave
 # them for future reference.
+
+def is_exec [cmd: string] {
+  which $cmd | is-not-empty
+}
+
+let autoload_dir = $nu.user-autoload-dirs | first
+
+if (is_exec starship) {
+  starship init nu | save -f ($autoload_dir | path join "starship.nu")
+}
+
+if (is_exec mise) {
+  mise activate nu | save -f ($autoload_dir | path join "mise.nu")
+}
+
+if (is_exec zoxide) {
+  zoxide init nushell | save -f ($autoload_dir | path join "zoxide.nu")
+}
