@@ -62,6 +62,8 @@ Set-UserEnv -Key "SHELL" -Value (Get-Command nu).Path
 Write-Output 'Setting EDITOR...'
 Set-UserEnv -Key "EDITOR" -Value 'nvim'
 Set-UserEnv -Key "VISUAL" -Value 'nvim'
-    
-# }
+
+# Otherwise it uses %appdata% for the config directory
+Set-UserEnv -Key "JJ_CONFIG" -Value "$env:XDG_CONFIG_HOME/jj"
+
 Write-Output 'Done!'
