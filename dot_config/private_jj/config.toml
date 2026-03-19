@@ -20,20 +20,6 @@ abandon-locally-abandoned = true
 default-branch = "main"
 push-bookmark-prefix = "jj/"
 
-[templates]
-# This puts the diff at the bottom of your message when you run 'jj describe'
-draft_commit_description = '''
-concat(
-  description,
-  surround(
-    "\nJJ: Changes:\n",
-    "",
-    indent("JJ: ", diff.stat(72)),
-  ),
-  surround("\nJJ: Diff:\n", "", indent("JJ: ", diff.git(4)))
-)
-'''
-
 [merge-tools.nvim]
 diff-args = ["-d", "$left", "$right"]
 edit-args = ["-d", "$left", "$right"]
@@ -51,8 +37,11 @@ HEAD = "@-"
 [snapshot]
 auto-update-stale = true
 
+[templates]
+draft_commit_description = "concat(\n  description,\n  surround(\n    \"\\nJJ: Changes:\\n\",\n    \"\",\n    indent(\"JJ: \", diff.stat(72)),\n  ),\n  surround(\"\\nJJ: Diff:\\n\", \"\", indent(\"JJ: \", diff.git(4)))\n)\n"
+
 [ui]
-color = "always"
+color = "auto"
 default-command = "log"
 diff-editor = "nvim-ext"
 diff-formatter = ":git"
