@@ -59,8 +59,9 @@ winget install @wingetPrograms --ignore-security-hash
 Write-Output 'Setting SHELL...'
 Set-UserEnv -Key "SHELL" -Value (Get-Command nu).Path
 
-Write-Output 'Setting PATH...'
-Set-UserEnv -Key "SHELL" -Value (Get-Command nu).Path
+Write-Output 'Setting EDITOR...'
+Set-UserEnv -Key "EDITOR" -Value 'nvim'
+Set-UserEnv -Key "VISUAL" -Value 'nvim'
     
 # }
 Write-Output 'Done!'
