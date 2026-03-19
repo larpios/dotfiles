@@ -54,6 +54,9 @@ Write-Output 'Installing programs...'
 winget install @wingetPrograms --ignore-security-hash
 # foreach ($package in $wingetPrograms) {
 #     winget install 
+#
+Write-Output 'Setting SHELL...'
+Set-UserEnv -Key "SHELL" -Value (Get-Command nu).Path
     
 # }
 Write-Output 'Done!'
