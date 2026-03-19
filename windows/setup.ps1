@@ -1,26 +1,37 @@
 $wingetPrograms = @(
-    'Ablaze.Floorp', # Browser
-    'wez.wezterm.nightly', # Wezterm Nightly, nightly programs probably needs the `--ignore-security-hash` flag
-    'Git.Git',
-    'Neovim.Neovim.Nightly', # Neovim
-    'Helix.Helix',
-    'twpayne.chezmoi', # Dotfiles manager
-    'Microsoft.PowerShell', # PowerShell 7
-    'Starship.Starship',
+    'Ablaze.Floorp' # Browser
+    'wez.wezterm.nightly' # Wezterm Nightly, nightly programs probably needs the `--ignore-security-hash` flag
+    'Git.Git'
+    'Neovim.Neovim.Nightly' # Neovim
+    'Helix.Helix'
+    'twpayne.chezmoi' # Dotfiles manager
+    'Microsoft.PowerShell' # PowerShell 7
+    'Starship.Starship'
     'ajeetdsouza.zoxide'
-    'sharkdp.bat',
-    'sharkdp.fd',
-    'sxyazi.yazi',
-    'jj-vcs.jj', # Jujutsu version control system
-    'jdx.mise', # Mise package manager for devs
-    'BurntSushi.ripgrep.GNU',
-    'DEVCOM.JetBrainsMonoNerdFont', # JetBrains Mono Nerd Font
-    'Neovide.Neovide', # VLC Media Player
-    'XnSoft.XnViewMP', # Image viewer
-    'VideoLAN.VLC', # VLC Media Player
-    'Discord.Discord', # Discord
-    'Valve.Steam',
-    'Google.Chrome.EXE', # Chrome just in case
+    'dandavison.delta'
+    'sharkdp.bat'
+    'sharkdp.fd'
+    'LLVM.LLVM'
+    'MSYS2.MSYS2' # gcc
+    'zig.zig'
+    'sxyazi.yazi'
+    'junegunn.fzf'
+    'Raycast' # Task runner
+    'jj-vcs.jj' # Jujutsu version control system
+    'jdx.mise' # Mise package manager for devs
+    'BurntSushi.ripgrep.GNU'
+    'DEVCOM.JetBrainsMonoNerdFont' # JetBrains Mono Nerd Font
+    'Nushell.Nushell'
+    'rsteube.Carapace'
+    'JesseDuffield.lazygit'
+    'Cretezy.lazyjj'
+    'Microsoft.PowerToys'
+    'Neovide.Neovide' # VLC Media Player
+    'XnSoft.XnViewMP' # Image viewer
+    'VideoLAN.VLC' # VLC Media Player
+    'Discord.Discord' # Discord
+    'Valve.Steam'
+    'Google.Chrome.EXE' # Chrome just in case
     'Kakao.KakaoTalk' # Kakaotalk just in case
 )
 

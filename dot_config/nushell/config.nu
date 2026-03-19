@@ -24,22 +24,7 @@ $env.config.buffer_editor = "nvim"
 
 source ~/.config/nushell/aliases.nu
 
-source ~/.zoxide.nu
-
 source ~/.config/nushell/themes/catppuccin_mocha.nu
 
-if (which starship | is-not-empty) {
-    mkdir ($nu.data-dir | path join "vendor/autoload")
-    starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
-}
-# oh-my-posh init nu --config 'catppuccin'
-# oh-my-posh init nu --config 'catppuccin_mocha'
-# oh-my-posh init nu --config 'stelbent-compact.minimal'
-# oh-my-posh init nu --config 'fish'
-
-# Run fastfetch if exists
-if (which fastfetch | is-not-empty) {
-    fastfetch
-}
-
 $env.config.show_banner = false
+
