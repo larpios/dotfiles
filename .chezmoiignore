@@ -7,12 +7,12 @@ README.md
 LICENSE
 windows
 
-{{ if ne .chezmoi.os "windows" }}
+{{- if ne .chezmoi.os "windows" }}
 readonly_Documents
 komorebi.json
 komorebi.bar.json
 dot_config/whkdrc
-{{ end }}
+{{- end }}
 
 # Gemini CLI: Ignore dynamic state and auth tokens
 .gemini/google_accounts.json
