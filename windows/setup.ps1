@@ -13,6 +13,7 @@ $wingetPrograms = @(
     'sharkdp.fd'
     'LLVM.LLVM'
     'MSYS2.MSYS2' # gcc
+    'Microsoft.VisualStudio.BuildTools'
     'zig.zig'
     'sxyazi.yazi'
     'junegunn.fzf'
@@ -56,6 +57,9 @@ winget install @wingetPrograms --ignore-security-hash
 #     winget install 
 #
 Write-Output 'Setting SHELL...'
+Set-UserEnv -Key "SHELL" -Value (Get-Command nu).Path
+
+Write-Output 'Setting PATH...'
 Set-UserEnv -Key "SHELL" -Value (Get-Command nu).Path
     
 # }
