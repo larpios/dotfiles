@@ -1,5 +1,0 @@
-[submodule "nvim"]
-    branch = "master"
-    update = merge
-	path = dot_config/nvim
-	url = https://github.com/kjwsl/nvim-config
