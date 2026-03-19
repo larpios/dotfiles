@@ -23,6 +23,10 @@ def is_exec [cmd: string] {
 
 let autoload_dir = $nu.user-autoload-dirs | first
 
+if not ($autoload_dir | path exists) {
+  mkdir $autoload_dir
+}
+
 if (is_exec starship) {
   starship init nu | save -f ($autoload_dir | path join "starship.nu")
 }
