@@ -90,8 +90,8 @@
 
 [includeIf "gitdir:~/work/"]
 	path = ~/.config/git/config-work
-
 {{- $ghPath := lookPath "gh" }}
+
 {{- if $ghPath }}
 [credential "https://github.com"]
 	helper =
@@ -100,8 +100,8 @@
 	helper =
 	helper = !'{{ $ghPath | replace "\\" "\\\\" }}' auth git-credential
 {{- end }}
-
 {{- if (lookPath "git-lfs") }}
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
