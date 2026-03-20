@@ -35,23 +35,23 @@ export def "path optimize" [] : [string -> string, list<string> -> list<string>]
 
 # Set environment variable
 export def "env set" [
-  --scope (-s): string = "user", # Environment variable scope, `user` or `machine`
-] : record<key: string, value: list<string>> -> nothing {
+  --scope (-s): string@scopes = "User", # Environment variable scope
+] : record -> nothing {
   let set_cmd = { |key, value|
-    $"[System.Environment]::SetEnvironmentVariable\('($key)', '($in)', [System.EnvironmentVariableTarget]::($scope)\)"
+    $"[System.Environment]::SetEnvironmentVariable\('($key)', '($value)', [System.EnvironmentVariableTarget]::($scope)\)"
   }
 
   $in 
   | items { |key, value| 
     if ($value | is-not-empty) {
-      pwsh -c (^$set_cmd $key $value)
+      pwsh -c (do $set_cmd $key $value)
     } 
   }
 }
 
 # Get environment variable
 export def "env get" [
-  --scope (-s): string = "user", # Environment variable scope, `user` or `machine`
+  --scope (-s): string@scope = "User", # Environment variable scope
 ] : [string -> list<string>, list<string> -> record<key: string, value: list<string>>] {
 
   let get_cmd = { |key|
@@ -65,10 +65,10 @@ export def "env get" [
 
     $in 
     | reduce --fold {} {|key, acc|
-      $acc | insert $key (pwsh -c (^$get_cmd $key) | split row ';')
+      $acc | insert $key (pwsh -c (do $get_cmd $key) | split row ';')
     }
   } else {
-    (pwsh -c (^$get_cmd $in) | split row ';')
+    (pwsh -c (do $get_cmd $in) | get stdout | split row ';')
   }
 }
 
@@ -77,5 +77,12 @@ export def "env get" [
 # This wrapper is to prefer `pwsh.exe` if it is available, but to fall back to `powershell.exe` otherwise.
 def --wrapped pwsh [...args] {
   let pwsh_cmd = if (is-exe pwsh.exe) { 'pwsh.exe' } else { 'powershell.exe' }
-  ^$pwsh_cmd ...$args
+
+  log debug $"cmd: ($pwsh_cmd), args: ($args)"
+  ^$pwsh_cmd ...$args | complete
+}
+
+# For scope completions
+def scopes [] : nothing -> list<string> {
+  ['User', 'Machine']
 }
