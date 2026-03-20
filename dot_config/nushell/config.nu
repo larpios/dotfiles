@@ -1,5 +1,7 @@
 $env.config.completions.external.enable = true
 $env.config.completions.external.max_results = 200
+$env.config.edit_mode = 'vi'
+$env.config.history.file_format = 'sqlite'
 $env.config.buffer_editor = "nvim"
 $env.config.show_banner = false
 

@@ -1,8 +1,57 @@
 use misc.nu is-exe
+use std/util 'path add'
 const AUTOLOAD_DIR = $nu.config-path | path dirname | path join "autoload"
 
 if not ($AUTOLOAD_DIR | path exists) {
   mkdir $AUTOLOAD_DIR
+}
+
+const ENV_DIRS = [
+  '~/.nix-profile/bin',
+  '~/.cargo/bin',
+  '~/.local/bin',
+  '/usr/local/bin',
+  '/usr/bin',
+  '/bin'
+  '/nix/var/nix/profiles/default/bin',
+]
+
+for $dir in $ENV_DIRS {
+  path add $dir
+}
+
+export-env {
+  $env.XDG_CONFIG_HOME = ('~/.config' | path expand)
+  $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
+  $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
+}
+
+if (is-exe direnv) {
+  $env.config.hooks.pre_prompt = (
+    $env.config.hooks.pre_prompt?
+    | default []
+    | append {||
+      ^direnv export json
+      | from json --strict
+      | default {}
+      | items {|key, value|
+        let value = do (
+          {
+            "PATH": {
+              from_string: {|s| $s | split row (char esep) | path expand --no-symlink }
+                           to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
+            }
+          }
+          | merge ($env.ENV_CONVERSIONS? | default {})
+          | get ([[value, optional, insensitive]; [$key, true, true] [from_string, true, false]] | into cell-path)
+          | if ($in | is-empty) { {|x| $x} } else { $in }
+        ) $value
+        return [ $key $value ]
+      }
+      | into record
+      | load-env
+    }
+  )
 }
 
 if (is-exe starship) {
