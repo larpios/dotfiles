@@ -7,11 +7,20 @@ README.md
 LICENSE
 windows
 
+# Ignore Windows specific files on non-windows
 {{- if ne .chezmoi.os "windows" }}
-readonly_Documents
+Documents
 komorebi.json
 komorebi.bar.json
-dot_config/whkdrc
+.config/whkdrc
+{{- end }}
+
+# If nix exists, ignore fish, nushell configs
+{{- if (findExecutable "nix") }}
+.config/fish
+.config/nushell
+.config/zellij
+.config/btop
 {{- end }}
 
 # Gemini CLI: Ignore dynamic state and auth tokens
