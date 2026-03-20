@@ -16,7 +16,7 @@ komorebi.bar.json
 {{- end }}
 
 # If nix exists, ignore fish, nushell configs
-{{- if (findExecutable "nix") }}
+{{- if (findExecutable "nix" (list "bin" ".cargo/bin" ".nix-profile/bin" ".local/bin" "/run/current-system/sw/bin")) }}
 .config/fish
 .config/nushell
 .config/zellij
