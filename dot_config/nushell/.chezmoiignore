@@ -1,2 +1,3 @@
 history.*
 autoload/
+plugins.msgpackz
