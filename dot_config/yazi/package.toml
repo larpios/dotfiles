@@ -1,0 +1,32 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "1962818"
+hash = "4e73319ab676b46840dcfb06864e207c"
+
+[[plugin.deps]]
+use = "Adda0/jjui"
+rev = "a41b2e1"
+hash = "39a4bc4632509e4a68e26b3eed3c3217"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+rev = "1962818"
+hash = "b99cda925dfd7969cb888e086408decc"
+
+[[plugin.deps]]
+use = "AminurAlam/yazi-plugins:preview-typst"
+rev = "1d28640"
+hash = "9740391e12628172cd68c54b5be713c3"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "1962818"
+hash = "8135055b6ae99fde8db06219e6ecb29a"
+
+[[plugin.deps]]
+use = "TD-Sky/sudo"
+rev = "86205aa"
+hash = "9628b660afb192d32f2ea5f6634d3e72"
+
+[flavor]
+deps = []

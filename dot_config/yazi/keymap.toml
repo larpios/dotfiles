@@ -9,9 +9,9 @@ on = "l"
 run = "plugin smart-enter"
 
 [[mgr.prepend_keymap]]
-desc = "Drag Files"
-on = ["<C-d>"]
-run = "plugin drag"
+on   = "<C-d>"
+run  = "plugin diff"
+desc = "Diff the selected with the hovered file"
 
 [[mgr.prepend_keymap]]
 desc = "sudo paste"
