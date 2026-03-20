@@ -1,7 +1,10 @@
 use misc.nu is-exe
-
 const AUTOLOAD_DIR = $nu.config-path | path dirname | path join "autoload"
-if not ($AUTOLOAD_DIR | path exists) { mkdir $AUTOLOAD_DIR }
+
+if not ($AUTOLOAD_DIR | path exists) {
+  mkdir $AUTOLOAD_DIR
+}
+
 if (is-exe starship) {
     starship init nu | save -f ($AUTOLOAD_DIR | path join "starship.nu")
 }
