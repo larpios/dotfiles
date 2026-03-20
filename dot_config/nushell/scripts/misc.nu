@@ -1,7 +1,12 @@
 use std/assert
 use std/log
 
-export def is-exe [cmd?: string] { 
+# Check if a command is an executable.
+#
+# The standard way is to pass the command as a regular argument, but it can also be piped.
+#
+# @error: If none or both of them are provided, an error is raised.
+export def is-exe [cmd?: string] : [nothing -> bool, string -> bool] { 
   if ($cmd == null and $in == null) {
     error make {
       msg: 'No arguments provided'
@@ -27,11 +32,9 @@ export def is-exe [cmd?: string] {
       ]
     } 
   } else if ($in != null) {
-    return (is-exe $in)
+    is-exe $in
+  } else {
+    log debug $"Checking if `($cmd)` is an executable"
+    which $cmd | is-not-empty 
   }
-
-  assert not equal $cmd null 'You should have already checked for arguments'
-
-  log debug $"Checking if `($cmd)` is an executable"
-  which $cmd | is-not-empty 
 }
