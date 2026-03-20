@@ -30,6 +30,12 @@ export def is-exe [cmd?: string] : [nothing -> bool, string -> bool] {
           span: (metadata $in).span
         }
       ]
+      help: ([
+        'Try using just a regular argument or just a piped argument'
+        ('is-exe cmd' | nu-highlight)
+        'or'
+        ('"cmd" | is-exe' | nu-highlight)
+      ] | str join "\n")
     } 
   } else if ($in != null) {
     is-exe $in
