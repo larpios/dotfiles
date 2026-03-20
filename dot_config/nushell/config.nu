@@ -20,3 +20,4 @@ use windows.nu
 use misc.nu *
 
 use external/yazi.nu *
+use external/tere.nu *

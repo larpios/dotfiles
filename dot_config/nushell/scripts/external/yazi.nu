@@ -1,5 +1,5 @@
 use std/log
-use misc is-exe
+use misc.nu is-exe
 
 export def --env --wrapped y [...args] {
   if not (is-exe yazi) {
