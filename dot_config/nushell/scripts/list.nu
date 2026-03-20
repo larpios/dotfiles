@@ -1,3 +1,5 @@
+# Helper functions for working with lists
+
 # Swaps two rows in a table
 # Usage:
 # ```nu

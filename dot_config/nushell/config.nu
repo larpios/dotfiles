@@ -14,6 +14,7 @@ source-env $THEME_FILE
 
 use aliases.nu *
 use list.nu *
-use misc.nu *
-use external.nu *
 use windows.nu
+use misc.nu *
+
+use external/yazi.nu *
