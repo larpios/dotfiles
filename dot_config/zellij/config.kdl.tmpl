@@ -1,0 +1,115 @@
+show_startup_tips false
+theme "catppuccin-mocha"
+web_client {
+    font "JetBrainsMono Nerd Font Mono"
+}
+web_server true
+web_server_cert "~{{ .chezmoi.pathSeparator }}.certs{{ .chezmoi.pathSeparator }}zellij.pem"
+web_server_ip "0.0.0.0"
+web_server_key "~{{ .chezmoi.pathSeparator }}.certs{{ .chezmoi.pathSeparator }}zellij-key.pem"
+web_server_port 8088
+{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} extraConfig
+plugins {
+    room location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}rvcas{{ .chezmoi.pathSeparator }}room{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}v1.2.1{{ .chezmoi.pathSeparator }}room.wasm"
+    vimZellijNavigator location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}hiasr{{ .chezmoi.pathSeparator }}vim-zellij-navigator{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}0.3.0{{ .chezmoi.pathSeparator }}vim-zellij-navigator.wasm"
+    harpoon location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}Nacho114{{ .chezmoi.pathSeparator }}harpoon{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}v0.3.0{{ .chezmoi.pathSeparator }}harpoon.wasm"
+    zellijForgot location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}karimould{{ .chezmoi.pathSeparator }}zellij-forgot{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}0.4.2{{ .chezmoi.pathSeparator }}zellij_forgot.wasm"
+}
+keybinds {
+    pane {
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "harpoon" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+    }
+    tab {
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "room" {
+                floating true
+                ignore_case true
+                quick_jump true
+            }
+        }
+        bind "Shift h" {
+            MoveTab "Left"
+        }
+        bind "Shift l" {
+            MoveTab "Right"
+        }
+    }
+    shared_except "locked" {
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "zellijForgot" {
+                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} LOAD_ZELLIJ_BINDINGS "false"
+                floating true
+            }
+        }
+        bind "Ctrl h" {
+            MessagePlugin "vimZellijNavigator" {
+                name "move_focus_or_tab"
+                payload "left"
+                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Plugin Configuration
+                move_mod "ctrl"
+                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Optional, should be added on every move command if changed.
+                use_arrow_keys "false"
+ {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Optional, uses arrow keys instead of hjkl. Should be added to every command where you want to use it.
+            }
+        }
+        bind "Ctrl j" {
+            MessagePlugin "vimZellijNavigator" {
+                name "move_focus"
+                payload "down"
+                move_mod "ctrl"
+                use_arrow_keys "false"
+            }
+        }
+        bind "Ctrl k" {
+            MessagePlugin "vimZellijNavigator" {
+                name "move_focus"
+                payload "up"
+                move_mod "ctrl"
+                use_arrow_keys "false"
+            }
+        }
+        bind "Ctrl l" {
+            MessagePlugin "vimZellijNavigator" {
+                name "move_focus_or_tab"
+                payload "right"
+                move_mod "ctrl"
+                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Optional, should be added on every command if you want to use it
+                use_arrow_keys "false"
+            }
+        }
+        bind "Alt h" {
+            MessagePlugin "vimZellijNavigator" {
+                name "resize"
+                payload "left"
+                resize_mod "alt"
+            }
+        }
+        bind "Alt j" {
+            MessagePlugin "vimZellijNavigator" {
+                name "resize"
+                payload "down"
+                resize_mod "alt"
+            }
+        }
+        bind "Alt k" {
+            MessagePlugin "vimZellijNavigator" {
+                name "resize"
+                payload "up"
+                resize_mod "alt"
+            }
+        }
+        bind "Alt l" {
+            MessagePlugin "vimZellijNavigator" {
+                name "resize"
+                payload "right"
+                resize_mod "alt"
+            }
+        }
+    }
+}
+
