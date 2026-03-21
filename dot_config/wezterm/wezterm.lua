@@ -115,9 +115,9 @@ config.font = wezterm.font_with_fallback({
     "Courier New",
 })
 if current_os == "OSX" or current_os == "Darwin" then
-    config.font_size = 16
+    config.font_size = 14
 else
-    config.font_size = 13
+    config.font_size = 11
 end
 -- Ligature
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
@@ -233,28 +233,28 @@ local modal = wezterm.plugin.require("https://github.com/MLFlexer/modal.wezterm"
 modal.apply_to_config(config)
 modal.set_default_keys(config)
 
-local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
--- you can put the rest of your Wezterm config here
-smart_splits.apply_to_config(config, {
-    -- the default config is here, if you'd like to use the default keys,
-    -- you can omit this configuration table parameter and just use
-    -- smart_splits.apply_to_config(config)
-
-    -- directional keys to use in order of: left, down, up, right
-    direction_keys = { "h", "j", "k", "l" },
-    -- if you want to use separate direction keys for move vs. resize, you
-    -- can also do this:
-    direction_keys = {
-        move = { "h", "j", "k", "l" },
-        resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
-    },
-    -- modifier keys to combine with direction_keys
-    modifiers = {
-        move = "CTRL", -- modifier to use for pane movement, e.g. CTRL+h to move left
-        resize = "META", -- modifier to use for pane resize, e.g. META+h to resize to the left
-    },
-    -- log level to use: info, warn, error
-    log_level = "info",
-})
+-- local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+-- -- you can put the rest of your Wezterm config here
+-- smart_splits.apply_to_config(config, {
+--     -- the default config is here, if you'd like to use the default keys,
+--     -- you can omit this configuration table parameter and just use
+--     -- smart_splits.apply_to_config(config)
+--
+--     -- directional keys to use in order of: left, down, up, right
+--     direction_keys = { "h", "j", "k", "l" },
+--     -- if you want to use separate direction keys for move vs. resize, you
+--     -- can also do this:
+--     direction_keys = {
+--         move = { "h", "j", "k", "l" },
+--         resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
+--     },
+--     -- modifier keys to combine with direction_keys
+--     modifiers = {
+--         move = "CTRL", -- modifier to use for pane movement, e.g. CTRL+h to move left
+--         resize = "META", -- modifier to use for pane resize, e.g. META+h to resize to the left
+--     },
+--     -- log level to use: info, warn, error
+--     log_level = "info",
+-- })
 
 return config
