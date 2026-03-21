@@ -18,6 +18,7 @@ use aliases.nu *
 use list.nu *
 use windows.nu
 use misc.nu *
+use symlink.nu *
 
 use external/yazi.nu *
 use external/tere.nu *

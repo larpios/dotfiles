@@ -44,3 +44,8 @@ export def is-exe [cmd?: string] : [nothing -> bool, string -> bool] {
     which $cmd | is-not-empty 
   }
 }
+
+export def with [action: closure] : any -> any {
+  let input = $in
+  do $action $input
+}

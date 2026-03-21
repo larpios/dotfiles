@@ -14,6 +14,7 @@ const ENV_DIRS = [
   '/usr/bin',
   '/bin'
   '/nix/var/nix/profiles/default/bin',
+  '/opt/homebrew/bin'
 ]
 
 for $dir in $ENV_DIRS {

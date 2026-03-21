@@ -4,16 +4,16 @@ web_client {
     font "JetBrainsMono Nerd Font Mono"
 }
 web_server true
-web_server_cert "~{{ .chezmoi.pathSeparator }}.certs{{ .chezmoi.pathSeparator }}zellij.pem"
+web_server_cert "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.certs{{ .chezmoi.pathSeparator }}zellij.pem"
 web_server_ip "0.0.0.0"
-web_server_key "~{{ .chezmoi.pathSeparator }}.certs{{ .chezmoi.pathSeparator }}zellij-key.pem"
+web_server_key "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.certs{{ .chezmoi.pathSeparator }}zellij-key.pem"
 web_server_port 8088
 {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} extraConfig
 plugins {
-    room location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}rvcas{{ .chezmoi.pathSeparator }}room{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}v1.2.1{{ .chezmoi.pathSeparator }}room.wasm"
-    vimZellijNavigator location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}hiasr{{ .chezmoi.pathSeparator }}vim-zellij-navigator{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}0.3.0{{ .chezmoi.pathSeparator }}vim-zellij-navigator.wasm"
-    harpoon location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}Nacho114{{ .chezmoi.pathSeparator }}harpoon{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}v0.3.0{{ .chezmoi.pathSeparator }}harpoon.wasm"
-    zellijForgot location="https{{ .chezmoi.pathListSeparator }}{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }}github.com{{ .chezmoi.pathSeparator }}karimould{{ .chezmoi.pathSeparator }}zellij-forgot{{ .chezmoi.pathSeparator }}releases{{ .chezmoi.pathSeparator }}download{{ .chezmoi.pathSeparator }}0.4.2{{ .chezmoi.pathSeparator }}zellij_forgot.wasm"
+    room location="https://github.com/rvcas/room/releases/download/v1.2.1/room.wasm"
+    vimZellijNavigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
+    harpoon location="https://github.com/Nacho114/harpoon/releases/download/v0.3.0/harpoon.wasm"
+    zellijForgot location="https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm"
 }
 keybinds {
     pane {
@@ -42,7 +42,7 @@ keybinds {
     shared_except "locked" {
         bind "Ctrl y" {
             LaunchOrFocusPlugin "zellijForgot" {
-                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} LOAD_ZELLIJ_BINDINGS "false"
+                // LOAD_ZELLIJ_BINDINGS "false"
                 floating true
             }
         }
@@ -50,11 +50,11 @@ keybinds {
             MessagePlugin "vimZellijNavigator" {
                 name "move_focus_or_tab"
                 payload "left"
-                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Plugin Configuration
+                // Plugin Configuration
                 move_mod "ctrl"
-                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Optional, should be added on every move command if changed.
+                // Optional, should be added on every move command if changed.
                 use_arrow_keys "false"
- {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Optional, uses arrow keys instead of hjkl. Should be added to every command where you want to use it.
+ // Optional, uses arrow keys instead of hjkl. Should be added to every command where you want to use it.
             }
         }
         bind "Ctrl j" {
@@ -78,7 +78,7 @@ keybinds {
                 name "move_focus_or_tab"
                 payload "right"
                 move_mod "ctrl"
-                {{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} Optional, should be added on every command if you want to use it
+                // Optional, should be added on every command if you want to use it
                 use_arrow_keys "false"
             }
         }
