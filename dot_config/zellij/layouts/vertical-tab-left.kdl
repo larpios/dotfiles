@@ -1,0 +1,31 @@
+layout {
+    pane split_direction="vertical" {
+        pane size=18 borderless=true {
+            plugin location="https://github.com/cfal/zellij-vertical-tabs/releases/download/v0.1.0/zellij-vertical-tabs.wasm" {
+                // Tab format (inactive tabs)
+                format "{index}:{name}"
+                // Active tab format
+                format_active "{index}:{name}*"
+                // Status indicators
+                indicator_active "*"
+                indicator_fullscreen "Z"
+                indicator_sync "S"
+                // Maximum name length before truncation
+                max_name_length 15
+                // Right border (with optional color)
+                border "#[fg=dim]│"
+                // Start tab numbering from (default: 1)
+                start_index 1
+                // Empty rows above the tab list (default: 0)
+                padding_top 0
+                // Overflow indicator formats (when tabs don't fit)
+                overflow_above "  ^ +{count}"
+                overflow_below "  v +{count}"
+            }
+        }
+        pane
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}
