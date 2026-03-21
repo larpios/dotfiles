@@ -29,14 +29,13 @@ run = "mpv %s"
 [preview]
 wrap = "yes"
 
-[plugin]
-prepend_previewers = [
-  { url = '*.typ', run = 'preview-typst' },
-]
+[[plugin.prepend_previewers]]
+url = '*.typ'
+run = 'preview-typst' 
 
-prepend_preloaders = [
-  { url = '*.typ', run = 'preview-typst' },
-]
+[[plugin.prepend_preloaders]]
+url = '*.typ'
+run = 'preview-typst' 
 
 [[plugin.prepend_fetchers]]
 id  = "git"
@@ -47,3 +46,7 @@ run = "git"
 id  = "git"
 url = "*/"
 run = "git"
+
+[[plugin.prepend_previewers]]
+url = "*"
+run = 'piper -- bat -p --color=always "$1"'
