@@ -8,7 +8,8 @@ web_server_cert "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.certs{{ .che
 web_server_ip "0.0.0.0"
 web_server_key "{{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.certs{{ .chezmoi.pathSeparator }}zellij-key.pem"
 web_server_port 8088
-{{ .chezmoi.pathSeparator }}{{ .chezmoi.pathSeparator }} extraConfig
+
+// extraConfig
 plugins {
     room location="https://github.com/rvcas/room/releases/download/v1.2.1/room.wasm"
     vimZellijNavigator location="https://github.com/hiasr/vim-zellij-navigator/releases/download/0.3.0/vim-zellij-navigator.wasm"
