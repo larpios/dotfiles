@@ -19,25 +19,35 @@ export def "is-symlink" [] : path -> bool {
   $type == 'symlink'
 }
 
-export def "symlink follow" [] : path -> path {
-  if not ($in | path exists) {
+export def "symlink follow" [] : [path -> path, list<path> -> list<path>] {
+  let path_input = $in
+
+  if ($path_input | describe | str contains 'list') {
+    return ($path_input | each { symlink follow })
+  }
+
+  if ($path_input | is-empty) {
+    return ''
+  }
+
+  if not ($path_input | path exists) {
     error make {
-      msg: $"($in) does not exist"
+      msg: $"($path_input) does not exist"
       labels: [
         {
           text: 'Path does not exist'
-          span: (metadata $in).span
+          span: (metadata $path_input).span
         }
       ]
     }
   }
-  if not ($in | is-symlink) {
+  if not ($path_input | is-symlink) {
     error make {
-      msg: $"($in) is not a symlink"
+      msg: $"($path_input) is not a symlink"
       labels: [
         {
           text: 'Path is not a symlink'
-          span: (metadata $in).span
+          span: (metadata $path_input).span
         }
       ]
     }
