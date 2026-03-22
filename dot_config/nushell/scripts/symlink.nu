@@ -57,9 +57,20 @@ export def "symlink follow" [] : [path -> path, list<path> -> list<path>] {
 }
 
 # Convert a symlink to its target file
-export def "symlink to-target" [link: path] {
+export def "symlink into-target" [
+  link: path
+  --copy-to (-c): oneof<path, nothing> = null # Instead of replacing the symlink, copy to the given path
+] {
   let target = $link | symlink follow 
 
-  rm $link
-  cp $target $link
+  if $copy_to == null {
+    let confirm = input $"Do you want to overwrite `($link)` with `($target)`? [y/N]: " | str downcase
+
+    if $confirm == 'y' {
+      rm $link
+      cp $target $link
+    }
+  } else {
+    cp -i $target $copy_to
+  }
 }
