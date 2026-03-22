@@ -10,6 +10,8 @@ const ENV_DIRS = [
   '~/.nix-profile/bin',
   '~/.cargo/bin',
   '~/.local/bin',
+  '~/.cache/.bun/bin',
+  '~/.bun/bin',
   '/usr/local/bin',
   '/usr/bin',
   '/bin'
@@ -69,4 +71,8 @@ if (is-exe zoxide) {
 if (is-exe carapace) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
     carapace _carapace nushell | save -f ($AUTOLOAD_DIR | path join "carapace.nu")
+}
+
+if (is-exe atuin) {
+  atuin gen-completions --shell nushell | save -f ($AUTOLOAD_DIR | path join "atuin.nu")
 }
