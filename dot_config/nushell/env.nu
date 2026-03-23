@@ -72,7 +72,9 @@ if (is-exe carapace) {
     $env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense' # optional
     carapace _carapace nushell | save -f ($AUTOLOAD_DIR | path join "carapace.nu")
 }
-
+if (is-exe jj) {
+  jj util completion nushell | save -f ($AUTOLOAD_DIR | path join "jj.nu")
+}
 if (is-exe atuin) {
   atuin gen-completions --shell nushell | save -f ($AUTOLOAD_DIR | path join "atuin.nu")
 }

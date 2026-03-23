@@ -1,6 +1,5 @@
 # Commands for working with symbolic links
 
-
 export def "is-symlink" [] : path -> bool {
   if not ($in | path exists) {
     error make {
