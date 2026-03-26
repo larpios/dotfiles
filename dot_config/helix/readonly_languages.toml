@@ -1,6 +1,0 @@
-[[language]]
-auto-format = true
-name = "nix"
-
-[language.formatter]
-command = "/nix/store/swklhwhzr0h43krvhfd0r5q3y5pd4mjz-alejandra-4.0.0"
