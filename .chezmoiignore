@@ -6,6 +6,7 @@ note.md
 README.md
 LICENSE
 windows
+bootstrap.sh
 
 # Ignore Windows specific files on non-windows
 {{- if ne .chezmoi.os "windows" }}
@@ -13,6 +14,11 @@ Documents
 komorebi.json
 komorebi.bar.json
 .config/whkdrc
+{{- end }}
+
+# Ignore macOS specific files on non-macOS
+{{- if ne .chezmoi.os "darwin" }}
+Library
 {{- end }}
 
 # If nix exists, ignore these

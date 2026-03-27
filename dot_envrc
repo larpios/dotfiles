@@ -8,12 +8,6 @@ else
     export EDITOR='vim'
 fi
 
-if [[ $(uname -s) == 'Darwin' ]]; then
-    export PATH=$HOME/binaries/darwin:$PATH
-elif [[ $(uname -s) == 'Linux' ]]; then
-    export PATH=$HOME/binaries/x86_64-linux:$PATH
-fi
-
 if [[ -d /usr/local/bin ]]; then
     export PATH=/usr/local/bin:$PATH
 fi
