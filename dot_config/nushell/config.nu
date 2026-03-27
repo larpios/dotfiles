@@ -35,6 +35,7 @@ use list.nu *
 use windows.nu
 use misc.nu *
 use symlink.nu *
+use wezterm.nu *
 
 use external/yazi.nu *
 use external/tere.nu *
