@@ -119,6 +119,20 @@ if current_os == "OSX" or current_os == "Darwin" then
 else
     config.font_size = 11
 end
+
+-- Enable Kitty image protocol
+config.enable_kitty_graphics = true
+
+-- Create unix domain socket
+config.unix_domains = {
+    {
+        name = "unix",
+    },
+}
+
+-- For persistent sessions
+config.default_gui_startup_args = { 'connect', 'unix' }
+
 -- Ligature
 config.harfbuzz_features = { "calt=1", "clig=1", "liga=1" }
 
