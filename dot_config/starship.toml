@@ -15,7 +15,6 @@ $kubernetes\
 $vcsh\
 $hg_branch\
 $docker_context\
-$package\
 $custom\
 
 $sudo\
@@ -152,17 +151,8 @@ symbol = " "
 [haskell]
 symbol = "λ "
 
-[memory_usage]
-symbol = " "
-
-[nim]
-symbol = " "
-
 [nix_shell]
 symbol = " "
-
-[package]
-symbol = " "
 
 [perl]
 symbol = " "
