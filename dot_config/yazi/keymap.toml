@@ -72,3 +72,16 @@ desc = "Smart filter"
 on = ["C"]
 run = "plugin ouch"
 desc = "Compress with ouch"
+
+# keymap.toml
+[[mgr.prepend_keymap]]
+on   = ["I", "z", "i"]
+run  = "plugin zoom 1"
+desc = "Zoom in hovered file"
+
+[[mgr.prepend_keymap]]
+on   = ["I", "z", "o"]
+run  = "plugin zoom -1"
+desc = "Zoom out hovered file"
+
+

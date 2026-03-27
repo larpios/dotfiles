@@ -54,3 +54,7 @@ run = 'piper -- bat -p --color=always "$1"'
 [[plugin.prepend_previewers]]
 mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}"
 run  = "ouch"
+
+[[plugin.prepend_previewers]]
+mime = "image/{jpeg,png,webp}"
+run  = "zoom 5"
