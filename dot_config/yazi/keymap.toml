@@ -9,7 +9,7 @@ on = "l"
 run = "plugin smart-enter"
 
 [[mgr.prepend_keymap]]
-on   = "<C-d>"
+on   = ["g", "d"]
 run  = "plugin diff"
 desc = "Diff the selected with the hovered file"
 
