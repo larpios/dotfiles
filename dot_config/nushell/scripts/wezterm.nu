@@ -2,7 +2,10 @@ use misc.nu is-exe
 
 export def --wrapped imgview [...args] {
   verify-wezterm
-  ^wezterm imgcat ...$args
+  
+  for arg in $args {
+    ^wezterm imgcat $arg
+  }
 }
 
 def verify-wezterm [] {
