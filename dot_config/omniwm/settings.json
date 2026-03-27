@@ -21,12 +21,24 @@
       "id" : "focus.right"
     },
     {
+      "binding" : "Option+Shift+F",
+      "id" : "toggleFullscreen"
+    },
+    {
+      "binding" : "Option+Shift+Return",
+      "id" : "toggleNativeFullscreen"
+    },
+    {
       "binding" : "Option+Shift+H",
       "id" : "moveColumn.left"
     },
     {
       "binding" : "Option+Shift+L",
       "id" : "moveColumn.right"
+    },
+    {
+      "binding" : "Option+Return",
+      "id" : "toggleColumnFullWidth"
     },
     {
       "binding" : "Unassigned",
