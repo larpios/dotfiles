@@ -40,6 +40,13 @@ local preload = {
     --- @type QuickSelectPattern[]
     quickselect_patterns = {
         {
+            name = "sha256",
+            pattern = "sha256-[^%s]+",
+            open = function(text)
+                wezterm.open_with(text)
+            end,
+        },
+        {
             name = "http",
             pattern = "https?://[^%s]+",
             open = function(text)
@@ -67,7 +74,7 @@ local preload = {
 wezterm.on("toggle-opacity", function(window, pane)
     local overrides = window:get_config_overrides() or {}
     if not overrides.window_background_opacity then
-        overrides.window_background_opacity = 0.7
+        overrides.window_background_opacity = 0.9
     else
         overrides.window_background_opacity = nil
     end
@@ -153,7 +160,6 @@ config.window_background_image = wezterm.config_dir .. "/bg.jpg"
 config.window_background_image_hsb = {
     brightness = 0.1,
 }
-config.window_background_opacity = 0.9
 
 -- Windows
 -- config.win32_system_backdrop = "Acrylic"
@@ -194,7 +200,7 @@ config.keys = {
     { key = "PageUp",   mods = "SHIFT",      action = act.ScrollByPage(-0.5) },
     { key = "PageDown", mods = "SHIFT",      action = act.ScrollByPage(0.5) },
     { key = "x",        mods = "CTRL|SHIFT", action = act.ActivateCopyMode },
-    { key = "B",        mods = "CTRL",       action = wezterm.action.EmitEvent("toggle-opacity") },
+    { key = "b",        mods = "CTRL|SHIFT",       action = wezterm.action.EmitEvent("toggle-opacity") },
     {
         -- Select URL to open
         key = "o",
