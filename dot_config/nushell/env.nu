@@ -68,5 +68,5 @@ if (is-exe jj) {
   jj util completion nushell | save -f ($AUTOLOAD_DIR | path join "jj.nu")
 }
 if (is-exe atuin) {
-  atuin gen-completions --shell nushell | save -f ($AUTOLOAD_DIR | path join "atuin.nu")
+  atuin init nu | save -f ($AUTOLOAD_DIR | path join "atuin.nu")
 }
