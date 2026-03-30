@@ -47,5 +47,15 @@
   ],
   "preventSleepEnabled" : true,
   "quakeTerminalEnabled" : false,
-  "version" : 4
+  "version" : 4,
+  "workspaceConfigurations" : [
+    {
+      "id" : "AD36F001-C57E-41A5-AC1D-DF5249D007F0",
+      "layoutType" : "niri",
+      "monitorAssignment" : {
+        "type" : "main"
+      },
+      "name" : "1"
+    }
+  ]
 }
