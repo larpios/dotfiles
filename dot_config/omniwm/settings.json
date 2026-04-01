@@ -3,6 +3,7 @@
   "borderColorGreen" : 0.5132427125265403,
   "borderColorRed" : 0.69840601157805549,
   "borderWidth" : 2,
+  "gestureFingerCount" : 4,
   "hotkeyBindings" : [
     {
       "binding" : "Option+H",
@@ -37,6 +38,14 @@
       "id" : "moveColumn.right"
     },
     {
+      "binding" : "Unassigned",
+      "id" : "cycleColumnWidthForward"
+    },
+    {
+      "binding" : "Unassigned",
+      "id" : "cycleColumnWidthBackward"
+    },
+    {
       "binding" : "Option+Return",
       "id" : "toggleColumnFullWidth"
     },
@@ -47,6 +56,7 @@
   ],
   "preventSleepEnabled" : true,
   "quakeTerminalEnabled" : false,
+  "scrollSensitivity" : 9,
   "version" : 4,
   "workspaceConfigurations" : [
     {
