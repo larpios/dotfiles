@@ -33,9 +33,11 @@ export-env {
 use aliases.nu *
 use list.nu *
 use windows.nu
-use misc.nu *
 use symlink.nu *
+use str.nu *
+use parse.nu *
 use wezterm.nu *
+use misc.nu *
 
 use external/yazi.nu *
 use external/tere.nu *
