@@ -35,7 +35,7 @@ use list.nu *
 use windows.nu
 use symlink.nu *
 use str.nu *
-use parse.nu *
+use nix.nu *
 use wezterm.nu *
 use misc.nu *
 
