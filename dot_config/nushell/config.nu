@@ -37,6 +37,7 @@ use symlink.nu *
 use str.nu *
 use nix.nu *
 use wezterm.nu *
+use bitwarden.nu *
 use misc.nu *
 
 use external/yazi.nu *
