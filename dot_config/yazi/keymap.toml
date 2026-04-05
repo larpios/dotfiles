@@ -73,7 +73,6 @@ on = ["C"]
 run = "plugin ouch"
 desc = "Compress with ouch"
 
-# keymap.toml
 [[mgr.prepend_keymap]]
 on   = ["I", "z", "i"]
 run  = "plugin zoom 1"
@@ -84,4 +83,12 @@ on   = ["I", "z", "o"]
 run  = "plugin zoom -1"
 desc = "Zoom out hovered file"
 
+[[mgr.prepend_keymap]]
+on   = "f"
+run  = "plugin jump-to-char"
+desc = "Jump to char"
 
+[[mgr.prepend_keymap]]
+on   = [ "c", "m" ]
+run  = "plugin chmod"
+desc = "Chmod on selected files"
