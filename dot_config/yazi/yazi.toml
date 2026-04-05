@@ -2,59 +2,43 @@
 show_hidden = true
 show_symlink = true
 
-[[opener.edit]]
-block = true
-for = "unix"
-run = "$EDITOR %s"
+[opener]
+edit = [
+  { block = true, for = "unix", run = "$EDITOR %s" },
+  { block = true, for = "windows", run = "%EDITOR% %s" },
+]
+open = [
+  { desc = "Open with the default program", for = "unix", run = "xdg-open %s" },
+  { desc = "Open with the default program", for = "macos", run = "open %s" },
+]
+play = [{ orphan = true, run = "mpv %s" }]
+extract = [
+  { run = 'ouch d -y %*', desc = "Extract here with ouch", for = "windows" },
+  { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+]
+archive = [
+  { run = 'ouch c -y %* %*.zip', desc = "Archive here with ouch", for = "windows" },
+  { run = 'ouch c -y "$@" "$@.zip"', desc = "Archive here with ouch", for = "unix" },
+]
 
-[[opener.edit]]
-block = true
-for = "windows"
-run = "%EDITOR% %s"
+[open]
+prepend_rules = [
+    { url = "*.{zip,tar,tar.gz,gzip,rar,7z}", use = 'extract' }
+]
 
-[[opener.open]]
-desc = "Open with the default program"
-for = "unix"
-run = "xdg-open %s"
-
-[[opener.open]]
-desc = "Open with the default program"
-for = "macos"
-run = "open %s"
-
-[[opener.play]]
-orphan = true
-run = "mpv %s"
 
 [preview]
 wrap = "yes"
 
-[[plugin.prepend_previewers]]
-url = '*.typ'
-run = 'preview-typst' 
-
-[[plugin.prepend_preloaders]]
-url = '*.typ'
-run = 'preview-typst' 
-
-[[plugin.prepend_fetchers]]
-id  = "git"
-url = "*"
-run = "git"
-
-[[plugin.prepend_fetchers]]
-id  = "git"
-url = "*/"
-run = "git"
-
-[[plugin.prepend_previewers]]
-url = "*.csv"
-run = 'piper -- bat -p --color=always "$1"'
-
-[[plugin.prepend_previewers]]
-mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}"
-run  = "ouch"
-
-[[plugin.prepend_previewers]]
-mime = "image/{jpeg,png,webp}"
-run  = "zoom 5"
+[plugin]
+prepend_previewers = [
+  { url = '*.typ', run = 'preview-typst' },
+  { url = "*.csv", run = 'piper -- bat -p --color=always "$1"' },
+  { mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch" },
+  { mime = "image/{jpeg,png,webp}", run = "zoom 5" },
+]
+prepend_preloaders = [{ url = '*.typ', run = 'preview-typst' }]
+prepend_fetchers = [
+  { id = "git", url = "*", run = "git" },
+  { id = "git", url = "*/", run = "git" },
+]
