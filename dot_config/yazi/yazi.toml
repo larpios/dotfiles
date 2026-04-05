@@ -8,8 +8,8 @@ edit = [
   { block = true, for = "windows", run = "%EDITOR% %s" },
 ]
 open = [
-  { desc = "Open with the default program", for = "linux", run = "xdg-open %s" },
-  { desc = "Open with the default program", for = "macos", run = "open %s" },
+  { desc = "Open with the default program", for = "linux", run = "xdg-open %s", orphan = true },
+  { desc = "Open with the default program", for = "macos", run = "open %s", orphan = true },
 ]
 play = [{ orphan = true, run = "mpv %s" }]
 extract = [
@@ -22,10 +22,8 @@ archive = [
 ]
 
 [open]
-prepend_rules = [
-    { url = "*.{zip,tar,tar.gz,gzip,rar,7z}", use = 'extract' }
-]
-
+prepend_rules = [{ url = "*.{zip,tar,tar.gz,gzip,rar,7z}", use = "extract" }]
+append_rules = [{ url = "*", use = ["open", "reveal"] }]
 
 [preview]
 wrap = "yes"
@@ -35,7 +33,7 @@ prepend_previewers = [
   { url = '*.typ', run = 'preview-typst' },
   { url = "*.csv", run = 'piper -- bat -p --color=always "$1"' },
   { mime = "application/{*zip,tar,bzip2,7z*,rar,xz,zstd,java-archive}", run = "ouch" },
-  { mime = "image/{jpeg,png,webp}", run = "zoom 5" },
+  { mime = "image/*", run = "zoom 5" },
 ]
 prepend_preloaders = [{ url = '*.typ', run = 'preview-typst' }]
 prepend_fetchers = [
