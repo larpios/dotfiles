@@ -36,9 +36,10 @@ use windows.nu
 use symlink.nu *
 use str.nu *
 use nix.nu *
-use wezterm.nu *
-use bitwarden.nu *
+use secrets.nu *
 use misc.nu *
 
+use external/wezterm.nu *
+use external/bitwarden.nu *
 use external/yazi.nu *
 use external/tere.nu *
