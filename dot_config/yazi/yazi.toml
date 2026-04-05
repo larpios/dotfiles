@@ -8,7 +8,7 @@ edit = [
   { block = true, for = "windows", run = "%EDITOR% %s" },
 ]
 open = [
-  { desc = "Open with the default program", for = "unix", run = "xdg-open %s" },
+  { desc = "Open with the default program", for = "linux", run = "xdg-open %s" },
   { desc = "Open with the default program", for = "macos", run = "open %s" },
 ]
 play = [{ orphan = true, run = "mpv %s" }]
