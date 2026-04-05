@@ -50,7 +50,7 @@ export def "secret encrypt" [
 
   mut $dest = $dest
   if $dest == null {
-    $dest = $file | path parse | upsert extension { |ext| 'enc.' + $ext } | path join
+    $dest = $file | path parse | upsert extension { |f| 'enc' + if ($f.extension | is-not-empty) { '.' + $f.extension } else { '' } } | path join
     log warning $"Saving encrypted file to: ($dest)"
   }
   
