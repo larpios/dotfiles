@@ -189,15 +189,12 @@ config.mouse_bindings = {
 
 config.disable_default_key_bindings = false
 local act = wezterm.action
---
---  [ CTRL = CMD ]
---   [ ALT = OPT ]
 config.keys = {
 	{ key = "Space", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-	{ key = "p", mods = "CTRL|ALT", action = act.ActivateCommandPalette },
+	{ key = "p", mods = "CTRL|META", action = act.ActivateCommandPalette },
 	{ key = "r", mods = "CTRL|SHIFT", action = "ReloadConfiguration" },
 	-- { key = "t", mods = "CTRL", action = act.SpawnTab("CurrentPaneDomain") },
-	{ key = "w", mods = "ALT", action = act.CloseCurrentPane({ confirm = true }) },
+	{ key = "w", mods = "META", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "Tab", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(-1) },
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 	{ key = "w", mods = "CTRL|SHIFT", action = act.CloseCurrentPane({ confirm = true }) },
@@ -240,13 +237,13 @@ local directions = { h = "Left", j = "Down", k = "Up", l = "Right" }
 
 for key, direction in pairs(directions) do
 	-- -- Adjust pane size
-	-- config.keys[#config.keys + 1] = { key = key, mods = "ALT", action = act.AdjustPaneSize({ direction, 5 }) }
+	-- config.keys[#config.keys + 1] = { key = key, mods = "META", action = act.AdjustPaneSize({ direction, 5 }) }
 	--
 	-- config.keys[#config.keys + 1] = { key = key, mods = "CTRL", action = act.ActivatePaneDirection(direction) }
 
 	config.keys[#config.keys + 1] = {
 		key = key,
-		mods = "CTRL|ALT",
+		mods = "CTRL|SHIFT",
 		action = act.SplitPane({
 			direction = direction,
 			command = { domain = "CurrentPaneDomain" },
@@ -256,22 +253,22 @@ for key, direction in pairs(directions) do
 end
 config.keys[#config.keys + 1] = {
 	key = "h",
-	mods = "CTRL|ALT",
+	mods = "SUPER",
 	action = act.MoveTabRelative(-1),
 }
 config.keys[#config.keys + 1] = {
 	key = "l",
-	mods = "CTRL|ALT",
+	mods = "SUPER",
 	action = act.MoveTabRelative(1),
 }
 config.keys[#config.keys + 1] = {
 	key = "h",
-	mods = "ALT|SHIFT",
+	mods = "SHIFT|SUPER",
 	action = act.ActivateTabRelative(-1),
 }
 config.keys[#config.keys + 1] = {
 	key = "l",
-	mods = "ALT|SHIFT",
+	mods = "SHIFT|SUPER",
 	action = act.ActivateTabRelative(1),
 }
 
