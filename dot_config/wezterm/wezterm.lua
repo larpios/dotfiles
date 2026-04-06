@@ -266,12 +266,12 @@ config.keys[#config.keys + 1] = {
 }
 config.keys[#config.keys + 1] = {
 	key = "h",
-	mods = "CTRL|SHIFT",
+	mods = "ALT|SHIFT",
 	action = act.ActivateTabRelative(-1),
 }
 config.keys[#config.keys + 1] = {
 	key = "l",
-	mods = "CTRL|SHIFT",
+	mods = "ALT|SHIFT",
 	action = act.ActivateTabRelative(1),
 }
 
