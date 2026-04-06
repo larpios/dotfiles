@@ -254,22 +254,22 @@ end
 config.keys[#config.keys + 1] = {
 	key = "h",
 	mods = "SUPER",
-	action = act.MoveTabRelative(-1),
-}
-config.keys[#config.keys + 1] = {
-	key = "l",
-	mods = "SUPER",
-	action = act.MoveTabRelative(1),
-}
-config.keys[#config.keys + 1] = {
-	key = "h",
-	mods = "SHIFT|SUPER",
 	action = act.ActivateTabRelative(-1),
 }
 config.keys[#config.keys + 1] = {
 	key = "l",
-	mods = "SHIFT|SUPER",
+	mods = "SUPER",
 	action = act.ActivateTabRelative(1),
+}
+config.keys[#config.keys + 1] = {
+	key = "h",
+	mods = "SHIFT|SUPER",
+	action = act.MoveTabRelative(-1),
+}
+config.keys[#config.keys + 1] = {
+	key = "l",
+	mods = "SHIFT|SUPER",
+	action = act.MoveTabRelative(1),
 }
 
 -- # Plugins
