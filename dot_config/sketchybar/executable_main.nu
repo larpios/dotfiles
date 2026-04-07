@@ -3,6 +3,9 @@
 use colors.nu mocha
 use icons.nu icons
 
+# Define custom events
+sketchybar --add event aerospace_workspace_change
+
 # Clear bar
 sketchybar --bar hidden=off
 sketchybar --remove '/.*/'
@@ -53,8 +56,9 @@ source items/workspaces.nu
 source items/cpu.nu
 source items/weather.nu
 source items/bluetooth.nu
-source items/wifi.nu
+source items/network.nu
 source items/clock.nu
 
 # Final update
 sketchybar --update
+sketchybar --trigger workspace_change
