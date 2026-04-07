@@ -37,9 +37,12 @@ use symlink.nu *
 use str.nu *
 use nix.nu *
 use secrets.nu *
+use weather.nu *
+use file.nu *
 use misc.nu *
 
 use external/wezterm.nu *
 use external/bitwarden.nu *
 use external/yazi.nu *
 use external/tere.nu *
+
