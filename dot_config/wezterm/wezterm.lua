@@ -9,10 +9,10 @@ local function get_os_name()
 
 	-- Unix, Linux variants
 	local fh = io.popen("uname -o 2>/dev/null", "r")
-    if fh == nil then
-        wezterm.log_error("Failed to run uname: " .. err)
-        return "Windows"
-    end
+	if fh == nil then
+		wezterm.log_error("Failed to run uname: " .. err)
+		return "Windows"
+	end
 
 	local osname = fh:read() or "Windows"
 
@@ -22,10 +22,10 @@ end
 local function is_exec(cmd, is_windows)
 	if is_windows then
 		local f = io.popen("where " .. cmd)
-        if f == nil then
-            wezterm.log_error("Failed to run where " .. cmd)
-            return false
-        end
+		if f == nil then
+			wezterm.log_error("Failed to run where " .. cmd)
+			return false
+		end
 		local result = f:read("*all")
 		f:close()
 
@@ -34,7 +34,6 @@ local function is_exec(cmd, is_windows)
 		return os.execute("which " .. cmd .. " > /dev/null 2>&1") == 0
 	end
 end
-
 
 local current_os = get_os_name()
 
@@ -167,6 +166,11 @@ config.window_padding = {
 config.window_background_image = wezterm.config_dir .. "/bg.jpg"
 config.window_background_image_hsb = {
 	brightness = 0.1,
+}
+
+config.inactive_pane_hsb = {
+	saturation = 0.8,
+	brightness = 0.2,
 }
 
 -- Windows
