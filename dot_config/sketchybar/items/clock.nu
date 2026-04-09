@@ -2,7 +2,7 @@ use ../colors.nu mocha
 use ../icons.nu icons
 
 sketchybar --add item "clock" "right"
-sketchybar --set "clock" "update_freq=10" $"icon=($icons.clock)" $"icon.color=($mocha.blue)" $"background.color=($mocha.surface0)" "popup.align=center" "popup.background.color=0xff1e1e2e" "popup.background.corner_radius=8" "popup.background.border_width=2" "popup.background.border_color=0xff45475a" $"script=nu ($nu.home-dir)/.config/sketchybar/plugins/clock.nu" "click_script=sketchybar --set $NAME popup.drawing=toggle"
+sketchybar --set "clock" "update_freq=10" $"icon=($icons.clock)" $"icon.color=($mocha.blue)" $"background.color=($mocha.surface0)" "popup.align=center" $"popup.background.color=($mocha.base)" "popup.background.corner_radius=8" "popup.background.border_width=2" $"popup.background.border_color=($mocha.surface1)" $"script=nu ($nu.home-dir)/.config/sketchybar/plugins/clock.nu" "click_script=sketchybar --set $NAME popup.drawing=toggle"
 
 # Popup details: Full Date
 sketchybar --add item "clock.date" "popup.clock"
