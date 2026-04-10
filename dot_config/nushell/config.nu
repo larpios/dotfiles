@@ -1,9 +1,113 @@
-$env.config.completions.external.enable = true
-$env.config.completions.external.max_results = 200
-$env.config.edit_mode = 'vi'
-$env.config.history.file_format = 'sqlite'
-$env.config.buffer_editor = "nvim"
-$env.config.show_banner = false
+let nu_config = {
+  completions: {
+    external: {
+      enable: true
+      max_results: 200
+    }
+    algorithm: 'fuzzy'
+  }
+  edit_mode: 'vi'
+  buffer_editor: "nvim"
+  show_banner: false
+  cursor_shape: {
+    emacs: 'block'
+    vi_insert: 'line'
+    vi_normal: 'block'
+  }
+  display_errors: {
+    exit_code: true
+  }
+  error_style: 'fancy'
+  footer_mode: 'auto'
+  history: {
+    file_format: 'sqlite'
+    isolation: true
+  }
+  hooks: {
+    display_output: {
+      table -e
+    }
+  }
+  keybindings: [
+    {
+      name: completion_menu
+      modifier: control
+      keycode: char_t
+      mode: [vi_insert vi_normal]
+      event: {
+        until: [
+          { send: menu name: completion_menu }
+        { send: menupagenext }
+        ]
+      }
+    }
+    {
+      name: history_menu
+      modifier: control
+      keycode: char_y
+      mode: [vi_insert vi_normal]
+      event: {
+        until: [
+          { send: menu name: history_menu }
+          { send: menupagenext }
+        ]
+      }
+    }
+  ],
+  menus: [
+    {
+      name: help_menu
+      only_buffer_difference: true # Search is done on the text written after activating the menu
+      marker: "? "                 # Indicator that appears with the menu is active
+      type: {
+        layout: description      # Type of menu
+        columns: 4               # Number of columns where the options are displayed
+        col_width: 20            # Optional value. If missing all the screen width is used to calculate column width
+        col_padding: 2           # Padding between columns
+        selection_rows: 4        # Number of rows allowed to display found options
+        description_rows: 10     # Number of rows allowed to display command description
+      }
+      style: {
+        text: green                   # Text style
+        selected_text: green_reverse  # Text style for selected option
+        description_text: yellow      # Text style for description
+      }
+    }
+    {
+      name: completion_menu
+      only_buffer_difference: false # Search is done on the text written after activating the menu
+      marker: "| "                  # Indicator that appears with the menu is active
+      type: {
+        layout: columnar          # Type of menu
+        columns: 4                # Number of columns where the options are displayed
+        col_width: 20             # Optional value. If missing all the screen width is used to calculate column width
+        col_padding: 2            # Padding between columns
+      }
+      style: {
+        text: green                   # Text style
+        selected_text: green_reverse  # Text style for selected option
+        description_text: yellow      # Text style for description
+      }
+    }
+    {
+      name: history_menu
+      only_buffer_difference: true # Search is done on the text written after activating the menu
+      marker: "? "                 # Indicator that appears with the menu is active
+      type: {
+        layout: list             # Type of menu
+        page_size: 10            # Number of entries that will presented when activating the menu
+      }
+      style: {
+        text: green                   # Text style
+        selected_text: green_reverse  # Text style for selected option
+        description_text: yellow      # Text style for description
+      }
+    }
+  ],
+  use_kitty_protocol: true
+}
+
+$env.config = $env.config | merge $nu_config
 
 const CONFIG_DIR = $nu.config-path | path dirname
 const THEMES_DIR = $CONFIG_DIR | path join "themes"
@@ -38,6 +142,7 @@ use str.nu *
 use nix.nu *
 use secrets.nu *
 use weather.nu *
+use ls.nu *
 use file.nu *
 use misc.nu *
 
