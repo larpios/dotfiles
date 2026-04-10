@@ -192,6 +192,9 @@ config.mouse_bindings = {
 -- Keybindings
 
 config.disable_default_key_bindings = false
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
+
 local act = wezterm.action
 config.keys = {
 	{ key = "Space", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
