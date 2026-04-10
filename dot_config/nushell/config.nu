@@ -142,7 +142,6 @@ use str.nu *
 use nix.nu *
 use secrets.nu *
 use weather.nu *
-use ls.nu *
 use file.nu *
 use misc.nu *
 
