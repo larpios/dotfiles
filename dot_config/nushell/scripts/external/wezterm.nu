@@ -5,7 +5,20 @@ export def --wrapped imgview [...args] {
   
   for arg in $args {
     for img in (glob $arg) {
-      ^wezterm imgcat $img
+      let result = ^wezterm imgcat $img | complete
+      if $result.exit_code != 0 {
+        error make {
+          msg: $'Failed to show image `($img)`.'
+          labels: [
+            {
+              text: 'Could NOT read this',
+              span: (metadata $img).span
+            }
+          ]
+        }
+      }
+
+      print $result.stdout
     }
   }
 }
