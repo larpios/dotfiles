@@ -4,7 +4,9 @@ export def --wrapped imgview [...args] {
   verify-wezterm
   
   for arg in $args {
-    ^wezterm imgcat $arg
+    for img in (glob $arg) {
+      ^wezterm imgcat $img
+    }
   }
 }
 
