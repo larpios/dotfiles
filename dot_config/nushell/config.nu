@@ -143,10 +143,12 @@ use nix.nu *
 use secrets.nu *
 use weather.nu *
 use file.nu *
+use http.nu *
 use misc.nu *
 
 use external/wezterm.nu *
 use external/bitwarden.nu *
 use external/yazi.nu *
 use external/tere.nu *
+use external/bat.nu *
 
