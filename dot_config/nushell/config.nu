@@ -144,6 +144,7 @@ use secrets.nu *
 use weather.nu *
 use file.nu *
 use http.nu *
+use math.nu
 use misc.nu *
 
 use external/wezterm.nu *
