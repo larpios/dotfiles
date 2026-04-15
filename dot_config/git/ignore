@@ -1,0 +1,25 @@
+**/.claude/settings.local.json
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Vim
+*.swp
+*~
+.netrwhist
+
+
+# Extras
+
+*.log
+.env.local
+
+# Nix flake
+.direnv
+result
+result-*
+.cache
