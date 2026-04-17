@@ -45,7 +45,25 @@ export def is-exe [cmd?: string] : [nothing -> bool, string -> bool] {
   }
 }
 
+# Use piped argument as regular argument.  
 export def with [action: closure] : any -> any {
   let input = $in
   do $action $input
+}
+
+# Run a closure in a specific directory
+export def within [
+    cwd: path, # Where to run closure in
+    ...args, # Commands to run, or closure to run
+# action: closure, # Closure to run
+] : any -> any {
+    let input = $in
+    do {
+        cd $cwd
+        if ($args | length) == 1 and ($args.0 | describe) =~ 'closure' {
+            do $args.0 $input
+        } else {
+            nu -c ($args | str join ' ')
+        }
+    }
 }
