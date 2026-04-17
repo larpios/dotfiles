@@ -93,7 +93,7 @@ if(parents.len() > 1,
 
 [ui]
 color = "auto"
-default-command = ["log", "--reversed"]
+default-command = ["log"]
 diff-editor = "nvim-ext"
 editor = "nvim"
 pager = "delta"
