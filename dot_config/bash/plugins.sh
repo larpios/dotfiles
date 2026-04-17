@@ -15,7 +15,7 @@ _setup_plugin_github() {
 
     for dep in "${dependencies[@]}"; do
         if ! is_exe "$dep"; then
-            echo "$dep is not installed"
+            error "$dep is not installed"
             return 1
         fi
     done
