@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+SCRIPT_PATH="$(realpath "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+
+export BASH_CONFIG_DIR="${SCRIPT_DIR:-"$HOME/.config/bash/"}"
+export BASH_CONFIG_PATH="${SCRIPT_PATH:-"$HOME/.config/bash/bashrc"}"
+
+source "${BASH_CONFIG_DIR}/aliases.sh"
+source "${BASH_CONFIG_DIR}/functions.sh"
+source "${BASH_CONFIG_DIR}/external.sh"
