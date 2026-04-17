@@ -145,6 +145,7 @@ use weather.nu *
 use file.nu *
 use http.nu *
 use math.nu
+use update.nu *
 use misc.nu *
 
 use external/wezterm.nu *
