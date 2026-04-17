@@ -6,6 +6,13 @@ ds = ["describe"]
 dfp = ["diff", "-r", "@-"]
 f = ["file"]
 g = ["git"]
+gf = ["git", "fetch"]
+gp = ["git", "push"]
+gi = ["git", "init"]
+gic = ["git", "init", "--colocate"]
+gr = ["git", "remote"]
+gra = ["git", "remote", "add"]
+grl = ["git", "remote", "list"]
 h = ["help"]
 lg = ["log"]
 rvt = ["revert", "--insert-after", "@-", "-r"]
@@ -47,7 +54,7 @@ program = "nvim"
 [revsets]
 log = "trunk()..@ | @..trunk() | trunk() | @:: | fork_point(trunk() | @) | ancestors(@, 10) | ancestors(tracked_remote_bookmarks().., 2)"
 bookmark-advance-from = 'heads(::to & bookmarks())'  # The closest bookmarks
-bookmark-advance-to = '(@ - empty()) | parents(@ & empty())' # Current working copy, or the parent of it if empty
+bookmark-advance-to = '(@ ~ empty()) | parents(@ & empty())' # Current working copy, or the parent of it if empty
 
 [revset-aliases]
 HEAD = "@-"
