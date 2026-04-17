@@ -19,7 +19,7 @@ warn() {
 }
 
 error() {
-    printf "%b\n" "${C_RED}[error] $*${C_RESET}"
+    printf "%b\n" "${C_RED}[error] $*${C_RESET}" >&2
 }
 
 is_exe() (

@@ -7,12 +7,17 @@ alias l='ls -CF'
 alias lla='ls -la'
 
 if is_exe eza; then
-    alias ls='eza --icons --group-directories-first'
-    alias ll='eza --icons --group-directories-first -l'
-    alias la='eza --icons --group-directories-first -a'
-    alias l='eza --icons --group-directories-first -l'
-    alias lla='eza --icons --group-directories-first -la'
+    __width=$((COLUMNS * 60 / 100))
+
+    alias ls="eza --icons --hyperlink --group-directories-first --width $__width"
+    alias ll="eza -lG --icons --hyperlink --group-directories-first --smart-group --width $__width"
+    alias la="eza -a --icons --hyperlink --group-directories-first --width $__width"
+    alias l="eza -lG --icons --hyperlink --group-directories-first --smart-group --width $__width"
+    alias lla="eza -laG --icons --hyperlink --group-directories-first --width $__width"
+
+    unset __width
 fi
 
 alias v='nvim'
 alias "v."='nvim .'
+alias g='git'
