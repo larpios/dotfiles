@@ -1,4 +1,4 @@
-const UPDATE_CACHE_FILE = $nu.data-dir | path join 'update-cache.nuon'
+const UPDATE_CACHE_FILE = $CONFIG_DIR | path join "update-cache.nuon"
 
 # Updates catppuccin themes
 export def "nu-update catppuccin" [
@@ -34,7 +34,6 @@ def update-cache [
     update_date: datetime 
     interval: duration
 ] {
-    mkdir ($UPDATE_CACHE_FILE | path dirname)
     if not ($UPDATE_CACHE_FILE | path exists) {
         {
             $name: { 
