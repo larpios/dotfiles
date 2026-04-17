@@ -24,7 +24,6 @@ Library
 
 # If nix exists, ignore these
 {{- if (findExecutable "nix" (list "bin" ".cargo/bin" ".nix-profile/bin" ".local/bin" "/run/current-system/sw/bin" "/nix/var/nix/profiles/default/bin")) }}
-.config/fish
 .config/btop
 {{- end }}
 
