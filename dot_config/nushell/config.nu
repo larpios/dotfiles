@@ -132,6 +132,8 @@ export-env {
     $env.EDITOR = if (is-exe nvim) { 'nvim' } else { 'vim' }
     $env.VISUAL = $env.EDITOR
     $env.VISUAL = $env.EDITOR
+    $env.PAGER = 'bat'
+    $env.BAT_THEME = 'Catppuccin Mocha'
 }
 
 use aliases.nu *
