@@ -14,22 +14,16 @@ _path() {
     echo -ne "${C_GREEN}$1${2:-$C_RESET}"
 }
 
-_wrap() {
-    local color="$1"
-    local text="$2"
-    local outer="${3:-$C_RESET}"
-}
-
 info() {
-    echo -e "${C_BLUE}$*${C_RESET}"
+    echo -e "${C_BLUE}[info] $*${C_RESET}"
 }
 
 warn() {
-    echo -e "${C_YELLOW}$*${C_RESET}"
+    echo -e "${C_YELLOW}[warn] $*${C_RESET}"
 }
 
 error() {
-    echo -e "${C_RED}$*${C_RESET}"
+    echo -e "${C_RED}[error] $*${C_RESET}"
 }
 
 is_exe() {
@@ -39,13 +33,15 @@ is_exe() {
 
 within() {
     local cwd="$1"
-    local rest=${*:2}
+    shift
+
+    local rest="$*"
 
     if [ "$cwd" = "" ]; then
         error "must specify cwd"
         return 1
     elif [ ! -d "$cwd" ]; then
-        error "$(_path "$cwd" "$C_RED") is not a directory"
+        error "$(_path "\`$cwd\`" "$C_RED") is not a directory"
         return 1
     fi
 

@@ -7,7 +7,9 @@ mkdir -p "$CURL_DOWNLOAD_DIR"
 _setup_plugin_github() {
     local url="$1"
     local post_hook="$2"
-    local dependencies="${*:3}"
+    shift 2
+
+    local dependencies="$*"
     local reponame
     reponame="$(basename "$url" | sed 's/\.git//')"
     local target
