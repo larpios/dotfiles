@@ -1,8 +1,13 @@
 #!/usr/bin/env sh
 
+__COMPLETION_DIR="$HOME/.config/bash/completions"
+if [ -n "$BASH_COMPLETION_USER_DIR" ]; then
+    __COMPLETION_DIR="$(echo "$BASH_COMPLETION_USER_DIR" | cut -d , -f 1)"
+fi
+
 if is_exe chezmoi; then
-    if [ "$CURRENT_SHELL" = "bash" ]; then
-        eval "$(chezmoi completion "$CURRENT_SHELL")"
+    if [ "$CURRENT_SHELL" = "bash" ] && $BASH_COMPLETION_VERSINFO; then
+        chezmoi completion "$CURRENT_SHELL" >"$__COMPLETION_DIR/_chezmoi"
     elif [ "$CURRENT_SHELL" = "zsh" ]; then
         chezmoi completion "$CURRENT_SHELL" >~/.config/zsh/completions/_chezmoi
     fi
@@ -20,8 +25,8 @@ fi
 
 if is_exe bat; then
     export BAT_THEME='Catppuccin Mocha'
-    if [ "$CURRENT_SHELL" = "bash" ]; then
-        eval "$(bat --completion "$CURRENT_SHELL")"
+    if [ "$CURRENT_SHELL" = "bash" ] && $BASH_COMPLETION_VERSINFO; then
+        bat --completion "$CURRENT_SHELL" >"$__COMPLETION_DIR/_bat"
     elif [ "$CURRENT_SHELL" = "zsh" ]; then
         bat --completion "$CURRENT_SHELL" >~/.config/zsh/completions/_bat
     fi
@@ -56,3 +61,5 @@ if is_exe yazi; then
         unset tmp
     }
 fi
+
+unset __COMPLETION_DIR

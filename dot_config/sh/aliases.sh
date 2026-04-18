@@ -7,15 +7,15 @@ alias l='ls -CF'
 alias lla='ls -la'
 
 if is_exe eza; then
-    __width=$((COLUMNS * 60 / 100))
+    __eza_width() {
+        echo $((COLUMNS * 60 / 100))
+    }
 
-    alias ls="eza --icons --hyperlink --group-directories-first --width $__width"
-    alias ll="eza -lG --icons --hyperlink --group-directories-first --smart-group --width $__width"
-    alias la="eza -a --icons --hyperlink --group-directories-first --width $__width"
-    alias l="eza -lG --icons --hyperlink --group-directories-first --smart-group --width $__width"
-    alias lla="eza -laG --icons --hyperlink --group-directories-first --width $__width"
-
-    unset __width
+    alias ls='eza --icons --hyperlink --group-directories-first --width "$(__eza_width)"'
+    alias ll='eza -lG --icons --hyperlink --group-directories-first --smart-group --width "$(__eza_width)"'
+    alias la='eza -a --icons --hyperlink --group-directories-first --width "$(__eza_width)"'
+    alias l='eza -lG --icons --hyperlink --group-directories-first --smart-group --width "$(__eza_width)"'
+    alias lla='eza -laG --icons --hyperlink --group-directories-first --width "$(__eza_width)"'
 fi
 
 alias v='nvim'

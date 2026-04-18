@@ -1,3 +1,24 @@
 #!/usr/bin/env bash
 
+SCRIPT_PATH="$(realpath "${BASH_SOURCE[0]}" 2>/dev/null)"
+SCRIPT_DIR="$(cd -- "$(dirname -- "$SCRIPT_PATH")" &>/dev/null && pwd)"
+
+export BASH_CONFIG_PATH="$SCRIPT_PATH"
+export BASH_CONFIG_DIR="$SCRIPT_DIR"
+
+# Check for bash_completion
+if [ -f "$HOME/.nix-profile/etc/profile.d/bash_completion.sh" ]; then
+    . "$HOME/.nix-profile/etc/profile.d/bash_completion.sh"
+elif [ -f "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]; then
+    . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+fi
+
+if [ -n "$BASH_COMPLETION_VERSINFO" ]; then
+    export BASH_COMPLETION_USER_DIR="$HOME/.config/bash/completions"
+    mkdir -p "$BASH_COMPLETION_USER_DIR"
+fi
+
 . "$HOME/.config/sh/shrc"
+
+unset SCRIPT_PATH
+unset SCRIPT_DIR
