@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # shellcheck shell=zsh disable=SC3028,SC3054
 
 export CURRENT_SHELL="sh"
