@@ -59,7 +59,11 @@ export def query [
     }
     let url = $"https://kaikki.org/($dict)/($lang)/meaning/($p1)/($p2)/($expression).jsonl" | url encode
 
-    http $url | decode | lines | each { from json }
+    try {
+        http $url | decode | lines | each { from json }
+    } catch {
+        print $"No entry for `($expression)`"
+    }
 }
 
 def "nu-complete language" [] {
