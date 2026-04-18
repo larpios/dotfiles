@@ -148,6 +148,7 @@ use file.nu *
 use http.nu *
 use math.nu
 use update.nu *
+use kaikki.nu 
 use misc.nu *
 
 use external/wezterm.nu *
