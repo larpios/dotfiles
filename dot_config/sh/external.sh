@@ -1,12 +1,16 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
+__COMPLETION_INSTALLED=false
 __COMPLETION_DIR="$HOME/.config/bash/completions"
 if [ -n "$BASH_COMPLETION_USER_DIR" ]; then
     __COMPLETION_DIR="$(echo "$BASH_COMPLETION_USER_DIR" | cut -d , -f 1)"
+    __COMPLETION_INSTALLED=true
 fi
 
+
+
 if is_exe chezmoi; then
-    if [ "$CURRENT_SHELL" = "bash" ] && $BASH_COMPLETION_VERSINFO; then
+    if [ "$CURRENT_SHELL" = "bash" ] && $__COMPLETION_INSTALLED; then
         chezmoi completion "$CURRENT_SHELL" >"$__COMPLETION_DIR/_chezmoi"
     elif [ "$CURRENT_SHELL" = "zsh" ]; then
         chezmoi completion "$CURRENT_SHELL" >~/.config/zsh/completions/_chezmoi
@@ -25,7 +29,7 @@ fi
 
 if is_exe bat; then
     export BAT_THEME='Catppuccin Mocha'
-    if [ "$CURRENT_SHELL" = "bash" ] && $BASH_COMPLETION_VERSINFO; then
+    if [ "$CURRENT_SHELL" = "bash" ] && $__COMPLETION_INSTALLED; then
         bat --completion "$CURRENT_SHELL" >"$__COMPLETION_DIR/_bat"
     elif [ "$CURRENT_SHELL" = "zsh" ]; then
         bat --completion "$CURRENT_SHELL" >~/.config/zsh/completions/_bat
@@ -33,8 +37,8 @@ if is_exe bat; then
 fi
 
 if is_exe jj; then
-    if [ "$CURRENT_SHELL" = "bash" ]; then
-        eval "$(jj util completion "$CURRENT_SHELL")"
+    if [ "$CURRENT_SHELL" = "bash" ] && $__COMPLETION_INSTALLED; then
+        jj util completion "$CURRENT_SHELL" >"$__COMPLETION_DIR/_jj"
     elif [ "$CURRENT_SHELL" = "zsh" ]; then
         jj util completion "$CURRENT_SHELL" >~/.config/zsh/completions/_jj
     fi
@@ -63,3 +67,4 @@ if is_exe yazi; then
 fi
 
 unset __COMPLETION_DIR
+unset __COMPLETION_INSTALLED

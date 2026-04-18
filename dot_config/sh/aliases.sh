@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'

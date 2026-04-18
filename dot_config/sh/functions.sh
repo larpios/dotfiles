@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 C_GREEN="\033[0;32m"
 C_RED="\033[0;31m"
