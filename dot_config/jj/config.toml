@@ -1,6 +1,7 @@
 [aliases]
 abd = ["abandon"]
 b = ["bookmark"]
+d = ["describe"]
 df = ["diff"]
 ds = ["describe"]
 dfp = ["diff", "-r", "@-"]
