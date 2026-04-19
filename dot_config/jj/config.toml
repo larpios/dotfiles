@@ -97,6 +97,7 @@ if(parents.len() > 1,
 color = "auto"
 default-command = ["log"]
 diff-editor = "nvim-ext"
+diff-formatter = ":git"
 editor = "nvim"
 pager = "delta"
 
