@@ -20,6 +20,7 @@ $custom\
 $sudo\
 
 $fill\
+${custom.jj}\
 $git_branch\
 $git_status\
 $git_commit\
@@ -38,6 +39,9 @@ $character"""
 # Disable the blank line at the start of the prompt
 add_newline = false
 
+[custom.jj]
+when = "jj-starship detect"
+shell = ["jj-starship"]
 
 # Second param
 [hostname]
