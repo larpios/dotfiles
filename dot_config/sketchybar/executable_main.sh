@@ -23,12 +23,12 @@ has_update() (
     old_commit=$(git rev-parse HEAD)
 
     git fetch
-    git pull
+    git pull --rebase
 
     new_commit=$(git rev-parse HEAD)
 
     if [ "$old_commit" != "$new_commit" ]; then
-        return 0
+        return
     else
         return 1
     fi
