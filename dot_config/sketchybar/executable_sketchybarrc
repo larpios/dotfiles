@@ -18,7 +18,7 @@ if [ ! -d "$DATA_DIR" ]; then
 fi
 
 has_update() (
-    cd "$DATA_DIR" || exit 1
+    cd "$REPO_PATH" || exit 1
 
     old_commit=$(git rev-parse HEAD)
 
@@ -28,7 +28,7 @@ has_update() (
     new_commit=$(git rev-parse HEAD)
 
     if [ "$old_commit" != "$new_commit" ]; then
-        return
+        return 0
     else
         return 1
     fi
