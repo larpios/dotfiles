@@ -1,13 +1,6 @@
-## ░█▀▀░▀█▀░█▀█░█▀▄░█▀▀░█░█░▀█▀░█▀█
-## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀
-## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
-## CROSS-SHELL PROMPT
-## The minimal, blazing-fast, and infinitely customizable prompt for any shell!
-
 format = """
 $hostname\
 $directory\
-
 $localip\
 $shlvl\
 $singularity\
@@ -16,10 +9,10 @@ $vcsh\
 $hg_branch\
 $docker_context\
 $custom\
-
 $sudo\
 
 $fill\
+
 ${custom.jj}\
 $git_branch\
 $git_status\
@@ -33,32 +26,22 @@ $os\
 $container\
 $shell\
 $line_break\
-$character"""
-
-
-# Disable the blank line at the start of the prompt
+$character
+"""
 add_newline = false
 
-[custom.jj]
-when = "jj-starship detect"
-shell = ["jj-starship"]
-
-# Second param
 [hostname]
-ssh_only = true 
+ssh_only = true
 format = "[](fg:#252525 bg:none)[█](fg:#E8E3E3 bg:#252525)[$ssh_symbol$hostname](bold bg:#E8E3E3)[](fg:#E8E3E3 bg:none) "
 disabled = false
 
-# Third param
 [directory]
 format = "[](fg:#252525 bg:none)[$path]($style)[█](fg:#232526 bg:#232526)[](fg:#6791C9 bg:#252525)[ ](fg:#252525 bg:#6791C9)[](fg:#6791C9 bg:none)"
 style = "fg:#E8E3E3 bg:#252525 bold"
 truncation_length = 3
-truncate_to_repo=true
+truncate_to_repo = true
 read_only = " "
 
-## SECOND LINE/ROW: Prompt
-# Prompt: param 2 └─
 [character]
 success_symbol = "[ ](#6791C9 bold)"
 error_symbol = "[ ](#B66467 bold)"
@@ -67,8 +50,8 @@ error_symbol = "[ ](#B66467 bold)"
 disabled = false
 
 [fill]
-symbol = ' '
-style = 'bold green'
+symbol = " "
+style = "bold green"
 
 [cmd_duration]
 min_time = 1
@@ -76,6 +59,9 @@ format = "[](fg:#252525 bg:none)[$duration]($style)[](fg:#252525 bg:#25252
 disabled = false
 style = "fg:#E8E3E3 bg:#252525 bold"
 
+[custom.jj]
+when = "jj-starship detect"
+shell = ["jj-starship"]
 
 [git_branch]
 format = "[](fg:#252525 bg:none)[$branch]($style)[](fg:#252525 bg:#252525)[](fg:#81C19B bg:#252525)[](fg:#252525 bg:#81C19B)[](fg:#81C19B bg:none) "
@@ -83,10 +69,10 @@ style = "fg:#E8E3E3 bg:#252525"
 symbol = " "
 
 [git_status]
-format="[](fg:#252525 bg:none)[$all_status$ahead_behind]($style)[](fg:#252525 bg:#252525)[](fg:#6791C9 bg:#252525)[ ](fg:#252525 bg:#6791C9)[](fg:#6791C9 bg:none) "
+format = "[](fg:#252525 bg:none)[$all_status$ahead_behind]($style)[](fg:#252525 bg:#252525)[](fg:#6791C9 bg:#252525)[ ](fg:#252525 bg:#6791C9)[](fg:#6791C9 bg:none) "
 style = "fg:#E8E3E3 bg:#252525"
 conflicted = "="
-ahead =	"⇡${count}"
+ahead = "⇡${count}"
 behind = "⇣${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 up_to_date = " 󰄸 "
@@ -98,21 +84,19 @@ renamed = "»${count}"
 deleted = " ${count}"
 
 [git_commit]
-format = "[\\($hash\\)]($style) [\\($tag\\)]($style)"
+format = '[\($hash\)]($style) [\($tag\)]($style)'
 style = "green"
 
 [git_state]
 rebase = "REBASING"
-merge =	"MERGING"
+merge = "MERGING"
 revert = "REVERTING"
 cherry_pick = "CHERRY-PICKING"
 bisect = "BISECTING"
 am = "AM"
 am_or_rebase = "AM/REBASE"
-style =	"yellow"
+style = "yellow"
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
-
-# # SYMBOLS
 
 [aws]
 symbol = "  "
@@ -123,14 +107,16 @@ symbol = " "
 [dart]
 symbol = " "
 
-# [directory]
-
 [docker_context]
 symbol = " "
 format = "via [$symbol$context]($style) "
 style = "blue bold"
 only_with_files = true
-detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_files = [
+    "docker-compose.yml",
+    "docker-compose.yaml",
+    "Dockerfile",
+]
 detect_folders = []
 disabled = false
 
@@ -142,39 +128,49 @@ symbol = " "
 
 [golang]
 symbol = " "
+disabled = true
 
 [hg_branch]
 symbol = " "
 
 [java]
 symbol = " "
+disabled = true
 
 [julia]
 symbol = " "
 
 [haskell]
+disabled = true
 symbol = "λ "
 
 [nix_shell]
 symbol = " "
 
 [perl]
+disabled = true
 symbol = " "
 
 [php]
 symbol = " "
 
 [python]
+disabled = true
 symbol = " "
-#pyenv_version_name = true
 format = 'via [${symbol}python (${version} )(\($virtualenv\) )]($style)'
 style = "bold yellow"
 pyenv_prefix = "venv "
-python_binary = ["./venv/bin/python", "python", "python3", "python2"]
+python_binary = [
+    "./venv/bin/python",
+    "python",
+    "python3",
+    "python2",
+]
 detect_extensions = ["py"]
 version_format = "v${raw}"
 
 [ruby]
+disabled = true
 symbol = " "
 
 [rust]
@@ -190,20 +186,50 @@ symbol = " "
 symbol = "ﯣ "
 
 [nodejs]
+disabled = true
 format = "via [ Node.js $version](bold green) "
-detect_files = ["package.json", ".node-version"]
+detect_files = [
+    "package.json",
+    ".node-version",
+]
 detect_folders = ["node_modules"]
 
-# Other languages configurations:
-c.disabled = true
-cmake.disabled = true
-haskell.disabled = true
-python.disabled = true
-ruby.disabled = true
-rust.disabled = true
-perl.disabled = true
-package.disabled = true
-lua.disabled = true
-nodejs.disabled = true
-java.disabled = true
-golang.disabled = true
+[c]
+disabled = true
+
+[cmake]
+disabled = true
+
+[package]
+disabled = true
+
+[lua]
+disabled = true
+
+[palettes.catppuccin_mocha]
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
