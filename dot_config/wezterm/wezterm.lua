@@ -142,34 +142,34 @@ config.enable_kitty_graphics = true
 
 -- SSH
 config.ssh_domains = {
-  {
-    -- The name of this specific domain.  Must be unique amongst
-    -- all types of domain in the configuration file.
-    name = 'my.server',
+	{
+		-- The name of this specific domain.  Must be unique amongst
+		-- all types of domain in the configuration file.
+		name = "my.server",
 
-    -- identifies the host:port pair of the remote server
-    -- Can be a DNS name or an IP address with an optional
-    -- ":port" on the end.
-    remote_address = '192.168.1.1',
+		-- identifies the host:port pair of the remote server
+		-- Can be a DNS name or an IP address with an optional
+		-- ":port" on the end.
+		remote_address = "192.168.1.1",
 
-    -- Whether agent auth should be disabled.
-    -- Set to true to disable it.
-    -- no_agent_auth = false,
+		-- Whether agent auth should be disabled.
+		-- Set to true to disable it.
+		-- no_agent_auth = false,
 
-    -- The username to use for authenticating with the remote host
-    username = 'larpi',
+		-- The username to use for authenticating with the remote host
+		username = "larpi",
 
-    -- If true, connect to this domain automatically at startup
-    -- connect_automatically = true,
+		-- If true, connect to this domain automatically at startup
+		-- connect_automatically = true,
 
-    -- Specify an alternative read timeout
-    -- timeout = 60,
+		-- Specify an alternative read timeout
+		-- timeout = 60,
 
-    -- The path to the wezterm binary on the remote host.
-    -- Primarily useful if it isn't installed in the $PATH
-    -- that is configure for ssh.
-    -- remote_wezterm_path = "/home/yourusername/bin/wezterm"
-  },
+		-- The path to the wezterm binary on the remote host.
+		-- Primarily useful if it isn't installed in the $PATH
+		-- that is configure for ssh.
+		-- remote_wezterm_path = "/home/yourusername/bin/wezterm"
+	},
 }
 
 -- Create unix domain socket
@@ -222,11 +222,11 @@ config.mouse_bindings = {
 		mods = "NONE",
 		action = wezterm.action.Nop,
 	},
-    {
+	{
 		event = { Up = { streak = 1, button = "Left" } },
 		mods = "CTRL",
-		action = wezterm.action.OpenLinkAtMouseCursor
-    }
+		action = wezterm.action.OpenLinkAtMouseCursor,
+	},
 }
 
 -- Keybindings
@@ -236,11 +236,32 @@ config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 
 local act = wezterm.action
+local spawn_tab_next_to_active = wezterm.action_callback(function(win, pane)
+	local mux_win = win:mux_window()
+	-- Find the current tab index
+	for _, item in ipairs(mux_win:tabs_with_info()) do
+		if item.is_active then
+			-- Spawn new tab and move it next to the current
+			mux_win:spawn_tab({})
+			win:perform_action(act.MoveTab(item.index + 1), pane)
+			return
+		end
+	end
+end)
 config.keys = {
 	{ key = "Space", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 	{ key = "p", mods = "CTRL|META", action = act.ActivateCommandPalette },
 	{ key = "r", mods = "CTRL|SHIFT", action = "ReloadConfiguration" },
-	-- { key = "t", mods = "CTRL", action = act.SpawnTab("CurrentPaneDomain") },
+	{
+		key = "t",
+		mods = "CTRL|SHIFT",
+		action = spawn_tab_next_to_active,
+	},
+	{
+		key = "t",
+		mods = "CMD",
+		action = spawn_tab_next_to_active,
+	},
 	{ key = "w", mods = "META", action = act.CloseCurrentPane({ confirm = true }) },
 	{ key = "Tab", mods = "CTRL|SHIFT", action = act.ActivateTabRelative(-1) },
 	{ key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
