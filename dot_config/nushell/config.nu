@@ -134,6 +134,7 @@ export-env {
     $env.VISUAL = $env.EDITOR
     $env.PAGER = 'bat'
     $env.BAT_THEME = 'Catppuccin Mocha'
+    $env.CURRENT_SHELL = 'nu'
 }
 
 use aliases.nu *
