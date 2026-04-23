@@ -27,6 +27,10 @@ n = ["new"]
 prune-divergent = ["abandon", "'divergent():: ~ ::@'"]
 show-last = ["show", "-r", "@-"]
 sl = ["show-last"]
+ws = ["workspace"]
+wsa = ["workspace", "add"]
+wsan = ["workspace", "add", "--name"]
+wsl = ["workspace", "list"]
 
 [colors]
 commit_id = "green"
@@ -57,8 +61,8 @@ program = "nvim"
 
 [revsets]
 log = "trunk()..@ | @..trunk() | trunk() | @:: | fork_point(trunk() | @) | ancestors(@, 10) | ancestors(tracked_remote_bookmarks().., 2)"
-bookmark-advance-from = 'heads(::to & bookmarks())'  # The closest bookmarks
-bookmark-advance-to = '(@ ~ empty()) | parents(@ & empty())' # Current working copy, or the parent of it if empty
+bookmark-advance-from = "heads(::to & bookmarks())"  # The closest bookmarks
+bookmark-advance-to = "(@ ~ empty()) | parents(@ & empty())"  # Current working copy, or the parent of it if empty
 
 [revset-aliases]
 HEAD = "@-"
