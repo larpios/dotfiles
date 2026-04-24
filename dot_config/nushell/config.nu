@@ -139,7 +139,6 @@ export-env {
 
 use aliases.nu *
 use list.nu *
-use windows.nu
 use symlink.nu *
 use str.nu *
 use nix.nu *
@@ -151,6 +150,8 @@ use math.nu
 use update.nu *
 use kaikki.nu 
 use misc.nu *
+use windows.nu
+use macos.nu *
 
 use external/wezterm.nu *
 use external/bitwarden.nu *
