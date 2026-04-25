@@ -28,10 +28,11 @@ export def query [
         }
     }
 
-    let p1 = $expression | str substring 0..0
-    let p2 = $expression | str substring 0..1
+    let p1 = $expression | str substring --grapheme-clusters 0..0
+    let p2 = $expression | str substring --grapheme-clusters 0..1
     let dict = match $source_language {
         "Chinese"        => "zhwiktionary"
+        "English"        => "dictionary"
         "French"         => "frwiktionary"
         "German"         => "dewiktionary"
         "Russian"        => "ruwiktionary"
