@@ -241,7 +241,7 @@ run = 'move-node-to-workspace 3'
 check-further-callbacks = true
 
 [[on-window-detected]]
-if.app-id = 'com.valvesoftware.steam'
+if.app-name-regex-substring = "steam"
 run = 'move-node-to-workspace 4'
 check-further-callbacks = true
 
