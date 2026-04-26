@@ -67,7 +67,6 @@ style = "bold green"
 [cmd_duration]
 min_time = 1
 format = "[](fg:base bg:none)[$duration]($style)[](fg:base bg:base)[](fg:mauve bg:base)[󱎫 ](fg:base bg:mauve)[](fg:mauve bg:none)"
-show_notifications = true
 disabled = false
 style = "fg:text bg:base bold"
 
