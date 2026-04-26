@@ -30,21 +30,23 @@ $character
 """
 add_newline = false
 
+palette = "catppuccin_mocha"
+
 [hostname]
 ssh_only = true
-format = "[](fg:#252525 bg:none)[█](fg:#E8E3E3 bg:#252525)[$ssh_symbol$hostname](bold bg:#E8E3E3)[](fg:#E8E3E3 bg:none) "
+format = "[](fg:base bg:none)[█](fg:text bg:base)[$ssh_symbol$hostname](bold bg:text)[](fg:text bg:none) "
 disabled = false
 
 [directory]
-format = "[](fg:#252525 bg:none)[$path]($style)[█](fg:#232526 bg:#232526)[](fg:#6791C9 bg:#252525)[ ](fg:#252525 bg:#6791C9)[](fg:#6791C9 bg:none)"
-style = "fg:#E8E3E3 bg:#252525 bold"
+format = "[](fg:base bg:none)[$path]($style)[█](fg:base bg:base)[](fg:blue bg:base)[ ](fg:base bg:blue)[](fg:blue bg:none)"
+style = "fg:text bg:base bold"
 truncation_length = 3
 truncate_to_repo = true
 read_only = " "
 
 [character]
-success_symbol = "[ ](#6791C9 bold)"
-error_symbol = "[ ](#B66467 bold)"
+success_symbol = "[ ](blue bold)"
+error_symbol = "[ ](red bold)"
 
 [line_break]
 disabled = false
@@ -55,22 +57,22 @@ style = "bold green"
 
 [cmd_duration]
 min_time = 1
-format = "[](fg:#252525 bg:none)[$duration]($style)[](fg:#252525 bg:#252525)[](fg:#C397D8 bg:#252525)[󱑂 ](fg:#252525 bg:#C397D8)[](fg:#C397D8 bg:none)"
+format = "[](fg:base bg:none)[$duration]($style)[](fg:base bg:base)[](fg:mauve bg:base)[󱑂 ](fg:base bg:mauve)[](fg:mauve bg:none)"
 disabled = false
-style = "fg:#E8E3E3 bg:#252525 bold"
+style = "fg:text bg:base bold"
 
 [custom.jj]
 when = "jj-starship detect"
 shell = ["jj-starship"]
 
 [git_branch]
-format = "[](fg:#252525 bg:none)[$branch]($style)[](fg:#252525 bg:#252525)[](fg:#81C19B bg:#252525)[](fg:#252525 bg:#81C19B)[](fg:#81C19B bg:none) "
-style = "fg:#E8E3E3 bg:#252525"
+format = "[](fg:base bg:none)[$branch]($style)[](fg:base bg:base)[](fg:green bg:base)[](fg:base bg:green)[](fg:green bg:none) "
+style = "fg:text bg:base"
 symbol = " "
 
 [git_status]
-format = "[](fg:#252525 bg:none)[$all_status$ahead_behind]($style)[](fg:#252525 bg:#252525)[](fg:#6791C9 bg:#252525)[ ](fg:#252525 bg:#6791C9)[](fg:#6791C9 bg:none) "
-style = "fg:#E8E3E3 bg:#252525"
+format = "[](fg:base bg:none)[$all_status$ahead_behind]($style)[](fg:base bg:base)[](fg:sky bg:base)[ ](fg:base bg:sky)[](fg:sky bg:none) "
+style = "fg:text bg:base"
 conflicted = "="
 ahead = "⇡${count}"
 behind = "⇣${count}"
