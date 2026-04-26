@@ -35,6 +35,12 @@ ssh_only = true
 format = "[](fg:base bg:none)[█](fg:text bg:base)[$ssh_symbol$hostname](bold bg:text)[](fg:text bg:none) "
 disabled = false
 
+[sudo]
+symbol = " "
+style = "fg:text bg:base"
+format = " [](fg:maroon bg:none)[$symbol](bold fg:base bg:maroon)[](fg:maroon bg:none) "
+disabled = false
+
 [directory]
 format = "[](fg:base bg:none)[$path]($style)[█](fg:base bg:base)[](fg:blue bg:base)[ ](fg:base bg:blue)[](fg:blue bg:none)"
 style = "fg:text bg:base bold"
@@ -61,6 +67,7 @@ style = "bold green"
 [cmd_duration]
 min_time = 1
 format = "[](fg:base bg:none)[$duration]($style)[](fg:base bg:base)[](fg:mauve bg:base)[󱎫 ](fg:base bg:mauve)[](fg:mauve bg:none)"
+show_notifications = true
 disabled = false
 style = "fg:text bg:base bold"
 
