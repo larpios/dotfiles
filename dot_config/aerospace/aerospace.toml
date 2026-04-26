@@ -228,15 +228,31 @@ shift-down = ['volume set 0', 'mode main']
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 1'
+check-further-callbacks = true
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.floorp'
 run = 'move-node-to-workspace 2'
+check-further-callbacks = true
 
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 3'
+check-further-callbacks = true
 
 [[on-window-detected]]
 if.window-title-regex-substring = "picture[- ]in[- ]picture"
 run = ["layout floating"]
+check-further-callbacks = true
+
+[[on-window-detected]]
+if.app-name-regex-substring = "steam"
+if.window-title-regex-substring = "steam settings"
+run = ["layout floating"]
+check-further-callbacks = true
+
+[[on-window-detected]]
+if.app-name-regex-substring = "steam"
+if.window-title-regex-substring = "friends list"
+run = ["layout floating"]
+check-further-callbacks = true
