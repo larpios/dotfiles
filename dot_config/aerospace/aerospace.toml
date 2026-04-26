@@ -252,12 +252,7 @@ check-further-callbacks = true
 
 [[on-window-detected]]
 if.app-name-regex-substring = "steam"
-if.window-title-regex-substring = "steam settings"
+if.window-title-regex-substring = "^(?!steam).*"
 run = ["layout floating"]
 check-further-callbacks = true
 
-[[on-window-detected]]
-if.app-name-regex-substring = "steam"
-if.window-title-regex-substring = "friends list"
-run = ["layout floating"]
-check-further-callbacks = true
