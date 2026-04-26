@@ -11,7 +11,7 @@ exec-on-workspace-change = [
   '/usr/bin/env',
   'bash',
   '-c',
-  'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+  '~/.config/aerospace/on_workspace_change.sh'
 ]
 
 # Start AeroSpace at login
@@ -238,5 +238,5 @@ if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-if.window-title-regex-substring = "Picture-in-Picture"
-run = ["layout floating"]
+if.window-title-regex-substring = "picture[- ]in[- ]picture"
+run = "layout floating"
