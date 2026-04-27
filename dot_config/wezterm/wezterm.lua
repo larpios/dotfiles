@@ -200,7 +200,7 @@ config.window_padding = {
 }
 config.window_background_image = wezterm.config_dir .. "/bg.jpg"
 config.window_background_image_hsb = {
-	brightness = 0.1,
+	brightness = 0.3,
 }
 
 config.inactive_pane_hsb = {
