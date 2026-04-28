@@ -1,3 +1,8 @@
+[flags]
+cpu_left_legend = true
+group_processes = true
+default_widget_type = "proc"
+
 [styles.cpu]
 all_entry_color = "#f5e0dc"
 avg_entry_color = "#eba0ac"
