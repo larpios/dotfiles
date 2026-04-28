@@ -22,10 +22,6 @@ komorebi.bar.json
 Library
 {{- end }}
 
-# If nix exists, ignore these
-{{- if (findExecutable "nix" (list "bin" ".cargo/bin" ".nix-profile/bin" ".local/bin" "/run/current-system/sw/bin" "/nix/var/nix/profiles/default/bin")) }}
-.config/btop
-{{- end }}
 
 # Gemini CLI: Ignore dynamic state and auth tokens
 .gemini/google_accounts.json
