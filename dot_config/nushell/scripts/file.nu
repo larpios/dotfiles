@@ -40,6 +40,6 @@ export def "file backup" [
       }
     }
 
-    cp $file $backup
+    cp -r $file $backup
   }
 }
