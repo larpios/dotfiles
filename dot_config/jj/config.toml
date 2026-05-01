@@ -43,8 +43,6 @@ backend = "watchman"
 
 [git]
 abandon-unreachable-commits = true
-# Don't accidentally push `tmp` bookmark
-private-commits = "bookmarks(tmp)"
 
 [merge-tools.delta]
 diff-expected-exit-codes = [0, 1]
