@@ -70,7 +70,7 @@ config.keys = {
         action = act.PromptInputLine({
             description = wezterm.format({
                 { Attribute = { Intensity = 'Bold' } },
-                { Foreground = { AnsiColor = 'Fuchsia' } },
+                -- { Foreground = { AnsiColor = 'Fuchsia' } },
                 { Text = 'Enter new name for workspace' },
             }),
             action = wezterm.action_callback(function(window, pane, line)

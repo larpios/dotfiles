@@ -1,4 +1,5 @@
 local platform = require('utils.platform')
+local helpers = require('utils.helpers')
 
 local function get_fallback_shell()
     if platform.is_win then
