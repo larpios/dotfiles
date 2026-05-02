@@ -4,7 +4,6 @@ Just my personal dotfiles.
 
 ## Prerequisites
 
-- [Chezmoi](https://github.com/twpayne/chezmoi)
 - Shell (Nushell)
 
 ## Installation
@@ -12,8 +11,15 @@ Just my personal dotfiles.
 If you want to try it out, you can run the following command:
 
 ```bash
-chezmoi init --apply larpios
+nu setup.nu
 ```
+
+You can also dry run it:
+
+```bash
+nu setup.nu --dry-run
+```
+
 
 ## Caution
 
