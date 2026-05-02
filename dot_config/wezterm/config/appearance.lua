@@ -33,8 +33,8 @@ config.allow_square_glyphs_to_overflow_width = 'Always'
 config.harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' }
 
 -- Window
-config.window_padding = { left = "3px", right = "3px", top = "3px", bottom = "3px" }
-config.background = require("utils.backdrops"):get_initial()
+config.window_padding = { left = '3px', right = '3px', top = '3px', bottom = '3px' }
+config.background = require('utils.backdrops'):get_initial()
 config.inactive_pane_hsb = { saturation = 0.6, brightness = 0.4 }
 config.macos_window_background_blur = 10
 config.native_macos_fullscreen_mode = true
@@ -54,33 +54,33 @@ config.status_update_interval = 1000
 
 -- Make the tab bar taller
 config.window_frame = {
-    font = wezterm.font({ family = "JetBrainsMono Nerd Font", weight = "Bold" }),
-    }
+    font = wezterm.font({ family = 'JetBrainsMono Nerd Font', weight = 'Bold' }),
+}
 
-    config.colors = {
+config.colors = {
     tab_bar = {
-    	background = "rgba(0, 0, 0, 0.4)",
-    	active_tab = {
-    		bg_color = "rgba(0, 0, 0, 0)",
-    		fg_color = theme.text,
-    	},
-    	inactive_tab = {
-    		bg_color = "rgba(0, 0, 0, 0)",
-    		fg_color = theme.subtext0,
-    	},
-    	inactive_tab_hover = {
-    		bg_color = "rgba(0, 0, 0, 0)",
-    		fg_color = theme.text,
-    	},
-    	new_tab = {
-    		bg_color = "rgba(0, 0, 0, 0)",
-    		fg_color = theme.subtext0,
-    	},
-    	new_tab_hover = {
-    		bg_color = "rgba(0, 0, 0, 0)",
-    		fg_color = theme.text,
-    	},
+        background = 'rgba(0, 0, 0, 0.4)',
+        active_tab = {
+            bg_color = 'rgba(0, 0, 0, 0)',
+            fg_color = theme.text,
+        },
+        inactive_tab = {
+            bg_color = 'rgba(0, 0, 0, 0)',
+            fg_color = theme.subtext0,
+        },
+        inactive_tab_hover = {
+            bg_color = 'rgba(0, 0, 0, 0)',
+            fg_color = theme.text,
+        },
+        new_tab = {
+            bg_color = 'rgba(0, 0, 0, 0)',
+            fg_color = theme.subtext0,
+        },
+        new_tab_hover = {
+            bg_color = 'rgba(0, 0, 0, 0)',
+            fg_color = theme.text,
+        },
     },
-    }
+}
 
-    return config
+return config

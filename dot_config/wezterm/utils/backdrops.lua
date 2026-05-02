@@ -36,6 +36,7 @@ function BackDrops:set_images_dir(path)
 end
 
 ---Sets the `images` after instantiating `BackDrops`.
+---@return BackDrops
 function BackDrops:scan_images_dir()
 	local files = wezterm.glob(self.images_dir .. GLOB_PATTERN)
 	if #files == 0 then
