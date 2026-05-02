@@ -108,6 +108,8 @@ function BackDrops:random()
 end
 
 ---Set a specific background from the `files` array
+---@param window Window
+---@param idx number Index of the `files` array
 function BackDrops:set_img(window, idx)
 	if idx > #self.images or idx < 0 then
 		wezterm.log_error("Index out of range")

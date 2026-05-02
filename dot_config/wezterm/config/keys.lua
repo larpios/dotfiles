@@ -1,4 +1,5 @@
 local wezterm = require('wezterm')
+local backdrops = require('utils.backdrops')
 local act = wezterm.action
 
 ---@class QuickSelectPattern
