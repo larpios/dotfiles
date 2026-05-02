@@ -54,7 +54,7 @@ function BackDrops:_gen_opts()
 	if #self.images > 0 then
 		table.insert(bg_opts, {
 			source = {
-				File = self.images[self.current_idx],
+				File = { path = self.images[self.current_idx] },
 			},
 			-- hsb = { brightness = 0.1 },
 			horizontal_align = "Center",
@@ -64,17 +64,16 @@ function BackDrops:_gen_opts()
 
 	-- Add a dark dimming layer on top of the image to improve text readability
 	table.insert(bg_opts, {
-		source = { Color = theme.base }, -- Catppuccin Mocha background color
+		source = { Color = theme.base },
 		height = "120%",
 		width = "120%",
 		vertical_offset = "-10%",
 		horizontal_offset = "-10%",
-		opacity = 0.5, -- Reduced opacity since we are now using HSB as well
+		opacity = 0.7, -- Subtle overlay
 	})
 
 	return bg_opts
 end
-
 ---Set the initial options for `background`
 function BackDrops:get_initial()
 	return self:_gen_opts()

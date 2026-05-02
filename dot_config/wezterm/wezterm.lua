@@ -26,16 +26,16 @@ if default_shell == nil then
 end
 
 -- Setup events
-require("events.toggle_opacity").setup()
-require("events.right_status").setup()
-require("events.tab_title").setup()
+require('events.toggle_opacity').setup()
+require('events.right_status').setup()
+require('events.tab_title').setup()
 
 -- Initialize backdrops
-require("utils.backdrops"):scan_images_dir():random()
+require('utils.backdrops'):scan_images_dir():random()
 
 return Config:init()
+    :append(require('config.shell'))
     :append({
-        default_prog = { default_shell },
         unix_domains = { { name = 'unix' } },
         default_gui_startup_args = { 'connect', 'unix' },
     })
