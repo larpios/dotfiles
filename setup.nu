@@ -6,6 +6,9 @@ def "main" [
     --force (-f) # Whether to force overwriting existing files
     --dry-run (-n) # Only print commands
 ] {
+    if $dry_run {
+        print $"Running in dry-run mode, no changes will be made."
+    }
     symlink-in-dir 'dots' --exclude ['.config'] --dry-run=$dry_run
     symlink-in-dir 'dots/.config' --dry-run=$dry_run
 
@@ -34,17 +37,20 @@ def clone-externals [
     $externals | par-each { |ext|
         print $"Cloning ($ext.0) into ($ext.1)..."
 
-        if not $dry_run {
-            let dest = $ext.1 | path expand
-            if ($dest | path exists) {
-                if $force {
-                    print $"($dest) already exists, overwriting..."
+        let dest = $ext.1 | path expand
+        if ($dest | path exists) {
+            if $force {
+                print $"($dest) already exists, overwriting..."
+                if not $dry_run {
                     rm -rf $dest
-                } else {
-                    print $"($dest) already exists, skipping..."
-                    return
                 }
+            } else {
+                print $"($dest) already exists, skipping..."
+                return
             }
+        }
+
+        if not $dry_run {
             git clone $ext.0 $dest
         }
     }
