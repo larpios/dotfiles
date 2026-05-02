@@ -70,7 +70,6 @@ config.keys = {
         action = act.PromptInputLine({
             description = wezterm.format({
                 { Attribute = { Intensity = 'Bold' } },
-                -- { Foreground = { AnsiColor = 'Fuchsia' } },
                 { Text = 'Enter new name for workspace' },
             }),
             action = wezterm.action_callback(function(window, pane, line)
@@ -181,9 +180,6 @@ config.mouse_bindings = {
 }
 
 -- Plugins
-local modal = wezterm.plugin.require('https://github.com/MLFlexer/modal.wezterm')
-modal.apply_to_config(config)
-modal.set_default_keys(config)
 
 local smart_splits = wezterm.plugin.require('https://github.com/mrjones2014/smart-splits.nvim')
 smart_splits.apply_to_config(config, {

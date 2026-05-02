@@ -57,30 +57,30 @@ config.window_frame = {
     font = wezterm.font({ family = 'JetBrainsMono Nerd Font', weight = 'Bold' }),
 }
 
-config.colors = {
-    tab_bar = {
-        background = 'rgba(0, 0, 0, 0.4)',
-        active_tab = {
-            bg_color = 'rgba(0, 0, 0, 0)',
-            fg_color = theme.text,
-        },
-        inactive_tab = {
-            bg_color = 'rgba(0, 0, 0, 0)',
-            fg_color = theme.subtext0,
-        },
-        inactive_tab_hover = {
-            bg_color = 'rgba(0, 0, 0, 0)',
-            fg_color = theme.text,
-        },
-        new_tab = {
-            bg_color = 'rgba(0, 0, 0, 0)',
-            fg_color = theme.subtext0,
-        },
-        new_tab_hover = {
-            bg_color = 'rgba(0, 0, 0, 0)',
-            fg_color = theme.text,
-        },
-    },
-}
-
+-- config.colors = {
+--     tab_bar = {
+--         background = 'rgba(0, 0, 0, 0.4)',
+--         active_tab = {
+--             bg_color = 'rgba(0, 0, 0, 0)',
+--             fg_color = theme.text,
+--         },
+--         inactive_tab = {
+--             bg_color = 'rgba(0, 0, 0, 0)',
+--             fg_color = theme.subtext0,
+--         },
+--         inactive_tab_hover = {
+--             bg_color = 'rgba(0, 0, 0, 0)',
+--             fg_color = theme.text,
+--         },
+--         new_tab = {
+--             bg_color = 'rgba(0, 0, 0, 0)',
+--             fg_color = theme.subtext0,
+--         },
+--         new_tab_hover = {
+--             bg_color = 'rgba(0, 0, 0, 0)',
+--             fg_color = theme.text,
+--         },
+--     },
+-- }
+--
 return config

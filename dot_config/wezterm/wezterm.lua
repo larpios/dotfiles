@@ -1,3 +1,4 @@
+local wezterm = require('wezterm')
 local Config = require('utils.config_builder')
 
 -- Setup events
@@ -8,7 +9,7 @@ require('events.tab_title').setup()
 -- Initialize backdrops
 require('utils.backdrops'):scan_images_dir():random()
 
-return Config:init()
+local ret = Config:init()
     :append(require('config.shell'))
     :append({
         unix_domains = { { name = 'unix' } },
@@ -16,3 +17,7 @@ return Config:init()
     })
     :append(require('config.appearance'))
     :append(require('config.keys')).options
+
+wezterm.log_info(ret)
+
+return ret
