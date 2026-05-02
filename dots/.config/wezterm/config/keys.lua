@@ -64,21 +64,21 @@ config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
     -- Workspace operations via Leader
     { key = 's', mods = 'LEADER', action = act.ShowLauncherArgs({ flags = 'FUZZY|WORKSPACES' }) },
-    {
-        key = '$',
-
-        action = act.PromptInputLine({
-            description = wezterm.format({
-                { Attribute = { Intensity = 'Bold' } },
-                { Text = 'Enter new name for workspace' },
-            }),
-            action = wezterm.action_callback(function(window, pane, line)
-                if line then
-                    wezterm.mux.rename_workspace(window:mux_window():get_workspace(), line)
-                end
-            end),
-        }),
-    },
+    -- {
+    --     key = '$',
+    --
+    --     action = act.PromptInputLine({
+    --         description = wezterm.format({
+    --             { Attribute = { Intensity = 'Bold' } },
+    --             { Text = 'Enter new name for workspace' },
+    --         }),
+    --         action = wezterm.action_callback(function(window, pane, line)
+    --             if line then
+    --                 wezterm.mux.rename_workspace(window:mux_window():get_workspace(), line)
+    --             end
+    --         end),
+    --     }),
+    -- },
     { key = 'Space', mods = 'CTRL|SHIFT', action = act.DisableDefaultAssignment },
     { key = 'p', mods = 'CTRL|META', action = act.ActivateCommandPalette },
     { key = 'r', mods = 'CTRL|SHIFT', action = 'ReloadConfiguration' },
