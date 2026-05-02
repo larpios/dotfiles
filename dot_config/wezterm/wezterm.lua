@@ -118,11 +118,16 @@ config.default_prog = { default_shell }
 -- Colorscheme
 config.color_scheme = "Catppuccin Mocha"
 
+-- Configures how square symbol glyph's cell is rendered
+config.allow_square_glyphs_to_overflow_width = 'Always'
+
 -- Font
 config.font = wezterm.font_with_fallback({
 	"JetBrainsMono Nerd Font",
 	"CaskaydiaCove Nerd Font",
 	"MesloLGS NF",
+	"Noto Color Emoji",
+	"Apple Color Emoji",
 	"Noto Sans Mono CJK KR",
 	"Menlo",
 	"Monaco",
