@@ -10,14 +10,14 @@ def "main" [
         print $"Running in dry-run mode, no changes will be made."
     }
     symlink-in-dir 'dots' --exclude ['.config'] --dry-run=$dry_run
-    symlink-in-dir 'dots/.config' --dry-run=$dry_run
+    symlink-in-dir 'dots' '.config' --dry-run=$dry_run
 
     match $nu.os-info.name {
         'windows' => {
-            symlink-in-dir 'windows/dots/Documents' --dry-run=$dry_run
+            symlink-in-dir 'windows/dots' 'Documents' --dry-run=$dry_run
         }
         'macos' => {
-            symlink-in-dir 'macos/dots/Library/Application Support/' --dry-run=$dry_run
+            symlink-in-dir 'macos/dots' 'Library/Application Support/' --dry-run=$dry_run
         }
     }
 
@@ -59,17 +59,20 @@ def clone-externals [
 }
 
 def symlink-in-dir [
-    dir: path
+    base_dir: path
+    relative_dir: path = ''
     --exclude (-e): list<path> = []
     --dry-run (-n) = false
 ] {
-    cd ($SCRIPT_DIR | path join $dir)
+    cd ($SCRIPT_DIR | path join $base_dir)
 
-    let files = ls -al *
-    $files 
-    | where { |f| not ($f.name in $exclude) }
+    let abs_files = glob ($relative_dir | path join '*')
+    let rel_files = $abs_files | str replace $"($SCRIPT_DIR | path join $base_dir)/" ''
+
+    $rel_files
+    | where { |f| not ($f in $exclude) }
     | par-each { |f| 
-        symlink-file $f.name --dry-run=$dry_run
+        symlink-file $f --dry-run=$dry_run
     }
 
     return
