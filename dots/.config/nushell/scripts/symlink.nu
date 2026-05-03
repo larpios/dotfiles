@@ -1,7 +1,7 @@
 # Commands for working with symbolic links
 
 export def "is-symlink" [] : path -> bool {
-  if not ($in | path exists) {
+  if not ($in | path exists --no-symlink) {
     error make {
       msg: $"($in) does not exist"
       labels: [
@@ -13,7 +13,7 @@ export def "is-symlink" [] : path -> bool {
     }
   }
 
-  let type = (ls -l $in | last | get type)
+  let type = (ls -l $in | get type | last)
 
   $type == 'symlink'
 }
