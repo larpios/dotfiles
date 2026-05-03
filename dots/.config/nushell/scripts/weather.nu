@@ -5,7 +5,7 @@ def location [] : nothing -> record<status: string, country: string, countryCode
 export def main [] {
   const WEATHER_API = 'https://wttr.in/?format=j1'
 
-  let weather_info = http $WEATHER_API
+  let weather_info = http $WEATHER_API --raw | from json
 
   $weather_info | upsert request { |it| $it.request.query | parse 'Lat {lat} and Lon {lon}' }
 }
