@@ -119,9 +119,6 @@ const THEME_FILE = $THEMES_DIR | path join $"($THEME).nu"
 source-env $THEME_FILE
 
 export-env {
-    $env.GITHUB_USERNAME = 'larpios'
-    $env.GITHUB_HTTP = $"https://github.com/($env.GITHUB_USERNAME)"
-    $env.GITHUB_SSH = $"git@github.com:($env.GITHUB_USERNAME)"
     $env.XDG_CONFIG_HOME = ('~/.config' | path expand)
     $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
     $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
@@ -150,8 +147,9 @@ use math.nu
 use update.nu *
 use kaikki.nu 
 use misc.nu *
-use windows.nu
 use macos.nu *
+use github.nu *
+use windows.nu
 
 use external/wezterm.nu *
 use external/bitwarden.nu *
