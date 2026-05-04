@@ -84,6 +84,8 @@ main() {
             error "Failed to install sketchybar-config"
             exit 3
         fi
+
+        rm -rf "$REPO_PATH/target"
     fi
 
     "$BINARY_PATH"
