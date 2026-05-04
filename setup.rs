@@ -19,95 +19,6 @@ use std::{
 };
 use which::which;
 
-#[cfg(not(windows))]
-fn create_symlink<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
-    std::os::unix::fs::symlink(&src, &dst).with_context(|| {
-        format!(
-            "Failed to create symlink from {} to {}",
-            src.as_ref().display(),
-            dst.as_ref().display()
-        )
-    })
-}
-
-#[cfg(windows)]
-fn create_symlink<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
-    if src.is_dir() {
-        std::os::windows::fs::symlink_dir(&src, &dst).with_context(|| {
-            format!(
-                "Failed to create symlink from {} to {}",
-                src.as_ref().display(),
-                dst.as_ref().display()
-            )
-        })
-    } else {
-        std::os::windows::fs::symlink_file(&src, &dst).with_context(|| {
-            format!(
-                "Failed to create symlink from {} to {}",
-                src.as_ref().display(),
-                dst.as_ref().display()
-            )
-        })
-    }
-}
-
-static BACKUP_DIR: OnceLock<PathBuf> = OnceLock::new();
-
-fn get_backup_dir() -> &'static PathBuf {
-    BACKUP_DIR.get_or_init(|| {
-        let home = env::var("HOME")
-            .or_else(|_| env::var("USERPROFILE"))
-            .expect("Could not find home directory");
-
-        let backup_dir = PathBuf::from(home).join(".backup");
-
-        if !backup_dir.exists() {
-            fs::create_dir_all(&backup_dir).expect("Failed to create backup directory");
-        }
-
-        backup_dir
-    })
-}
-
-#[derive(Parser)]
-#[command(name = "dotfiles")]
-struct Cli {
-    #[command(subcommand)]
-    command: Commands,
-}
-
-#[derive(Subcommand)]
-enum Commands {
-    Install(InstallArgs),
-}
-
-#[derive(clap::Args)]
-struct InstallArgs {
-    #[arg(short, long, default_value_t = false)]
-    force: bool,
-    #[arg(short = 'n', long, default_value_t = false)]
-    dry_run: bool,
-}
-
-#[derive(Debug, Clone)]
-struct Repos {
-    url: String,
-    dest: String,
-}
-
-impl Repos {
-    fn new<T, U>(url: T, dest: U) -> Self
-    where
-        T: ToString,
-        U: ToString,
-    {
-        Self {
-            url: url.to_string(),
-            dest: dest.to_string(),
-        }
-    }
-}
-
 fn main() -> Result<()> {
     let cli = Cli::parse();
 
@@ -287,4 +198,93 @@ fn expand_tilde(path: &str) -> Result<PathBuf> {
     let canonicalized = fs::canonicalize(&expanded)
         .with_context(|| format!("Failed to canonicalize path: {}", expanded.display()))?;
     Ok(canonicalized)
+}
+
+#[cfg(not(windows))]
+fn create_symlink<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
+    std::os::unix::fs::symlink(&src, &dst).with_context(|| {
+        format!(
+            "Failed to create symlink from {} to {}",
+            src.as_ref().display(),
+            dst.as_ref().display()
+        )
+    })
+}
+
+#[cfg(windows)]
+fn create_symlink<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
+    if src.is_dir() {
+        std::os::windows::fs::symlink_dir(&src, &dst).with_context(|| {
+            format!(
+                "Failed to create symlink from {} to {}",
+                src.as_ref().display(),
+                dst.as_ref().display()
+            )
+        })
+    } else {
+        std::os::windows::fs::symlink_file(&src, &dst).with_context(|| {
+            format!(
+                "Failed to create symlink from {} to {}",
+                src.as_ref().display(),
+                dst.as_ref().display()
+            )
+        })
+    }
+}
+
+static BACKUP_DIR: OnceLock<PathBuf> = OnceLock::new();
+
+fn get_backup_dir() -> &'static PathBuf {
+    BACKUP_DIR.get_or_init(|| {
+        let home = env::var("HOME")
+            .or_else(|_| env::var("USERPROFILE"))
+            .expect("Could not find home directory");
+
+        let backup_dir = PathBuf::from(home).join(".backup");
+
+        if !backup_dir.exists() {
+            fs::create_dir_all(&backup_dir).expect("Failed to create backup directory");
+        }
+
+        backup_dir
+    })
+}
+
+#[derive(Parser)]
+#[command(name = "dotfiles")]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Subcommand)]
+enum Commands {
+    Install(InstallArgs),
+}
+
+#[derive(clap::Args)]
+struct InstallArgs {
+    #[arg(short, long, default_value_t = false)]
+    force: bool,
+    #[arg(short = 'n', long, default_value_t = false)]
+    dry_run: bool,
+}
+
+#[derive(Debug, Clone)]
+struct Repos {
+    url: String,
+    dest: String,
+}
+
+impl Repos {
+    fn new<T, U>(url: T, dest: U) -> Self
+    where
+        T: ToString,
+        U: ToString,
+    {
+        Self {
+            url: url.to_string(),
+            dest: dest.to_string(),
+        }
+    }
 }
