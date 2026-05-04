@@ -2,9 +2,7 @@ local wezterm = require('wezterm')
 local Config = require('utils.config_builder')
 
 -- Setup events
-require('events.toggle_opacity').setup()
-require('events.right_status').setup()
-require('events.tab_title').setup()
+require('events').setup()
 
 -- Initialize backdrops
 require('utils.backdrops'):scan_images_dir():random()
