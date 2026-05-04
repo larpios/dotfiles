@@ -85,4 +85,28 @@ export def psub [
     $tmp
 }
 
+export def export-compat [
+    entry: string
+] {
+    let pair = $entry | parse '{key}={value}'
 
+    let key = $pair.key
+    let value = $pair.value
+
+    export-env {
+        $env.$key = $value
+    }
+}
+
+export def export-from-sh [
+    code: string
+] {
+    $code
+    | lines
+    | where { |line|
+        $line | str starts-with 'export'
+    } 
+    | each { |line|
+        export-compat ($line | str trim -l -c "export ")
+    }
+}
