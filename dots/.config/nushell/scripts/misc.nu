@@ -67,3 +67,22 @@ export def within [
         }
     }
 }
+
+export def psub [
+    --timeout (-t): duration = 10sec, # Timeout for the spawned process
+] : any -> path {
+    let input = $in
+
+    let tmp = mktemp
+
+    $input | save -f $tmp
+
+    job spawn {
+        sleep $timeout
+        rm $tmp
+    }
+
+    $tmp
+}
+
+
