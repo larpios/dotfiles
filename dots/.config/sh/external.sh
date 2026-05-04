@@ -41,6 +41,8 @@ if is_exe yazi; then
 fi
 
 if [ "$__COMPLETION_DIR" != "" ]; then
+    mkdir -p "$__COMPLETION_DIR"
+
     if is_exe chezmoi; then
         chezmoi completion "$CURRENT_SHELL" >"$__COMPLETION_DIR/_chezmoi"
     fi
