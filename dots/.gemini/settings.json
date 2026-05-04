@@ -1,0 +1,43 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    },
+    "environmentVariableRedaction": {
+      "enabled": true
+    }
+  },
+  "general": {
+    "preferredEditor": "neovim",
+    "enableNotifications": true
+  },
+  "ui": {
+    "footer": {
+      "hideContextPercentage": false
+    },
+    "showMemoryUsage": true,
+    "showCitations": true,
+    "showModelInfoInChat": true,
+    "terminalBuffer": true,
+    "errorVerbosity": "full"
+  },
+  "agents": {
+    "browser": {
+      "confirmSensitiveActions": true,
+      "blockFileUploads": true
+    }
+  },
+  "tools": {
+    "disableLLMCorrection": false
+  },
+  "experimental": {
+    "worktrees": true,
+    "useOSC52Paste": true,
+    "useOSC52Copy": true,
+    "modelSteering": true,
+    "directWebFetch": true,
+    "autoMemory": true,
+    "generalistProfile": true,
+    "contextManagement": true
+  }
+}
