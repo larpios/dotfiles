@@ -85,9 +85,6 @@
 [difftool "nvim-ext"]
     cmd = nvim -c "DiffEditor $LOCAL $REMOTE $MERGED"
 
-[oh-my-zsh]
-	git-commit-alias = 61bacd95b285a9792a05d1c818d9cee15ebe53c6
-
 [color]
 	ui = auto
 
@@ -100,8 +97,6 @@
 	process = git-lfs filter-process
 	required = true
 [credential "https://github.com"]
-	helper = 
-	helper = !/home/larpi/.nix-profile/bin/.gh-wrapped auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/home/larpi/.nix-profile/bin/.gh-wrapped auth git-credential
+	helper = !gh auth git-credential
