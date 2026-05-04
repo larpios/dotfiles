@@ -18,10 +18,16 @@ main() {
     local grim_args=()
 
     # Handle region selection
-    if [ "$mode" != "full" ]; then
+    if [ "$mode" == "region" ]; then
         local region
         # If slurp fails (e.g., user presses Escape), exit gracefully
         region=$(slurp) || {
+            notify "Screenshot cancelled"
+            exit 1
+        }
+        grim_args+=("-g" "$region")
+    elif [ "$mode" = "window" ]; then
+        region=$(hyprctl clients -j | jq -r '.[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | slurp) || {
             notify "Screenshot cancelled"
             exit 1
         }
