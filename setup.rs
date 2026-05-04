@@ -13,7 +13,7 @@ use anyhow::{bail, Context, Result};
 use clap::{Parser, Subcommand};
 use std::{
     env, fs,
-    path::{Path, PathBuf},
+    path,
     process::Command,
     sync::OnceLock,
 };
@@ -39,12 +39,21 @@ fn install(ctx: &InstallArgs) -> Result<()> {
     symlink_in_dir(ctx, "dots", ".config", None)?;
 
     match env::consts::OS {
-        "macos" => symlink_in_dir(ctx, "macos/dots", "Library/Application Support", None)?,
-        "windows" => symlink_in_dir(ctx, "windows/dots", "Documents", None)?,
+        "macos" => {
+            let symlinks = [SymlinkSpec::new(
+                "~/.config/nushell",
+                "~/Library/Application Support/nushell",
+            )];
+            handle_symlinks(ctx, &symlinks)?;
+        }
+        "windows" => {
+            symlink_in_dir(ctx, "windows/dots", "", Some(&["Documents"]))?;
+            symlink_in_dir(ctx, "windows/dots", "Documents", None)?;
+        }
         _ => (),
     }
 
-    let repos = [Repos::new(
+    let repos = [RepoSpec::new(
         "https://github.com/larpios/nvim-config",
         "~/.config/nvim",
     )];
@@ -54,7 +63,33 @@ fn install(ctx: &InstallArgs) -> Result<()> {
     Ok(())
 }
 
-fn clone_repos(ctx: &InstallArgs, repos: &[Repos]) -> Result<()> {
+fn handle_symlinks(ctx: &InstallArgs, symlinks: &[SymlinkSpec]) -> Result<()> {
+    for symlink in symlinks {
+        let src = expand_tilde(&symlink.src)?;
+        let dest = expand_tilde(&symlink.dest)?;
+
+        if dest.exists() || dest.symlink_metadata().is_ok() {
+            if ctx.force {
+                println!("`{}` already exists, overwriting...", dest.display());
+                if !ctx.dry_run {
+                    remove_file(&dest).with_context(|| "Failed to remove file")?;
+                }
+            } else {
+                println!("`{}` already exists, skipping...", dest.display());
+                continue;
+            }
+        }
+        create_symlink(src, dest).with_context(|| {
+            format!(
+                "Failed to create symlink from {} to {}",
+                symlink.src, symlink.dest
+            )
+        })?;
+    }
+    Ok(())
+}
+
+fn clone_repos(ctx: &InstallArgs, repos: &[RepoSpec]) -> Result<()> {
     let has_jj = which("jj").is_ok();
     let has_git = which("git").is_ok();
 
@@ -77,7 +112,7 @@ fn clone_repos(ctx: &InstallArgs, repos: &[Repos]) -> Result<()> {
             } else {
                 println!("`{}` already exists, backing up...", dest.display());
                 if !ctx.dry_run {
-                    backup_file(ctx, &dest.as_path())?;
+                    backup_file(ctx, dest.as_path())?;
                 }
             }
         }
@@ -85,12 +120,12 @@ fn clone_repos(ctx: &InstallArgs, repos: &[Repos]) -> Result<()> {
         if !ctx.dry_run {
             if has_jj {
                 Command::new("jj")
-                    .args(&["git", "clone", &repo.url, &dest.display().to_string()])
+                    .args(["git", "clone", &repo.url, &dest.display().to_string()])
                     .output()
                     .with_context(|| format!("Failed to clone {}", repo.url))?;
             } else {
                 Command::new("git")
-                    .args(&["clone", &repo.url, &dest.display().to_string()])
+                    .args(["clone", &repo.url, &dest.display().to_string()])
                     .output()
                     .with_context(|| format!("Failed to clone {}", repo.url))?;
             }
@@ -102,8 +137,8 @@ fn clone_repos(ctx: &InstallArgs, repos: &[Repos]) -> Result<()> {
 
 fn symlink_in_dir(
     ctx: &InstallArgs,
-    base_dir: impl AsRef<Path>,
-    relative_path: impl AsRef<Path>,
+    base_dir: impl AsRef<path::Path>,
+    relative_path: impl AsRef<path::Path>,
     excludes: Option<&[&str]>,
 ) -> Result<()> {
     let base = base_dir.as_ref();
@@ -114,7 +149,7 @@ fn symlink_in_dir(
         return Ok(());
     }
 
-    let home_dir = PathBuf::from(
+    let home_dir = path::PathBuf::from(
         env::var("HOME")
             .or_else(|_| env::var("USERPROFILE"))
             .context("Failed to get home directory")?,
@@ -165,8 +200,7 @@ fn symlink_in_dir(
         }
 
         if !ctx.dry_run {
-            // Using canonicalize ensures the symlink gets an absolute path, preventing broken links
-            let abs_src = fs::canonicalize(&path).unwrap_or(path.clone());
+            let abs_src = path::absolute(&path).unwrap_or(path.clone());
             create_symlink(&abs_src, &dest)
                 .with_context(|| format!("Failed to symlink {}", path.display()))?;
         }
@@ -175,7 +209,7 @@ fn symlink_in_dir(
     Ok(())
 }
 
-fn backup_file(ctx: &InstallArgs, path: &Path) -> Result<()> {
+fn backup_file(ctx: &InstallArgs, path: &path::Path) -> Result<()> {
     let file_name = path.file_name().context("Path has no filename")?;
     let backup_path = get_backup_dir().join(file_name);
 
@@ -192,16 +226,24 @@ fn backup_file(ctx: &InstallArgs, path: &Path) -> Result<()> {
     Ok(())
 }
 
-fn expand_tilde(path: &str) -> Result<PathBuf> {
+fn expand_tilde(path: &str) -> Result<path::PathBuf> {
     let home_dir = std::env::home_dir().with_context(|| "Failed to get home directory")?;
     let expanded = home_dir.join(path.strip_prefix("~/").unwrap_or(path));
-    let canonicalized = fs::canonicalize(&expanded)
-        .with_context(|| format!("Failed to canonicalize path: {}", expanded.display()))?;
-    Ok(canonicalized)
+    fs::create_dir_all(expanded.parent().unwrap())?;
+    Ok(expanded)
+}
+
+fn remove_file(path: &path::Path) -> Result<()> {
+    if path.is_dir() {
+        fs::remove_dir_all(path).with_context(|| "Failed to remove directory")?;
+    } else {
+        fs::remove_file(path).with_context(|| "Failed to remove file")?;
+    }
+    Ok(())
 }
 
 #[cfg(not(windows))]
-fn create_symlink<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
+fn create_symlink<T: AsRef<path::Path>>(src: T, dst: T) -> Result<()> {
     std::os::unix::fs::symlink(&src, &dst).with_context(|| {
         format!(
             "Failed to create symlink from {} to {}",
@@ -232,15 +274,15 @@ fn create_symlink<T: AsRef<Path>>(src: T, dst: T) -> Result<()> {
     }
 }
 
-static BACKUP_DIR: OnceLock<PathBuf> = OnceLock::new();
+static BACKUP_DIR: OnceLock<path::PathBuf> = OnceLock::new();
 
-fn get_backup_dir() -> &'static PathBuf {
+fn get_backup_dir() -> &'static path::PathBuf {
     BACKUP_DIR.get_or_init(|| {
         let home = env::var("HOME")
             .or_else(|_| env::var("USERPROFILE"))
             .expect("Could not find home directory");
 
-        let backup_dir = PathBuf::from(home).join(".backup");
+        let backup_dir = path::PathBuf::from(home).join(".backup");
 
         if !backup_dir.exists() {
             fs::create_dir_all(&backup_dir).expect("Failed to create backup directory");
@@ -271,12 +313,12 @@ struct InstallArgs {
 }
 
 #[derive(Debug, Clone)]
-struct Repos {
+struct RepoSpec {
     url: String,
     dest: String,
 }
 
-impl Repos {
+impl RepoSpec {
     fn new<T, U>(url: T, dest: U) -> Self
     where
         T: ToString,
@@ -284,6 +326,25 @@ impl Repos {
     {
         Self {
             url: url.to_string(),
+            dest: dest.to_string(),
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+struct SymlinkSpec {
+    src: String,
+    dest: String,
+}
+
+impl SymlinkSpec {
+    fn new<T, U>(src: T, dest: U) -> Self
+    where
+        T: ToString,
+        U: ToString,
+    {
+        Self {
+            src: src.to_string(),
             dest: dest.to_string(),
         }
     }
