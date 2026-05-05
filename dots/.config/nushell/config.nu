@@ -1,3 +1,53 @@
+const CONFIG_DIR = $nu.config-path | path dirname
+const THEMES_DIR = $CONFIG_DIR | path join "themes"
+const MODULES_DIR = $CONFIG_DIR | path join "modules"
+const AUTOLOAD_DIR = $CONFIG_DIR | path join "autoload"
+
+const THEME = "catppuccin_mocha"
+const THEME_FILE = $THEMES_DIR | path join $"($THEME).nu"
+
+source-env $THEME_FILE
+
+export-env {
+    $env.XDG_CONFIG_HOME = ('~/.config' | path expand)
+    $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
+    $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
+    $env.EDITOR = if (is-exe nvim) { 'nvim' } else { 'vim' }
+    $env.XDG_CONFIG_HOME = ('~/.config' | path expand)
+    $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
+    $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
+    $env.EDITOR = if (is-exe nvim) { 'nvim' } else { 'vim' }
+    $env.VISUAL = $env.EDITOR
+    $env.VISUAL = $env.EDITOR
+    $env.PAGER = 'bat'
+    $env.BAT_THEME = 'Catppuccin Mocha'
+    $env.CURRENT_SHELL = 'nu'
+}
+
+
+use aliases.nu *
+use list.nu *
+use symlink.nu *
+use str.nu *
+use nix.nu *
+use secrets.nu *
+use weather.nu *
+use file.nu *
+use http.nu *
+use math.nu
+use update.nu *
+use kaikki.nu 
+use misc.nu *
+use macos.nu *
+use github.nu *
+use windows.nu
+
+use external/wezterm.nu *
+use external/bitwarden.nu *
+use external/yazi.nu *
+use external/tere.nu *
+use external/bat.nu *
+
 let nu_config = {
     completions: {
       external: {
@@ -33,7 +83,7 @@ let nu_config = {
                 let clean_cmd = ($cmd 
                     | lines
                     | str trim
-                    | str replace -r '^\$\s*' '' 
+                    | str replace -r '^\$\s+' '' 
                     | str replace -a '&&' ';'
                     | str join "\n"
                 )
@@ -64,7 +114,24 @@ let nu_config = {
             mode: [vi_insert vi_normal]
             event: {
                 send: executehostcommand,
-                cmd: `commandline edit --replace (commandline | lines | str trim | str replace -r '^\$\s*' '' | str replace -a '&&' ';' | str join "\n")`
+                cmd: `
+                let new_cmdline = commandline 
+                    | lines 
+                    | str trim 
+                    | str replace -r '^\$\s+' '' 
+                    | str replace -a '&&' ';' 
+                    | each { |line|
+                        let parsed = $line | parse 'export {key}={value}' | last
+                        if ($parsed | is-not-empty) {
+                            $"\$env.($parsed.key) = ($parsed.value)"
+                        } else {
+                            $line
+                        }
+                    }
+                    | str join "\n"
+
+                commandline edit --replace $new_cmdline
+                `
             }
         }
     ],
@@ -123,51 +190,4 @@ let nu_config = {
 
 $env.config = $env.config | merge $nu_config
 
-const CONFIG_DIR = $nu.config-path | path dirname
-const THEMES_DIR = $CONFIG_DIR | path join "themes"
-const MODULES_DIR = $CONFIG_DIR | path join "modules"
-const AUTOLOAD_DIR = $CONFIG_DIR | path join "autoload"
-
-const THEME = "catppuccin_mocha"
-const THEME_FILE = $THEMES_DIR | path join $"($THEME).nu"
-source-env $THEME_FILE
-
-export-env {
-    $env.XDG_CONFIG_HOME = ('~/.config' | path expand)
-    $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
-    $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
-    $env.EDITOR = if (is-exe nvim) { 'nvim' } else { 'vim' }
-    $env.XDG_CONFIG_HOME = ('~/.config' | path expand)
-    $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
-    $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
-    $env.EDITOR = if (is-exe nvim) { 'nvim' } else { 'vim' }
-    $env.VISUAL = $env.EDITOR
-    $env.VISUAL = $env.EDITOR
-    $env.PAGER = 'bat'
-    $env.BAT_THEME = 'Catppuccin Mocha'
-    $env.CURRENT_SHELL = 'nu'
-}
-
-use aliases.nu *
-use list.nu *
-use symlink.nu *
-use str.nu *
-use nix.nu *
-use secrets.nu *
-use weather.nu *
-use file.nu *
-use http.nu *
-use math.nu
-use update.nu *
-use kaikki.nu 
-use misc.nu *
-use macos.nu *
-use github.nu *
-use windows.nu
-
-use external/wezterm.nu *
-use external/bitwarden.nu *
-use external/yazi.nu *
-use external/tere.nu *
-use external/bat.nu *
 
