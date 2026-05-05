@@ -19,7 +19,8 @@
     "showCitations": true,
     "showModelInfoInChat": true,
     "terminalBuffer": true,
-    "errorVerbosity": "full"
+    "errorVerbosity": "full",
+    "theme": "Tokyo Night"
   },
   "agents": {
     "browser": {
