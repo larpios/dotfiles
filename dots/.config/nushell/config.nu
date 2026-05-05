@@ -13,17 +13,11 @@ export-env {
     $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
     $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
     $env.EDITOR = if (is-exe nvim) { 'nvim' } else { 'vim' }
-    $env.XDG_CONFIG_HOME = ('~/.config' | path expand)
-    $env.XDG_DATA_HOME = ('~/.local/share' | path expand)
-    $env.XDG_CACHE_HOME = ('~/.cache' | path expand)
-    $env.EDITOR = if (is-exe nvim) { 'nvim' } else { 'vim' }
-    $env.VISUAL = $env.EDITOR
     $env.VISUAL = $env.EDITOR
     $env.PAGER = 'bat'
     $env.BAT_THEME = 'Catppuccin Mocha'
     $env.CURRENT_SHELL = 'nu'
 }
-
 
 use aliases.nu *
 use list.nu *
@@ -40,6 +34,7 @@ use kaikki.nu
 use misc.nu *
 use macos.nu *
 use github.nu *
+use license.nu *
 use windows.nu
 
 use external/wezterm.nu *
