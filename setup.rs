@@ -104,7 +104,7 @@ fn clone_repos(ctx: &InstallArgs, repos: &[RepoSpec]) -> Result<()> {
             if ctx.force {
                 println!("`{}` already exists, overwriting...", dest.display());
                 if !ctx.dry_run {
-                    fs::remove_dir_all(&dest).with_context(|| "Failed to remove directory")?;
+                    remove_file(&dest).with_context(|| "Failed to remove directory")?;
                 }
             } else if dest.is_dir() && dest.join(".git").exists() {
                 println!("`{}` already exists, skipping...", dest.display());
@@ -174,7 +174,7 @@ fn symlink_in_dir(
         if dest.exists() && !dest.is_symlink() {
             if ctx.force {
                 println!("`{}` already exists, overwriting...", dest.display());
-                fs::remove_dir_all(&dest)?;
+                remove_file(&dest)?;
             } else {
                 println!("`{}` already exists, skipping...", dest.display());
                 continue;
@@ -191,7 +191,7 @@ fn symlink_in_dir(
             if ctx.force {
                 println!("`{}` already exists, overwriting...", dest.display());
                 if !ctx.dry_run {
-                    fs::remove_file(&dest)?;
+                    remove_file(&dest)?;
                 }
             } else {
                 println!("`{}` already exists, backing up...", dest.display());
