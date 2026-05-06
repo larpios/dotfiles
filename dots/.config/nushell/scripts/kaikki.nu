@@ -1,4 +1,4 @@
-export def query [
+export def "main" [
     expression: string
     --language (-l): string@"nu-complete language" = "Any"
     --source-language (-s): string@"nu-complete source-language" = "English"

@@ -1,5 +1,10 @@
 use str.nu *
 
+# Use a package using `nix run nixpkgs#<package>`
+export def "nr" [pkg: string, ...args] {
+    ^nix run $"nixpkgs#($pkg)" -- ...($args | each { |it| glob $it } | flatten)
+}
+
 export def "to nix" [
     --indent (-i): int = 2 # Number of spaces to use for each indentation level
 ] : any -> string {
