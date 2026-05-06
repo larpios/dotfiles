@@ -16,5 +16,18 @@
   "autoCompact": true,
   "compactOnContextOverflow": true,
   "compactOnApproachingLimit": true,
-  "enableInstallTelemetry": false
+  "enableInstallTelemetry": false,
+  "packages": [
+    "npm:pi-web-access",
+    "npm:context-mode",
+    "npm:pi-lens",
+    "npm:pi-btw",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@juicesharp/rpiv-todo",
+    "npm:pi-simplify",
+    "npm:@juicesharp/rpiv-pi",
+    "npm:pi-subagents",
+    "npm:@juicesharp/rpiv-advisor",
+    "npm:pi-powerline-footer"
+  ]
 }
