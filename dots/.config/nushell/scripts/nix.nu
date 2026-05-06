@@ -1,8 +1,12 @@
 use str.nu *
 
 # Use a package using `nix run nixpkgs#<package>`
-export def "nr" [pkg: string, ...args] {
-    ^nix run $"nixpkgs#($pkg)" -- ...($args | each { |it| glob $it } | flatten)
+export def --wrapped "nr" [pkg: string, ...args] {
+    ^nix run $"nixpkgs#($pkg)" -- ...$args
+}
+
+export def --wrapped "ns" [pkg: string, ...rest] {
+    ^nix shell $"nixpkgs#($pkg)" --command ...$rest
 }
 
 export def "to nix" [
