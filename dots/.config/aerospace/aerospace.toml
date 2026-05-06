@@ -108,6 +108,10 @@ outer.right = [{ monitor."built-in" = 10 }, { monitor.main = 20 }, 24]
 
 alt-w = 'close'
 alt-r = 'reload-config'
+alt-shift-r = [
+    'reload-config',
+    'exec-and-forget sketchybar --reload',
+]
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
@@ -118,7 +122,7 @@ alt-h = 'focus left'
 alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
-
+alt-f = 'layout floating tiling' # Toggle between floating and tiling layout
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
