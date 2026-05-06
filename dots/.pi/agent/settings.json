@@ -4,12 +4,17 @@
   "defaultModel": "zai-org/glm-4.7-flash",
   "defaultThinkingLevel": "medium",
   "theme": "catppuccin-mocha",
-  "scopedModels": ["claude-sonnet", "gpt-4o", "glm-4.7-flash"],
+  "scopedModels": [
+    "claude-sonnet",
+    "gpt-4o",
+    "glm-4.7-flash"
+  ],
   "transport": "auto",
   "steeringMode": "one-at-a-time",
   "followUpMode": "one-at-a-time",
   "cacheRetention": "long",
   "autoCompact": true,
   "compactOnContextOverflow": true,
-  "compactOnApproachingLimit": true
+  "compactOnApproachingLimit": true,
+  "enableInstallTelemetry": false
 }
