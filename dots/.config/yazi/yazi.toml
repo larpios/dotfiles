@@ -22,7 +22,10 @@ archive = [
 ]
 
 [open]
-prepend_rules = [{ url = "*.{zip,tar,tar.gz,gzip,rar,7z}", use = "extract" }]
+prepend_rules = [
+  { url = "*.{zip,tar,tar.gz,gzip,rar,7z}", use = "extract" },
+  { url = "*.html", use = ["open", "edit", "reveal"] },
+]
 append_rules = [{ url = "*", use = ["open", "reveal"] }]
 
 [preview]
