@@ -59,7 +59,7 @@ config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 
 -- Leader Key (Tmux Style: Ctrl-A)
-config.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 }
+config.leader = { key = 's', mods = 'CTRL', timeout_milliseconds = 1000 }
 
 config.keys = {
     -- Workspace operations via Leader
