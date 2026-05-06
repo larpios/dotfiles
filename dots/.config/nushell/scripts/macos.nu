@@ -31,6 +31,10 @@ export def "macos cp-file" [...patterns: string] {
     ^osascript -e $script ...$files
 }
 
+export def "macos set-wallpaper" [path: string] {
+    osascript -e $'tell application "System Events" to set picture of every desktop to POSIX file "($path)"'
+}
+
 def check-macos [] {
     if $nu.os-info.name != 'macos' {
         error make 'This command is macOS only'
