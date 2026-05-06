@@ -20,7 +20,10 @@
     "showModelInfoInChat": true,
     "terminalBuffer": true,
     "errorVerbosity": "full",
-    "theme": "Tokyo Night"
+    "theme": "Tokyo Night",
+    "showUserIdentity": true,
+    "compactToolOutput": true,
+    "inlineThinkingMode": "full"
   },
   "agents": {
     "browser": {
@@ -39,6 +42,7 @@
     "directWebFetch": true,
     "autoMemory": true,
     "generalistProfile": true,
-    "contextManagement": true
+    "contextManagement": true,
+    "voiceMode": true
   }
 }
