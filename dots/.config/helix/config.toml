@@ -18,11 +18,22 @@ display-messages = true
 display-progress-messages = true
 enable = true
 
+[keys.normal]
+V = ["select_mode", "extend_line_below"]
+K = "hover"
+'!' = ":write"
+
 [keys.insert.z]
 x = ["normal_mode", "collapse_selection"]
 
-[keys.normal]
-V = ["select_mode", "extend_line_below"]
+[keys.normal.space.o]
+c = ":e ~/.config/helix"
+
+[keys.normal.space.b]
+o = ":cd .."
+
+[keys.normal.space.space]
+r = ":config-reload"
 
 [keys.normal.space.q]
 q = ":q"
@@ -30,6 +41,9 @@ q = ":q"
 [keys.normal.space.w]
 q = ":wq"
 w = ":w"
+
+[keys.normal.space.u]
+h = ":toggle lsp.display-inlay-hints"
 
 [keys.select.z]
 x = ["normal_mode", "collapse_selection"]
