@@ -257,6 +257,11 @@ run = 'move-node-to-workspace 4'
 check-further-callbacks = true
 
 [[on-window-detected]]
+if.app-name-regex-substring = "net.ankiweb.launcher"
+run = 'move-node-to-workspace 6'
+check-further-callbacks = true
+
+[[on-window-detected]]
 if.window-title-regex-substring = "picture[- ]in[- ]picture"
 run = ["layout floating"]
 check-further-callbacks = true
