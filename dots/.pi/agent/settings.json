@@ -1,0 +1,6 @@
+{
+  "lastChangelogVersion": "0.74.0",
+  "defaultProvider": "lmstudio",
+  "defaultModel": "zai-org/glm-4.7-flash",
+  "defaultThinkingLevel": "medium"
+}
