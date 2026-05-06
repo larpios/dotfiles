@@ -37,6 +37,6 @@ prepend_previewers = [
 ]
 prepend_preloaders = [{ url = '*.typ', run = 'preview-typst' }]
 prepend_fetchers = [
-  { id = "git", url = "*", run = "git" },
-  { id = "git", url = "*/", run = "git" },
+  { url = "*", run = "git", group = "git" },
+  { url = "*/", run = "git", group = "git" },
 ]
