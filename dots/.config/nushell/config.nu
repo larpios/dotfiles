@@ -36,6 +36,7 @@ use macos.nu *
 use github.nu *
 use license.nu *
 use windows.nu
+use cookies.nu *
 
 use external/wezterm.nu *
 use external/bitwarden.nu *
@@ -184,5 +185,4 @@ let nu_config = {
 }
 
 $env.config = $env.config | merge $nu_config
-
 
