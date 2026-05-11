@@ -1,0 +1,27 @@
+{
+  "name": "pi-jujutsu-vcs-extension",
+  "version": "1.0.0",
+  "description": "Jujutsu VCS integration for Pi AI agent",
+  "main": "index.ts",
+  "type": "module",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "keywords": [
+    "pi",
+    "ai",
+    "jujutsu",
+    "vcs",
+    "extension"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "^1.0.0",
+    "typebox": "^1.1.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

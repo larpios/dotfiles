@@ -1,0 +1,10 @@
+font-size = 11
+theme = Catppuccin Mocha
+
+background-image = bg.jpg
+background-image-fit = cover
+# Make the window transparent
+background-image-opacity = 0.3
+background-opacity = 1.00
+background-blur = true
+

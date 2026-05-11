@@ -1,0 +1,74 @@
+" --- SETTINGS ---
+set scrollstep 140
+" Tridactyl uses 'searchengine' for the default
+set searchengine google
+" Tridactyl's hint mode is explicit by default, but you can force uppercase
+set hintchars ABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+" --- GLOBAL UNMAPS ---
+unbind <C-a>
+unbind <C-e>
+unbind <C-j>
+unbind on
+unbind om
+
+" --- YOUTUBE UNMAPS ---
+" Tridactyl requires unbinding each key per domain
+unbindurl youtube.com 1
+unbindurl youtube.com 2
+unbindurl youtube.com 3
+unbindurl youtube.com 4
+unbindurl youtube.com 5
+unbindurl youtube.com 6
+unbindurl youtube.com 7
+unbindurl youtube.com 8
+unbindurl youtube.com 9
+unbindurl youtube.com 0
+unbindurl youtube.com <
+unbindurl youtube.com >
+
+" --- COMMAND LINE MAPS (CMAP) ---
+cmap <C-j> <Tab>
+cmap <C-k> <S-Tab>
+cmap <C-n> <Tab>
+cmap <C-p> <S-Tab>
+
+" --- NORMAL MAPS ---
+" Assuming 'F' in Surfingkeys opens a link in a new background tab
+bind F hint -b
+
+" Basic image source copying/opening (Tridactyl built-ins)
+" Hint image and yank URL
+bind ;ys hint -i y
+" Hint image and open in background tab
+bind ;gs hint -i F
+" Download image
+bind ;yi hint -i saveas
+
+" --- SEARCH ENGINES (BASIC URL MAPPING) ---
+set searchurls.d https://duckduckgo.com/?q=%s
+set searchurls.b https://search.brave.com/search?q=%s
+set searchurls.wi https://en.wikipedia.org/wiki/%s
+set searchurls.wt https://en.wiktionary.org/w/index.php?search=%s
+set searchurls.ne https://en.dict.naver.com/#/search?query=%s
+set searchurls.nk https://kr.dict.naver.com/#/search?query=%s
+set searchurls.nh https://hanja.dict.naver.com/#/search?query=%s
+set searchurls.nz https://zh.dict.naver.com/#/search?query=%s
+set searchurls.nj https://ja.dict.naver.com/#/search?query=%s
+set searchurls.mw https://www.merriam-webster.com/dictionary/%s
+set searchurls.cam https://dictionary.cambridge.org/dictionary/english/%s
+set searchurls.ox https://www.oxfordlearnersdictionaries.com/definition/english/%s
+set searchurls.lm https://www.ldoceonline.com/dictionary/%s
+set searchurls.ji https://jisho.org/search/%s
+set searchurls.cs https://chrome.google.com/webstore/search/%s
+set searchurls.re https://www.reddit.com/search?sort=relevance&t=all&q=%s
+set searchurls.na https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%s
+set searchurls.gt https://translate.google.com/?sl=auto&tl=ko&text=%s
+set searchurls.pp https://www.phind.com/agent?q=%s
+set searchurls.ps https://www.phind.com/search?q=%s
+set searchurls.sp https://www.startpage.com/sp/search?q=%s
+set searchurls.an https://annas-archive.li/search?q=%s
+set searchurls.wa https://web.archive.org/save/%s
+
+" --- Colorscheme
+colourscheme --url https://raw.githubusercontent.com/devnullvoid/tridactyl/main/themes/catppuccin-mocha.css catppuccin-mocha

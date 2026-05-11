@@ -1,0 +1,12 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="https://github.com/h1romas4/zellij-datetime/releases/latest/download/zellij-datetime.wasm"
+    }
+    pane size=1 borderless=true {
+        plugin location="zellij:tab-bar"
+    }
+    pane
+    pane size=1 borderless=true {
+        plugin location="zellij:status-bar"
+    }
+}

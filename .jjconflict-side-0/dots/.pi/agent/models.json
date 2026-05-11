@@ -1,0 +1,18 @@
+{
+    "providers": {
+        "lmstudio": {
+            "baseUrl": "http://localhost:1234/v1",
+            "api": "openai-completions",
+            "apiKey": "lm-studio",
+            "models": [
+                {
+                    "id": "zai-org/glm-4.7-flash",
+                    "input": [
+                        "text",
+                        "image"
+                    ]
+                }
+            ]
+        }
+    }
+}
