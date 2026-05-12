@@ -79,7 +79,7 @@ export def "main" [
         $data
     } else {
         let processed = $data
-        | select senses pos word lang 
+        | select senses pos word lang etymology_text
         | flatten 
         | group-by lang 
         | transpose lang entries
@@ -92,9 +92,9 @@ export def "main" [
                     {
                         senses: ($row.senses.glosses? | default [] | flatten)
                         examples: (try { $row.senses.examples.text } catch { [] })
+                        etymology: $row.etymology_text
                     }
                 }
-                # $pos_row.items | get senses.glosses? | flatten
             }
             | transpose -rd
         }
