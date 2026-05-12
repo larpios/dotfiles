@@ -237,6 +237,11 @@ run = 'move-node-to-workspace 1'
 check-further-callbacks = true
 
 [[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = 'move-node-to-workspace 1'
+check-further-callbacks = true
+
+[[on-window-detected]]
 if.app-id = 'org.mozilla.floorp'
 run = 'move-node-to-workspace 2'
 check-further-callbacks = true
