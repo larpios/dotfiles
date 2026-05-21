@@ -286,28 +286,28 @@ export extern "bw serve" [
     --help(-h)                  # output usage information
 ]
 
-
 export def --env "bw unlock-export" [] {
-  let output = bw unlock | lines
-  let session_key = $output | parse "$ export BW_SESSION=\"{session_key}\"" | get session_key | last
-  print $"Session key: ($session_key)"
+    let output = bw unlock | lines
+    let session_key = $output | parse "$ export BW_SESSION=\"{session_key}\"" | get session_key | last
 
-  if ($session_key | is-empty) {
-    error make "Failed to unlock vault"
-  }
+    if ($session_key | is-empty) {
+        error make "Failed to unlock vault"
+    }
 
-  export-env {
-    $env.BW_SESSION = $session_key
-  }
+    export-env {
+        $env.BW_SESSION = $session_key
+    }
+    print "Successfully unlocked vault."
+    print $"BW_SESSION: ($session_key)"
 }
 
 def "nu-complete object" [] : nothing -> list<string> {
-  [
-    "items"
-    "folders"
-    "collections"
-    "org-collections"
-    "org-members"
-    "organizations"
-  ]
+    [
+        "items"
+        "folders"
+        "collections"
+        "org-collections"
+        "org-members"
+        "organizations"
+    ]
 }
