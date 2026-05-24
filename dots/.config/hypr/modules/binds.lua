@@ -27,6 +27,7 @@ keybind(
 )
 keybind({ main_mod, 'E' }, hl.dsp.exec_cmd(apps.fileManager))
 keybind({ main_mod, 'F' }, hl.dsp.window.float({ action = 'toggle' }))
+keybind({ main_mod, 'SHIFT',  'F' }, hl.dsp.window.fullscreen({ action = 'toggle' }))
 keybind({ main_mod, 'Space' }, hl.dsp.exec_cmd(apps.menu))
 keybind({ main_mod, 'R' }, function()
     hl.exec_cmd('hyprctl reload')
