@@ -2,10 +2,9 @@ use external/bitwarden.nu *
 use misc.nu is-exe
 use std/log
 
-const AGE_PATH = $nu.home-dir + '/.config/sops/age'
-
-const AGE_KEY_ID = '234609ae-ed35-4975-aacd-b42300b8ea64'
+const AGE_PATH = $nu.home-dir | path join '.config/sops/age'
 const AGE_KEY_PATH = $AGE_PATH | path join 'keys.txt'
+const AGE_KEY_ID = '234609ae-ed35-4975-aacd-b42300b8ea64'
 
 # Setup age keys
 export def "secrets setup" [] {
@@ -13,7 +12,7 @@ export def "secrets setup" [] {
         error make "bitwarden is not installed"
     }
 
-    let confirm = (input "Don't proceed unless you're on a private machine. Are you sure you want to setup age keys? (y/n) " -n 1 | str downcase) == 'y'
+    let confirm = (input "Don't proceed unless you're on a private machine. Are you sure you want to setup age keys? (y/N) " | str downcase) == 'y'
 
     if not $confirm {
         print "Aborting"
