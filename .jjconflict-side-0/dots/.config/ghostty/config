@@ -1,7 +1,7 @@
 font-size = 11
 theme = Catppuccin Mocha
 
-background-image = bg.jpg
+background-image = ~/.dotfiles/images/oneshot/video-game-oneshot-niko-oneshot-rowbot-oneshot-wallpaper-49e0289d714a9d3b8657780fa08176ad.jpg
 background-image-fit = cover
 # Make the window transparent
 background-image-opacity = 0.3
