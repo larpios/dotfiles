@@ -1,11 +1,11 @@
 export def "to netscape-cookies" [
     --expires (-e): datetime
-    ] : record -> string {
+] : record -> string {
 
     let expires = $expires | default ((date now) + 365day * 10)
     let records = $in
 
-    let header = [
+    const header = [
         "# Netscape HTTP Cookie File"
         "# http://curl.haxx.se/rfc/cookie_spec.html"
         "# This is a generated file!  Do not edit."

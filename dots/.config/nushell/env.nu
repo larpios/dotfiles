@@ -3,52 +3,52 @@ use std/util 'path add'
 const AUTOLOAD_DIR = $nu.config-path | path dirname | path join "autoload"
 
 if not ($AUTOLOAD_DIR | path exists) {
-  mkdir $AUTOLOAD_DIR
+    mkdir $AUTOLOAD_DIR
 }
 
 const ENV_DIRS = [
-  '/usr/bin',
-  '/usr/local/bin',
-  '/bin'
-  '/nix/var/nix/profiles/default/bin',
-  '/opt/homebrew/bin'
-  '~/.nix-profile/bin',
-  '~/.cargo/bin',
-  '~/.local/bin',
-  '~/.cache/.bun/bin',
-  '~/.bun/bin',
+    '/usr/bin',
+    '/usr/local/bin',
+    '/bin'
+    '/nix/var/nix/profiles/default/bin',
+    '/opt/homebrew/bin'
+    '~/.nix-profile/bin',
+    '~/.cargo/bin',
+    '~/.local/bin',
+    '~/.cache/.bun/bin',
+    '~/.bun/bin',
 ]
 
 for $dir in $ENV_DIRS {
-  path add $dir
+    path add $dir
 }
 
 if (is-exe direnv) {
-  $env.config.hooks.pre_prompt = (
-    $env.config.hooks.pre_prompt?
-    | default []
-    | append {||
-      ^direnv export json
-      | from json --strict
-      | default {}
-      | items {|key, value|
-        let value = do (
-          {
-            "PATH": {
-              from_string: {|s| $s | split row (char esep) | path expand --no-symlink }
-                           to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
+    $env.config.hooks.pre_prompt = (
+        $env.config.hooks.pre_prompt?
+        | default []
+        | append {||
+            ^direnv export json
+            | from json --strict
+            | default {}
+            | items {|key, value|
+                let value = do (
+                    {
+                        "PATH": {
+                            from_string: {|s| $s | split row (char esep) | path expand --no-symlink }
+                                         to_string: {|v| $v | path expand --no-symlink | str join (char esep) }
+                        }
+                    }
+                    | merge ($env.ENV_CONVERSIONS? | default {})
+                    | get ([[value, optional, insensitive]; [$key, true, true] [from_string, true, false]] | into cell-path)
+                    | if ($in | is-empty) { {|x| $x} } else { $in }
+                ) $value
+                return [ $key $value ]
             }
-          }
-          | merge ($env.ENV_CONVERSIONS? | default {})
-          | get ([[value, optional, insensitive]; [$key, true, true] [from_string, true, false]] | into cell-path)
-          | if ($in | is-empty) { {|x| $x} } else { $in }
-        ) $value
-        return [ $key $value ]
-      }
-      | into record
-      | load-env
-    }
-  )
+            | into record
+            | load-env
+        }
+    )
 }
 
 if (is-exe starship) {
@@ -65,5 +65,5 @@ if (is-exe carapace) {
     carapace _carapace nushell | save -f ($AUTOLOAD_DIR | path join "carapace.nu")
 }
 if (is-exe atuin) {
-  atuin init nu | save -f ($AUTOLOAD_DIR | path join "atuin.nu")
+    atuin init nu | save -f ($AUTOLOAD_DIR | path join "atuin.nu")
 }
