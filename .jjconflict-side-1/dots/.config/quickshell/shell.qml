@@ -1,7 +1,11 @@
 pragma ComponentBehavior: Bound
 
 import Quickshell
+import Quickshell.Widgets
+import Quickshell.Bluetooth
 import Quickshell.Services.Mpris
+import Quickshell.Services.Pipewire
+import Quickshell.Services.SystemTray
 import Quickshell.Hyprland
 import Quickshell.Io
 import QtQuick
@@ -12,17 +16,36 @@ ShellRoot {
     id: root
     Colors { id: colors }
 
+    Component.onCompleted: console.log("Quickshell: Shell loaded successfully")
+
     property date currentTime: new Date()
     property int cpuUsage: 0
     property int lastCpuTotal: 0
     property int lastCpuIdle: 0
     property int memUsage: 0
-    property int volume: 0
-    property bool muted: false
+    // Volume properties
+    property int volume: Pipewire.defaultAudioSink ? Math.round(Pipewire.defaultAudioSink.audio.volume * 100) : 0
+    property bool muted: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.muted : false
 
-    // Bluetooth & Keyboard state
-    property string btState: "off"
+    // Bluetooth properties
+    property string btState: {
+        if (!Bluetooth.defaultAdapter || !Bluetooth.defaultAdapter.enabled) return "off";
+        for (const device of Bluetooth.devices.values) {
+            if (device.connected) return "connected";
+        }
+        return "on";
+    }
+    property bool btScanning: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.discovering : false
+    property var btPairedDevices: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.devices.values.filter(device => device.paired) : []
+    property var btAvailableDevices: Bluetooth.defaultAdapter ? Bluetooth.defaultAdapter.devices.values.filter(device => !device.paired && device.name !== "") : []
+
+    // Keyboard state
     property string kbLayout: "EN"
+    property bool btMenuVisible: false
+    property bool kbMenuVisible: false
+    property bool volMenuVisible: false
+    property var kbLayoutsList: []
+    property var cpuHistory: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
     // Media properties
     property var activePlayer: {
@@ -119,32 +142,6 @@ ShellRoot {
         }
     }
 
-    // Volume
-    Process {
-        id: volProcess
-        command: ["sh", "-c", "wpctl get-volume @DEFAULT_AUDIO_SINK@"]
-        running: true
-        stdout: SplitParser {
-            onRead: (data) => {
-                let match = data.match(/Volume: (\d\.\d+)( \[MUTED\])?/)
-                if (match) {
-                    root.volume = Math.round(parseFloat(match[1]) * 100)
-                    root.muted = !!match[2]
-                }
-            }
-        }
-    }
-
-    // Bluetooth
-    Process {
-        id: btProcess
-        command: ["sh", "-c", "if bluetoothctl info | grep -q 'Connected: yes'; then echo 'connected'; elif bluetoothctl show | grep -q 'Powered: yes'; then echo 'on'; else echo 'off'; fi"]
-        running: true
-        stdout: SplitParser {
-            onRead: (data) => root.btState = data.trim()
-        }
-    }
-
     // Keyboard Layout (fcitx5)
     Process {
         id: kbProcess
@@ -169,6 +166,39 @@ ShellRoot {
                     root.kbLayout = "EN"
                 }
             }
+        }
+    }
+
+    // Keyboard layouts list
+    Process {
+        id: kbListProcess
+        command: ["sh", "-c", "grep -E '^Name=' ~/.config/fcitx5/profile 2>/dev/null | cut -d= -f2 | grep -E '^(keyboard-|pinyin|mozc|hangul|anthy|bopomofo|chewing|rime)'"]
+        running: false
+        property string _buffer: ""
+        onRunningChanged: {
+            if (running) {
+                _buffer = "";
+            } else if (_buffer.length > 0) {
+                let lines = _buffer.trim().split('\n');
+                let layouts = [];
+                for (let i = 0; i < lines.length; i++) {
+                    if (!lines[i]) continue;
+                    let name = lines[i];
+                    let disp = name;
+                    if (name.startsWith("keyboard-")) {
+                        disp = name.replace("keyboard-", "").substring(0, 2).toUpperCase();
+                    } else if (name === "pinyin") {
+                        disp = "中";
+                    } else {
+                        disp = name.substring(0, 2).toUpperCase();
+                    }
+                    layouts.push({ id: name, display: disp });
+                }
+                root.kbLayoutsList = layouts;
+            }
+        }
+        stdout: SplitParser {
+            onRead: (data) => kbListProcess._buffer += data + "\n"
         }
     }
 
@@ -201,9 +231,11 @@ ShellRoot {
             root.currentTime = new Date()
             cpuProcess.running = true
             memProcess.running = true
-            volProcess.running = true
-            btProcess.running = true
             kbProcess.running = true
+
+            // Update CPU History
+            root.cpuHistory = [...root.cpuHistory, root.cpuUsage].slice(-15)
+
             if (root.activePlayer && root.activePlayer.playbackState === MprisPlaybackState.Playing) {
                 root.activePlayer.positionChanged(); // Force fresh poll
                 let rawPos = root.activePlayer.position;
@@ -298,7 +330,7 @@ ShellRoot {
                                 Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
                                 Text {
                                     anchors.centerIn: parent
-                                    text: parent.modelData.name
+                                    text: modelData.name
                                     color: parent.isActive ? colors.crust : colors.text
                                     font.pixelSize: 10
                                     font.bold: parent.isActive
@@ -306,7 +338,7 @@ ShellRoot {
                                 MouseArea {
                                     anchors.fill: parent
                                     cursorShape: Qt.PointingHandCursor
-                                    onClicked: parent.modelData.activate()
+                                    onClicked: modelData.activate()
                                 }
                             }
                         }
@@ -317,7 +349,7 @@ ShellRoot {
                         id: mediaContainer
                         Layout.alignment: Qt.AlignVCenter
                         height: 25
-                        width: mediaLayout.implicitWidth + 30
+                        width: Math.max(100, mediaLayout.implicitWidth + 30)
                         color: colors.mantle
                         radius: 15
                         border.color: colors.surface0
@@ -467,50 +499,85 @@ ShellRoot {
                     spacing: 16
 
                     // Keyboard Layout
-                    Row {
-                        spacing: 6
+                    Item {
+                        id: kbIndicator
+                        implicitWidth: kbLayoutRow.implicitWidth
+                        implicitHeight: 26
                         Layout.alignment: Qt.AlignVCenter
-                        Text {
-                            text: "󰌌"
-                            color: colors.lavender
-                            font.pixelSize: 14
-                            anchors.verticalCenter: parent.verticalCenter
+                        RowLayout {
+                            id: kbLayoutRow
+                            anchors.centerIn: parent
+                            spacing: 6
+                            Text {
+                                text: "󰌌"
+                                color: colors.lavender
+                                font.pixelSize: 14
+                            }
+                            Text {
+                                text: root.kbLayout
+                                color: colors.subtext1
+                                font.pixelSize: 11
+                                font.bold: true
+                            }
                         }
-                        Text {
-                            text: root.kbLayout
-                            color: colors.subtext1
-                            font.pixelSize: 11
-                            font.bold: true
-                            anchors.verticalCenter: parent.verticalCenter
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                kbListProcess.running = false
+                                kbListProcess.running = true
+                                root.kbMenuVisible = !root.kbMenuVisible
+                            }
                         }
                     }
 
                     // Bluetooth
-                    Row {
-                        spacing: 6
+                    Item {
+                        id: btIndicator
+                        implicitWidth: btIndicatorRow.implicitWidth
+                        implicitHeight: 26
                         Layout.alignment: Qt.AlignVCenter
-                        Text {
-                            text: root.btState === "connected" ? "󰂱" : (root.btState === "on" ? "󰂯" : "󰂲")
-                            color: root.btState === "off" ? colors.surface1 : colors.blue
-                            font.pixelSize: 14
-                            anchors.verticalCenter: parent.verticalCenter
+                        RowLayout {
+                            id: btIndicatorRow
+                            anchors.centerIn: parent
+                            spacing: 6
+                            Text {
+                                text: root.btState === "connected" ? "󰂱" : (root.btState === "on" ? "󰂯" : "󰂲")
+                                color: root.btState === "off" ? colors.surface1 : colors.blue
+                                font.pixelSize: 14
+                            }
+                        }
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: root.btMenuVisible = !root.btMenuVisible
                         }
                     }
                     
-                    Row {
-                        spacing: 6
+                    Item {
+                        id: volIndicator
+                        implicitWidth: volIndicatorRow.implicitWidth
+                        implicitHeight: 26
                         Layout.alignment: Qt.AlignVCenter
-                        Text {
-                            text: root.muted ? "󰝟" : (root.volume > 50 ? "󰕾" : "󰖀")
-                            color: root.muted ? colors.red : colors.lavender
-                            font.pixelSize: 14
-                            anchors.verticalCenter: parent.verticalCenter
+                        RowLayout {
+                            id: volIndicatorRow
+                            anchors.centerIn: parent
+                            spacing: 6
+                            Text {
+                                text: root.muted ? "󰝟" : (root.volume > 50 ? "󰕾" : "󰖀")
+                                color: root.muted ? colors.red : colors.lavender
+                                font.pixelSize: 14
+                            }
+                            Text {
+                                text: root.volume + "%"
+                                color: colors.subtext1
+                                font.pixelSize: 11
+                            }
                         }
-                        Text {
-                            text: root.volume + "%"
-                            color: colors.subtext1
-                            font.pixelSize: 11
-                            anchors.verticalCenter: parent.verticalCenter
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: root.volMenuVisible = !root.volMenuVisible
                         }
                     }
 
@@ -518,9 +585,30 @@ ShellRoot {
                         spacing: 12
                         Layout.alignment: Qt.AlignVCenter
                         Row {
-                            spacing: 4
+                            spacing: 6
                             Layout.alignment: Qt.AlignVCenter
-                            Text { text: "󰻠"; color: colors.blue; font.pixelSize: 14; anchors.verticalCenter: parent.verticalCenter }
+                            Text { text: ""; color: colors.red; font.pixelSize: 14; anchors.verticalCenter: parent.verticalCenter }
+                            
+                            // CPU Graph
+                            Row {
+                                spacing: 1
+                                Layout.alignment: Qt.AlignVCenter
+                                height: 14
+                                anchors.verticalCenter: parent.verticalCenter
+                                Repeater {
+                                    model: root.cpuHistory
+                                    delegate: Rectangle {
+                                        required property var modelData
+                                        width: 2
+                                        height: Math.max(2, (modelData / 100) * 14)
+                                        color: colors.blue
+                                        opacity: 0.6
+                                        anchors.bottom: parent.bottom
+                                        radius: 1
+                                    }
+                                }
+                            }
+
                             Text {
                                 text: root.cpuUsage + "%"
                                 color: colors.subtext1
@@ -532,7 +620,7 @@ ShellRoot {
                             spacing: 4
                             Layout.alignment: Qt.AlignVCenter
                             Text {
-                                text: "󰍛"
+                                text: ""
                                 color: colors.green
                                 font.pixelSize: 14
                                 anchors.verticalCenter: parent.verticalCenter
@@ -542,6 +630,44 @@ ShellRoot {
                                 color: colors.subtext1
                                 font.pixelSize: 11
                                 anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+
+                    // System Tray
+                    Row {
+                        spacing: 10
+                        Layout.alignment: Qt.AlignVCenter
+                        Rectangle {
+                            height: 14
+                            width: 1
+                            color: colors.surface1
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Repeater {
+                            model: SystemTray.items
+                            delegate: Item {
+                                id: trayItem
+                                required property var modelData
+                                width: 20
+                                height: 20
+                                
+                                IconImage {
+                                    anchors.fill: parent
+                                    source: modelData.icon
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    acceptedButtons: Qt.LeftButton | Qt.RightButton
+                                    onClicked: (mouse) => {
+                                        if (mouse.button === Qt.RightButton) {
+                                            modelData.menu.open(trayItem)
+                                        } else {
+                                            modelData.activate()
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -605,7 +731,7 @@ ShellRoot {
     PopupWindow {
         id: powerMenuPopup
         anchor.window: bar
-        anchor.rect.x: bar.width - width - 12
+        anchor.rect.x: powerBtn.mapToItem(null, 0, 0).x - (implicitWidth - powerBtn.width)
         anchor.rect.y: bar.height + 4
         implicitWidth: 180
         implicitHeight: powerMenuLayout.implicitHeight + 40
@@ -660,11 +786,333 @@ ShellRoot {
         }
     }
 
+    // --- Keyboard Menu Popup ---
+    PopupWindow {
+        id: kbMenuPopup
+        anchor.window: bar
+        anchor.rect.x: {
+            let targetX = kbIndicator.mapToItem(null, 0, 0).x - (implicitWidth - kbIndicator.width) / 2
+            return Math.max(6, Math.min(bar.width - implicitWidth - 6, targetX))
+        }
+        anchor.rect.y: bar.height + 4
+        implicitWidth: 160
+        implicitHeight: kbMenuLayout.implicitHeight + 40
+        visible: root.kbMenuVisible
+        color: "transparent"
+        Rectangle {
+            id: kbMenuContent
+            anchors.fill: parent
+            anchors.margins: 10
+            color: colors.mantle
+            radius: 12
+            border.color: colors.surface1
+            border.width: 1
+            ColumnLayout {
+                id: kbMenuLayout
+                anchors.fill: parent
+                anchors.margins: 10
+                spacing: 4
+                Repeater {
+                    model: root.kbLayoutsList
+                    delegate: Rectangle {
+                        required property var modelData
+                        Layout.fillWidth: true
+                        height: 32
+                        radius: 6
+                        color: "transparent"
+                        RowLayout {
+                            anchors.fill: parent
+                            anchors.leftMargin: 8
+                            spacing: 10
+                            Text {
+                                text: modelData.display
+                                color: colors.mauve
+                                font.pixelSize: 12
+                                font.bold: true
+                            }
+                            Text {
+                                text: modelData.id
+                                color: colors.text
+                                font.pixelSize: 10
+                                elide: Text.ElideRight
+                                Layout.fillWidth: true
+                            }
+                        }
+                        MouseArea {
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onEntered: parent.color = colors.surface0
+                            onExited: parent.color = "transparent"
+                            onClicked: {
+                                root.runAction(["fcitx5-remote", "-s", modelData.id])
+                                root.kbMenuVisible = false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // --- Bluetooth Menu Popup ---
+    PopupWindow {
+        id: btMenuPopup
+        anchor.window: bar
+        anchor.rect.x: {
+            let targetX = btIndicator.mapToItem(null, 0, 0).x - (implicitWidth - btIndicator.width) / 2
+            return Math.max(6, Math.min(bar.width - implicitWidth - 6, targetX))
+        }
+        anchor.rect.y: bar.height + 4
+        implicitWidth: 240
+        implicitHeight: btMenuLayout.implicitHeight + 40
+        visible: root.btMenuVisible
+        color: "transparent"
+        Rectangle {
+            id: btMenuContent
+            anchors.fill: parent
+            anchors.margins: 10
+            color: colors.mantle
+            radius: 12
+            border.color: colors.surface1
+            border.width: 1
+            ColumnLayout {
+                id: btMenuLayout
+                anchors.fill: parent
+                anchors.margins: 10
+                spacing: 10
+                
+                // Toggle Switch
+                RowLayout {
+                    Layout.fillWidth: true
+                    Text {
+                        text: "Bluetooth"
+                        color: colors.text
+                        font.bold: true
+                        Layout.fillWidth: true
+                    }
+                    Rectangle {
+                        width: 36
+                        height: 20
+                        radius: 10
+                        color: root.btState !== "off" ? colors.blue : colors.surface1
+                        Rectangle {
+                            width: 16
+                            height: 16
+                            radius: 8
+                            color: colors.crust
+                            anchors.verticalCenter: parent.verticalCenter
+                            x: root.btState !== "off" ? 18 : 2
+                            Behavior on x { NumberAnimation { duration: 200 } }
+                        }
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                if (Bluetooth.defaultAdapter) {
+                                    Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Scanning Toggle
+                RowLayout {
+                    Layout.fillWidth: true
+                    visible: Bluetooth.defaultAdapter && Bluetooth.defaultAdapter.enabled
+                    Text {
+                        text: root.btScanning ? "Scanning..." : "Scan for Devices"
+                        color: root.btScanning ? colors.mauve : colors.subtext0
+                        font.pixelSize: 11
+                        Layout.fillWidth: true
+                    }
+                    Text {
+                        text: root.btScanning ? "󰓦" : "󰑐"
+                        color: root.btScanning ? colors.mauve : colors.subtext1
+                        font.pixelSize: 14
+                        MouseArea {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                if (Bluetooth.defaultAdapter) {
+                                    Bluetooth.defaultAdapter.discovering = !Bluetooth.defaultAdapter.discovering
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Paired Devices
+                Text { text: "Paired Devices"; color: colors.subtext0; font.pixelSize: 10; font.bold: true; visible: root.btPairedDevices.length > 0 }
+                ColumnLayout {
+                    spacing: 2
+                    visible: root.btPairedDevices.length > 0
+                    Repeater {
+                        model: root.btPairedDevices
+                        delegate: Rectangle {
+                            required property var modelData
+                            Layout.fillWidth: true
+                            height: 32
+                            radius: 6
+                            color: "transparent"
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 8
+                                Text { text: modelData.connected ? "󰂱" : "󰂯"; color: colors.blue; font.pixelSize: 14 }
+                                Text { text: modelData.name || modelData.address; color: colors.text; font.pixelSize: 11; elide: Text.ElideRight; Layout.fillWidth: true }
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onEntered: parent.color = colors.surface0
+                                onExited: parent.color = "transparent"
+                                onClicked: {
+                                    modelData.connected = !modelData.connected
+                                    root.btMenuVisible = false
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Available Devices
+                Text { text: "Available Devices"; color: colors.subtext0; font.pixelSize: 10; font.bold: true; visible: root.btAvailableDevices.length > 0 }
+                ColumnLayout {
+                    spacing: 2
+                    visible: root.btAvailableDevices.length > 0
+                    Repeater {
+                        model: root.btAvailableDevices
+                        delegate: Rectangle {
+                            required property var modelData
+                            Layout.fillWidth: true
+                            height: 32
+                            radius: 6
+                            color: "transparent"
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 8
+                                Text { text: "󰂯"; color: colors.surface1; font.pixelSize: 14 }
+                                Text { text: modelData.name || modelData.address; color: colors.text; font.pixelSize: 11; elide: Text.ElideRight; Layout.fillWidth: true }
+                            }
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onEntered: parent.color = colors.surface0
+                                onExited: parent.color = "transparent"
+                                onClicked: {
+                                    modelData.paired = true
+                                    modelData.connected = true
+                                    root.btMenuVisible = false
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // --- Volume Menu Popup ---
+    PopupWindow {
+        id: volMenuPopup
+        anchor.window: bar
+        anchor.rect.x: {
+            let targetX = volIndicator.mapToItem(null, 0, 0).x - (implicitWidth - volIndicator.width) / 2
+            return Math.max(6, Math.min(bar.width - implicitWidth - 6, targetX))
+        }
+        anchor.rect.y: bar.height + 4
+        implicitWidth: 200
+        implicitHeight: 80
+        visible: root.volMenuVisible
+        color: "transparent"
+        Rectangle {
+            id: volMenuContent
+            anchors.fill: parent
+            anchors.margins: 10
+            color: colors.mantle
+            radius: 12
+            border.color: colors.surface1
+            border.width: 1
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 15
+                spacing: 10
+                RowLayout {
+                    Layout.fillWidth: true
+                    Text {
+                        text: root.muted ? "󰝟" : (root.volume > 50 ? "󰕾" : "󰖀")
+                        color: colors.mauve
+                        font.pixelSize: 16
+                    }
+                    Text {
+                        text: "Volume"
+                        color: colors.text
+                        font.bold: true
+                        Layout.fillWidth: true
+                    }
+                    Text {
+                        text: root.volume + "%"
+                        color: colors.subtext1
+                        font.pixelSize: 11
+                    }
+                }
+                
+                // Custom Slider
+                Rectangle {
+                    id: sliderTrack
+                    Layout.fillWidth: true
+                    height: 6
+                    radius: 3
+                    color: colors.surface0
+                    Rectangle {
+                        width: (root.volume / 100) * parent.width
+                        height: parent.height
+                        radius: 3
+                        color: colors.mauve
+                    }
+                    Rectangle {
+                        width: 12
+                        height: 12
+                        radius: 6
+                        color: colors.text
+                        anchors.verticalCenter: parent.verticalCenter
+                        x: (root.volume / 100) * (parent.width - width)
+                        border.color: colors.mauve
+                        border.width: 2
+                    }
+                    MouseArea {
+                        anchors.fill: parent
+                        anchors.margins: -10
+                        function updateVolume(mouse) {
+                            let val = Math.max(0, Math.min(1, mouse.x / parent.width))
+                            if (Pipewire.defaultAudioSink) {
+                                Pipewire.defaultAudioSink.audio.volume = val
+                            }
+                        }
+                        onPressed: updateVolume(mouse)
+                        onPositionChanged: updateVolume(mouse)
+                    }
+                }
+            }
+        }
+        DropShadow {
+            anchors.fill: volMenuContent
+            source: volMenuContent
+            radius: 10
+            samples: 16
+            color: "#80000000"
+            verticalOffset: 4
+        }
+    }
+
     // --- Media Dashboard Popup ---
     PopupWindow {
         id: mediaDashboardPopup
         anchor.window: bar
-        anchor.rect.x: mediaContainer.mapToItem(bar.contentItem, 0, 0).x - (implicitWidth - mediaContainer.width) / 2
+        anchor.rect.x: mediaContainer.mapToItem(null, 0, 0).x - (implicitWidth - mediaContainer.width) / 2
         anchor.rect.y: bar.height + 4
         implicitWidth: 340
         implicitHeight: 520
