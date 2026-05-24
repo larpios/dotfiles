@@ -20,6 +20,10 @@ ShellRoot {
     property int volume: 0
     property bool muted: false
 
+    // Bluetooth & Keyboard state
+    property string btState: "off"
+    property string kbLayout: "EN"
+
     // Media properties
     property var activePlayer: {
         const players = Mpris.players.values;
@@ -131,6 +135,43 @@ ShellRoot {
         }
     }
 
+    // Bluetooth
+    Process {
+        id: btProcess
+        command: ["sh", "-c", "if bluetoothctl info | grep -q 'Connected: yes'; then echo 'connected'; elif bluetoothctl show | grep -q 'Powered: yes'; then echo 'on'; else echo 'off'; fi"]
+        running: true
+        stdout: SplitParser {
+            onRead: (data) => root.btState = data.trim()
+        }
+    }
+
+    // Keyboard Layout (fcitx5)
+    Process {
+        id: kbProcess
+        command: ["sh", "-c", "fcitx5-remote -n"]
+        running: true
+        stdout: SplitParser {
+            onRead: (data) => {
+                let layout = data.trim()
+                if (layout.startsWith("keyboard-")) {
+                    root.kbLayout = layout.replace("keyboard-", "").substring(0, 2).toUpperCase()
+                } else if (layout === "pinyin" || layout === "rime") {
+                    root.kbLayout = "中"
+                } else if (layout === "hangul") { 
+                    root.kbLayout = "한"
+                } else if (layout === "mozc" || layout === "mozc") { 
+                    root.kbLayout = "日"
+                } else if (layout === "hangul") { 
+                    root.kbLayout = "한"
+                } else if (layout.length > 0) {
+                    root.kbLayout = layout.substring(0, 2).toUpperCase()
+                } else {
+                    root.kbLayout = "EN"
+                }
+            }
+        }
+    }
+
     // Generic Action Process
     Process {
         id: actionProcess
@@ -161,6 +202,8 @@ ShellRoot {
             cpuProcess.running = true
             memProcess.running = true
             volProcess.running = true
+            btProcess.running = true
+            kbProcess.running = true
             if (root.activePlayer && root.activePlayer.playbackState === MprisPlaybackState.Playing) {
                 root.activePlayer.positionChanged(); // Force fresh poll
                 let rawPos = root.activePlayer.position;
@@ -422,6 +465,37 @@ ShellRoot {
                 RowLayout {
                     Layout.alignment: Qt.AlignVCenter
                     spacing: 16
+
+                    // Keyboard Layout
+                    Row {
+                        spacing: 6
+                        Layout.alignment: Qt.AlignVCenter
+                        Text {
+                            text: "󰌌"
+                            color: colors.lavender
+                            font.pixelSize: 14
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Text {
+                            text: root.kbLayout
+                            color: colors.subtext1
+                            font.pixelSize: 11
+                            font.bold: true
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
+
+                    // Bluetooth
+                    Row {
+                        spacing: 6
+                        Layout.alignment: Qt.AlignVCenter
+                        Text {
+                            text: root.btState === "connected" ? "󰂱" : (root.btState === "on" ? "󰂯" : "󰂲")
+                            color: root.btState === "off" ? colors.surface1 : colors.blue
+                            font.pixelSize: 14
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                    }
                     
                     Row {
                         spacing: 6
