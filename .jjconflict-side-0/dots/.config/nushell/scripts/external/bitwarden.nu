@@ -286,7 +286,9 @@ export extern "bw serve" [
     --help(-h)                  # output usage information
 ]
 
-export def --env "bw unlock-export" [] {
+export def --env "bw unlock-export" [
+    --show-session-key (-s) # Show session key
+] {
     let output = bw unlock | lines
     let session_key = $output | parse "$ export BW_SESSION=\"{session_key}\"" | get session_key | last
 
@@ -298,7 +300,9 @@ export def --env "bw unlock-export" [] {
         $env.BW_SESSION = $session_key
     }
     print "Successfully unlocked vault."
-    print $"BW_SESSION: ($session_key)"
+    if $show_session_key {
+        print $"BW_SESSION: ($session_key)"
+    }
 }
 
 def "nu-complete object" [] : nothing -> list<string> {
