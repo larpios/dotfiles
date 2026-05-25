@@ -35,7 +35,7 @@ hl.window_rule({
     name = 'steam',
     match = { class = '^steam' },
     workspace = 4,
-    fullscreen = true,
+    maximize = true,
     float = false,
 })
 
