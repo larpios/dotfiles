@@ -60,31 +60,28 @@ Rectangle {
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 2
-            Text {
+            MarqueeText {
                 Layout.fillWidth: true
                 text: mediaTitle
                 color: colors.text
                 font.pixelSize: 18
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
             }
-            Text {
+            MarqueeText {
                 Layout.fillWidth: true
                 text: mediaArtist
                 color: colors.mauve
                 font.pixelSize: 14
                 horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
             }
-            Text {
+            MarqueeText {
                 Layout.fillWidth: true
                 text: mediaAlbum
                 color: colors.subtext0
                 font.pixelSize: 11
                 font.italic: true
                 horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
                 visible: mediaAlbum !== ""
             }
         }

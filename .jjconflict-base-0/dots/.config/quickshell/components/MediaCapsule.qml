@@ -53,14 +53,8 @@ Rectangle {
             source: barBlurredArtSource
             radius: 20
             samples: 16
-            opacity: 0.6
+            opacity: 0.2
             visible: mediaArt !== ""
-        }
-
-        Rectangle {
-            anchors.fill: parent
-            color: colors.base
-            opacity: 0.3
         }
     }
     
@@ -104,20 +98,18 @@ Rectangle {
         ColumnLayout {
             spacing: -4
             Layout.alignment: Qt.AlignVCenter
-            Text {
+            MarqueeText {
                 text: mediaTitle
                 color: colors.text
                 font.pixelSize: 10
                 font.bold: true
-                elide: Text.ElideRight
-                Layout.maximumWidth: 100
+                width: 100
             }
-            Text {
+            MarqueeText {
                 text: mediaArtist
                 color: colors.subtext0
                 font.pixelSize: 8
-                elide: Text.ElideRight
-                Layout.maximumWidth: 100
+                width: 100
             }
         }
         
