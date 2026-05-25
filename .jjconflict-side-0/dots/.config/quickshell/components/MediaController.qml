@@ -73,8 +73,19 @@ Item {
         return ""
     }
 
+    property bool _controlLocked: false
+    Timer {
+        id: controlLockTimer
+        interval: 500
+        onTriggered: root._controlLocked = false
+    }
+
     function controlMedia(action) {
-        if (!activePlayer) return;
+        if (!activePlayer || _controlLocked) return;
+        
+        _controlLocked = true;
+        controlLockTimer.start();
+
         switch (action) {
             case "play-pause": activePlayer.togglePlaying(); break;
             case "next": activePlayer.next(); break;
