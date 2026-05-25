@@ -22,32 +22,48 @@ Rectangle {
     signal close()
 
     implicitWidth: 340
-    implicitHeight: 520
+    implicitHeight: mainLayout.implicitHeight + 40
     color: colors.crust
     radius: 20
     border.color: colors.surface0
     border.width: 1
-    clip: true
     
+    // Antialiasing for smooth rounded corners
+    antialiasing: true
+
     ColumnLayout {
+        id: mainLayout
         anchors.fill: parent
         anchors.margins: 20
         spacing: 15
         
         Rectangle {
+            id: artContainer
             Layout.alignment: Qt.AlignHCenter
             width: 240
             height: 240
-            radius: 15
+            radius: 20
             color: colors.surface0
-            clip: true
-
+            
+            // Proper way to round children: use layer and mask
+            layer.enabled: mediaArt !== ""
+            layer.effect: OpacityMask {
+                maskSource: Rectangle {
+                    width: artContainer.width
+                    height: artContainer.height
+                    radius: artContainer.radius
+                    antialiasing: true
+                }
+            }
+            
             Image {
+                id: artImage
                 anchors.fill: parent
                 source: mediaArt
                 fillMode: Image.PreserveAspectCrop
                 asynchronous: true
             }
+
             Text {
                 anchors.centerIn: parent
                 text: "󰎆"
@@ -115,7 +131,6 @@ Rectangle {
         
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
-            Layout.bottomMargin: 10
             spacing: 30
             Text {
                 text: "󰒮"

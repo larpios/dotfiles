@@ -11,7 +11,8 @@ Item {
     property int delay: 2000 // Pause duration at start
     property int spacing: 50 // Space between loops
     
-    height: text1.implicitHeight
+    implicitHeight: text1.implicitHeight
+    height: implicitHeight
     clip: true
 
     Item {

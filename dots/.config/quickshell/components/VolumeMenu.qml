@@ -12,7 +12,7 @@ Rectangle {
     property bool muted: false
 
     implicitWidth: 200
-    implicitHeight: volMenuLayout.implicitHeight + 20
+    implicitHeight: volMenuLayout.implicitHeight + 50
     color: colors.mantle
     radius: 12
     border.color: colors.surface1

@@ -123,17 +123,28 @@ Item {
         id: popup
         anchor.window: bar
         anchor.rect.x: {
-            let targetX = capsule.mapToItem(null, 0, 0).x - (popup.implicitWidth - capsule.width) / 2
-            return Math.max(6, Math.min(bar.width - popup.implicitWidth - 6, targetX))
+            let targetX = capsule.mapToItem(null, 0, 0).x - (popup.width - capsule.width) / 2
+            return Math.max(6, Math.min(bar.width - popup.width - 6, targetX))
         }
         anchor.rect.y: bar.height + 4
-        implicitWidth: mediaDashboard.implicitWidth
-        implicitHeight: mediaDashboard.implicitHeight
+        width: mediaDashboard.implicitWidth + 40
+        height: mediaDashboard.implicitHeight + 40
         visible: root.mediaDashboardVisible
         color: "transparent"
         
+        DropShadow {
+            anchors.fill: mediaDashboard
+            source: mediaDashboard
+            radius: 12
+            samples: 20
+            color: "#80000000"
+            verticalOffset: 6
+            visible: popup.visible
+        }
+
         MediaDashboard {
             id: mediaDashboard
+            anchors.centerIn: parent
             colors: root.colors
             
             mediaTitle: root.mediaTitle
@@ -149,15 +160,6 @@ Item {
             onPrevious: root.controlMedia("previous")
             onPlayPause: root.controlMedia("play-pause")
             onClose: root.mediaDashboardVisible = false
-        }
-        
-        DropShadow {
-            anchors.fill: mediaDashboard
-            source: mediaDashboard
-            radius: 12
-            samples: 20
-            color: "#80000000"
-            verticalOffset: 6
         }
     }
 }
