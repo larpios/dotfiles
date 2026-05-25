@@ -62,15 +62,16 @@ def symlink-in-dir [
         return
     }
 
-    ls $search_dir | each { |entry|
-        let file_name = $entry.name | path basename
-        if ($file_name in $exclude) { return }
+    glob ($search_dir | path join '*') 
+    | each { |entry|
+        let file_name = $entry | path basename
+        if ($file_name in $exclude) or ($file_name == '.' or $file_name == '..') { return }
 
         # rel_path calculation mirroring Rust: path.strip_prefix(base)
-        let rel_path = $entry.name | path relative-to $source_root
+        let rel_path = $entry | path relative-to $source_root
         let dest = $nu.home-dir | path join $rel_path
         
-        handle-symlinks [{ src: $entry.name, dest: $dest }] --force=$force --dry-run=$dry_run
+        handle-symlinks [{ src: $entry, dest: $dest }] --force=$force --dry-run=$dry_run
     }
 }
 
@@ -81,8 +82,14 @@ def handle-symlinks [
     --dry-run (-n)
 ] {
     for link in $links {
-        let src = $link.src | path expand
-        let dest = $link.dest | path expand
+        let src = $link.src | path expand -n
+        let dest = $link.dest | path expand -n
+
+        let current_target = get-symlink-target $dest
+        if $current_target == $src {
+            # Already correct, skip
+            continue
+        }
 
         if ($dest | path exists) or (is-broken-link $dest) {
             if $force {
@@ -93,6 +100,13 @@ def handle-symlinks [
             } else {
                 print $"($dest) already exists, backing up..."
                 backup-file $dest --dry-run=$dry_run
+                
+                # If backup failed to move the file (and it's not a dry run), 
+                # we should skip to avoid nesting symlinks.
+                if not $dry_run and ($dest | path exists) {
+                    print $"Warning: ($dest) still exists after backup, skipping to avoid nested symlinks."
+                    continue
+                }
             }
         }
 
@@ -106,17 +120,37 @@ def handle-symlinks [
                     ^mklink $dest $src
                 }
             } else {
-                ln -sf $src $dest
+                rm -rf $dest
+                ln -sfn $src $dest
             }
         }
     }
 }
 
+# Helper to get where a symlink points, returning null if not a symlink
+def get-symlink-target [p: path] {
+    let p = ($p | path expand)
+    let parent = ($p | path dirname)
+    if not ($parent | path exists) { return null }
+    
+    let info = (ls -la $parent | where name == $p | get 0?)
+    if ($info | is-empty) or $info.type != 'symlink' {
+        return null
+    }
+    
+    # Target might be relative to the symlink's location
+    let target = $info.target
+    $parent | path join $target | path expand
+}
+
 # Helper to check for broken symlinks (which 'path exists' returns false for)
 def is-broken-link [p: path] {
-    let parent = $p | path dirname
+    let p = ($p | path expand)
+    let parent = ($p | path dirname)
     if not ($parent | path exists) { return false }
-    (ls -la $parent | where name == ($p | path expand) | is-not-empty) and (not ($p | path exists))
+    
+    let info = (ls -la $parent | where name == $p | get 0?)
+    ($info | is-not-empty) and $info.type == 'symlink' and (not ($p | path exists))
 }
 
 # Backup a file or directory
@@ -152,7 +186,7 @@ def clone-repos [
     }
 
     for repo in $repos {
-        let dest = $repo.dest | path expand
+        let dest = $repo.dest | path expand -n
         
         if ($dest | path exists) {
             if $force {
