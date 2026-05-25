@@ -29,8 +29,6 @@ Rectangle {
     border.width: 1
     clip: true
     
-    Rectangle { anchors.fill: parent; color: colors.base; opacity: 0.8 }
-    
     ColumnLayout {
         anchors.fill: parent
         anchors.margins: 20
