@@ -16,6 +16,13 @@ ShellRoot {
     id: root
     Colors { id: colors }
 
+    PwObjectTracker {
+        objects: [
+            Pipewire.defaultAudioSink,
+            Pipewire.defaultAudioSource
+        ]
+    }
+
     Component.onCompleted: console.log("Quickshell: Shell loaded successfully")
 
     property date currentTime: new Date()
@@ -1025,7 +1032,7 @@ ShellRoot {
         }
         anchor.rect.y: bar.height + 4
         implicitWidth: 200
-        implicitHeight: 80
+        implicitHeight: 100
         visible: root.volMenuVisible
         color: "transparent"
         Rectangle {
