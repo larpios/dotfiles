@@ -146,6 +146,7 @@ ShellRoot {
 
                     SystemTrayModule {
                         colors: colors
+                        bar: bar
                     }
 
                     Row {
