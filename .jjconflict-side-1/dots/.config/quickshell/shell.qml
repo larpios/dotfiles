@@ -134,6 +134,11 @@ ShellRoot {
                         bar: bar
                     }
                     
+                    BrightnessIndicator {
+                        colors: colors
+                        bar: bar
+                    }
+                    
                     VolumeIndicator {
                         colors: colors
                         bar: bar
