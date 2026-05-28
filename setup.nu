@@ -85,8 +85,7 @@ def handle-symlinks [
         let src = $link.src | path expand -n
         let dest = $link.dest | path expand -n
 
-        let current_target = get-symlink-target $dest
-        if $current_target == $src {
+        if ($dest | path expand) == ($src | path expand) {
             # Already correct, skip
             continue
         }
@@ -121,36 +120,26 @@ def handle-symlinks [
                 }
             } else {
                 rm -rf $dest
-                ln -sfn $src $dest
+                ^ln -sfn $src $dest
             }
         }
     }
 }
 
-# Helper to get where a symlink points, returning null if not a symlink
-def get-symlink-target [p: path] {
-    let p = ($p | path expand)
-    let parent = ($p | path dirname)
-    if not ($parent | path exists) { return null }
-    
-    let info = (ls -la $parent | where name == $p | get 0?)
-    if ($info | is-empty) or $info.type != 'symlink' {
-        return null
-    }
-    
-    # Target might be relative to the symlink's location
-    let target = $info.target
-    $parent | path join $target | path expand
-}
 
 # Helper to check for broken symlinks (which 'path exists' returns false for)
 def is-broken-link [p: path] {
-    let p = ($p | path expand)
-    let parent = ($p | path dirname)
-    if not ($parent | path exists) { return false }
-    
-    let info = (ls -la $parent | where name == $p | get 0?)
-    ($info | is-not-empty) and $info.type == 'symlink' and (not ($p | path exists))
+    if ($p | path type) != 'symlink' {
+        return false
+    }
+
+    try {
+        'p' | path expand --strict
+    } catch {
+        return true
+    } 
+
+    return false
 }
 
 # Backup a file or directory

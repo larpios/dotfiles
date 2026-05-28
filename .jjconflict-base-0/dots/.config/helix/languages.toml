@@ -1,4 +1,0 @@
-[[language]]
-auto-format = true
-name = "nix"
-formatter = { command = "alejandra" }

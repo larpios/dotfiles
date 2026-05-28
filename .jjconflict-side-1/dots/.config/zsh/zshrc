@@ -1,6 +1,0 @@
-#!/usr/bin/env zsh
-
-. "$HOME/.config/sh/shrc"
-
-# OpenClaw Completion
-[ -f "/Users/larpi/.openclaw/completions/openclaw.zsh" ] && source "/Users/larpi/.openclaw/completions/openclaw.zsh"
