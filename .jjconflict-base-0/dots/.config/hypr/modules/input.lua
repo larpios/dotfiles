@@ -18,6 +18,7 @@ hl.gesture({
 })
 
 hl.device({
-    name = 'epic-mouse-v1',
-    sensitivity = -1.0,
+    -- ZSA Navigator
+    name = 'zsa-technology-labs-voyager-1',
+    sensitivity = -0.5,
 })
