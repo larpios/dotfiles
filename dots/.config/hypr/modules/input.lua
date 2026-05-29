@@ -20,5 +20,5 @@ hl.gesture({
 hl.device({
     -- ZSA Navigator
     name = 'zsa-technology-labs-voyager-1',
-    sensitivity = -0.5,
+    sensitivity = -0.8,
 })
