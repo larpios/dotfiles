@@ -18,9 +18,7 @@ export def "is-symlink" [] : [path -> bool, list<path> -> list<bool>] {
             }
         }
 
-        let type = (ls -l $input | get type | last)
-
-        $type == 'symlink'
+        ($input | path type) == 'symlink'
     }
 }
 
@@ -36,6 +34,10 @@ export def "symlink is-valid" [] : [path -> bool, list<path> -> list<bool>] {
     } else {
         $input | path exists
     }
+}
+
+export def "symlink is-broken" [] : [path -> bool, list<path> -> list<bool>] {
+    $in | symlink is-valid | each { |v| not $v }
 }
 
 export def "symlink follow" [] : [path -> path, list<path> -> list<path>] {
