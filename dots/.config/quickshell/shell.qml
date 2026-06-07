@@ -164,7 +164,7 @@ ShellRoot {
                             anchors.verticalCenter: parent.verticalCenter
                         }
                         Text {
-                            text: Qt.formatDateTime(root.currentTime, "yyyy-MM-dd HH:mm:ss")
+                            text: Qt.formatDateTime(root.currentTime, "yyyy-MM-dd HH:mm:ss (ddd)")
                             color: colors.mauve
                             font.pixelSize: 12
                             font.bold: true
