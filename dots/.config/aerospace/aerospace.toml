@@ -262,7 +262,7 @@ run = 'move-node-to-workspace 4'
 check-further-callbacks = true
 
 [[on-window-detected]]
-if.app-name-regex-substring = "net.ankiweb.launcher"
+if.app-id = "net.ankiweb.launcher"
 run = 'move-node-to-workspace 6'
 check-further-callbacks = true
 
