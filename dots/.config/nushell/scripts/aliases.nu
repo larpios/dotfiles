@@ -9,3 +9,5 @@ export alias la = ls -a
 export alias lla = ls -al
 
 export alias fg = job unfreeze
+
+export alias icat = kitten icat

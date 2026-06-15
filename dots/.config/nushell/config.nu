@@ -115,7 +115,8 @@ let nu_config = {
                     | lines 
                     | str trim 
                     | str replace -r '^\$\s+' '' 
-                    | str replace -a '&&' ';' 
+                    | str replace -ar '\s*&&' '; ' 
+                    | str replace -ar '\|\|\s+(true)?' '| ignore; '
                     | each { |line|
                         let parsed = $line | parse 'export {key}={value}' | last
                         if ($parsed | is-not-empty) {
