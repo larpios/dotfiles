@@ -57,6 +57,12 @@ hl.window_rule({
 })
 
 hl.window_rule({
+    name = 'anki',
+    match = { class = '^anki' },
+    workspace = 6,
+})
+
+hl.window_rule({
     name = 'pip',
     match = {
         title = '^(?i)picture-in-picture',
