@@ -18,7 +18,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@earendil-works/pi-coding-agent": "^1.0.0",
+    "@earendil-works/pi-coding-agent": "^0.79.0",
     "typebox": "^1.1.1"
   },
   "devDependencies": {
