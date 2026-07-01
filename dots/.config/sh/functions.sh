@@ -35,7 +35,7 @@ within() (
         error "must specify cwd"
         return 1
     elif [ ! -d "$cwd" ]; then
-        error "$(_path "\`$cwd\`" "$C_RED") is not a directory"
+        error "$("$C_GREEN" "\`$cwd\`" "$C_RED") is not a directory"
         return 1
     fi
 
