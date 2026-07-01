@@ -22,13 +22,13 @@ git clone https://github.com/larpi/dotfiles.git ~/.dotfiles
 Inside the repository, run the following command:
 
 ```bash
-cargo +nightly -Zscript setup.rs install
+nu setup.nu
 ```
 
 You can also dry run it:
 
 ```bash
-cargo +nightly -Zscript setup.rs install --dry-run
+nu setup.nu --dry-run
 ```
 
 ---
