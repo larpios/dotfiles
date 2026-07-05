@@ -5,6 +5,7 @@ auto-pairs = false
 color-modes = true
 end-of-line-diagnostics = "hint"
 line-number = "relative"
+scrolloff = 100
 
 [editor.indent-guides]
 render = true
