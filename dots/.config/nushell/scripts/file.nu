@@ -30,7 +30,7 @@ export def "file backup" [
 
         if ($backup | path exists) and not $overwrite_all {
             let options_str = if ($files | length) > 1 { "(y)es/(N)o/(a)ll/(q)uit" } else { "(y)es/(N)o" }
-            let confirm = (input $"Do you want to overwrite `($backup)`? [($options_str)]: " | str downcase)
+            let confirm = (input $"Do you want to overwrite `($backup)`? [($options_str)]: " | str lowercase)
 
             match $confirm {
                 "q" | "quit" => { print 'Aborting backup...'; return }

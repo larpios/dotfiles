@@ -87,7 +87,7 @@ export def "symlink into-target" [
     let dest = $copy_to | default $link
 
     if not $yes and ($dest | path exists) {
-        let overwrite = input $"Do you want to overwrite `($dest)` with `($link_target)`? [y/N]: " | str downcase
+        let overwrite = input $"Do you want to overwrite `($dest)` with `($link_target)`? [y/N]: " | str lowercase
 
         if $overwrite == 'y' {
             rm $dest

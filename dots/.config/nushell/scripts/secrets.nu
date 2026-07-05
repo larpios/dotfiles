@@ -12,7 +12,7 @@ export def "secrets setup" [] {
         error make "bitwarden is not installed"
     }
 
-    let confirm = (input "Don't proceed unless you're on a private machine. Are you sure you want to setup age keys? (y/N) " | str downcase) == 'y'
+    let confirm = (input "Don't proceed unless you're on a private machine. Are you sure you want to setup age keys? (y/N) " | str lowercase) == 'y'
 
     if not $confirm {
         print "Aborting"
