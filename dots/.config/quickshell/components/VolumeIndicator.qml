@@ -53,6 +53,7 @@ Item {
             colors: root.colors
             volume: root.volume
             muted: root.muted
+            menuVisible: root.menuVisible
         }
     }
 }

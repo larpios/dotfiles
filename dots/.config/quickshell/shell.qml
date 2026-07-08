@@ -87,14 +87,19 @@ ShellRoot {
                             delegate: Rectangle {
                                 required property var modelData
                                 property bool isActive: modelData.active
+                                property bool hovered: false
                                 width: isActive ? 32 : 20
                                 height: 20
                                 radius: 10
-                                color: isActive ? colors.mauve : colors.surface1
-                                border.color: isActive ? colors.mauve : colors.surface1
+                                color: isActive ? colors.mauve : (hovered ? colors.surface2 : colors.surface1)
+                                border.color: isActive ? colors.mauve : (hovered ? colors.surface2 : colors.surface1)
                                 border.width: 1
                                 anchors.verticalCenter: parent ? parent.verticalCenter : undefined
+                                
                                 Behavior on width { NumberAnimation { duration: 250; easing.type: Easing.OutQuint } }
+                                Behavior on color { ColorAnimation { duration: 200 } }
+                                Behavior on border.color { ColorAnimation { duration: 200 } }
+                                
                                 Text {
                                     anchors.centerIn: parent
                                     text: modelData.name
@@ -104,7 +109,10 @@ ShellRoot {
                                 }
                                 MouseArea {
                                     anchors.fill: parent
+                                    hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
+                                    onEntered: parent.hovered = true
+                                    onExited: parent.hovered = false
                                     onClicked: modelData.activate()
                                 }
                             }
@@ -154,22 +162,10 @@ ShellRoot {
                         bar: bar
                     }
 
-                    Row {
-                        spacing: 8
-                        Layout.alignment: Qt.AlignVCenter
-                        Rectangle {
-                            height: 14
-                            width: 1
-                            color: colors.surface1
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
-                        Text {
-                            text: Qt.formatDateTime(root.currentTime, "yyyy-MM-dd HH:mm:ss (ddd)")
-                            color: colors.mauve
-                            font.pixelSize: 12
-                            font.bold: true
-                            anchors.verticalCenter: parent.verticalCenter
-                        }
+                    TimeIndicator {
+                        colors: colors
+                        bar: bar
+                        currentTime: root.currentTime
                     }
 
                     PowerModule {
