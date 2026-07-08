@@ -13,6 +13,7 @@
 .netrwhist
 
 # Extras
+.antigravitycli
 
 *.log
 .env.local
