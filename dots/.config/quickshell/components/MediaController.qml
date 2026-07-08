@@ -134,12 +134,15 @@ Item {
         id: popup
         anchor.window: bar
         anchor.rect.x: {
-            let targetX = capsule.mapToItem(null, 0, 0).x - (popup.width - capsule.width) / 2
-            return Math.max(6, Math.min(bar.width - popup.width - 6, targetX))
+            let visibleDummy = popup.visible
+            let xDummy = root.x
+            let targetX = root.mapToItem(null, 0, 0).x - (mediaDashboard.implicitWidth - root.width) / 2
+            let windowX = targetX - 20
+            return Math.max(6, Math.min(bar.width - (mediaDashboard.implicitWidth + 40) - 6, windowX))
         }
-        anchor.rect.y: bar.height + 4
-        width: mediaDashboard.implicitWidth + 40
-        height: mediaDashboard.implicitHeight + 40
+        anchor.rect.y: bar.height - 8
+        implicitWidth: mediaDashboard.implicitWidth + 40
+        implicitHeight: mediaDashboard.implicitHeight + 60
         visible: root.mediaDashboardVisible
         color: "transparent"
         
@@ -155,8 +158,10 @@ Item {
 
         MediaDashboard {
             id: mediaDashboard
-            anchors.centerIn: parent
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             colors: root.colors
+            menuVisible: root.mediaDashboardVisible
             
             mediaTitle: root.mediaTitle
             mediaArtist: root.mediaArtist

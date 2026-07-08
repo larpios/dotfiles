@@ -5,6 +5,39 @@ import Quickshell
 Rectangle {
     id: brightnessMenuContent
     property var colors: ({})
+    property bool menuVisible: false
+    
+    transform: Scale {
+        id: menuScale
+        origin.x: brightnessMenuContent.width / 2
+        origin.y: 0
+        yScale: 0.0
+    }
+    
+    NumberAnimation {
+        id: scaleInAnim
+        target: menuScale
+        property: "yScale"
+        from: 0.0
+        to: 1.0
+        duration: 320
+        easing.type: Easing.OutBack
+    }
+    
+    onMenuVisibleChanged: {
+        if (menuVisible) {
+            scaleInAnim.start();
+        } else {
+            scaleInAnim.stop();
+            menuScale.yScale = 0.0;
+        }
+    }
+    
+    Component.onCompleted: {
+        if (menuVisible) {
+            scaleInAnim.start();
+        }
+    }
     
     // Passed properties
     property int brightness: 0
@@ -12,15 +45,20 @@ Rectangle {
 
     implicitWidth: 200
     implicitHeight: brightnessMenuLayout.implicitHeight + 50
-    color: colors.mantle
-    radius: 12
-    border.color: colors.surface1
-    border.width: 1
+    color: "transparent"
+    border.width: 0
+    
+    MenuBackground {
+        colors: brightnessMenuContent.colors
+    }
     
     ColumnLayout {
         id: brightnessMenuLayout
         anchors.fill: parent
-        anchors.margins: 15
+        anchors.leftMargin: 15 + 12
+        anchors.rightMargin: 15 + 12
+        anchors.topMargin: 15 + 12
+        anchors.bottomMargin: 15
         spacing: 10
         RowLayout {
             Layout.fillWidth: true

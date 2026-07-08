@@ -53,19 +53,24 @@ Item {
         id: popup
         anchor.window: root.bar
         anchor.rect.x: {
-            let targetX = indicator.mapToItem(null, 0, 0).x - (popup.implicitWidth - indicator.width) / 2
-            return Math.max(6, Math.min(root.bar.width - popup.implicitWidth - 6, targetX))
+            let visibleDummy = popup.visible
+            let xDummy = root.x
+            let targetX = root.mapToItem(null, 0, 0).x - (brightnessMenu.implicitWidth - root.width) / 2
+            return Math.max(6, Math.min(root.bar.width - brightnessMenu.implicitWidth - 6, targetX))
         }
-        anchor.rect.y: root.bar.height + 4
+        anchor.rect.y: root.bar.height - 8
         implicitWidth: brightnessMenu.implicitWidth
-        implicitHeight: brightnessMenu.implicitHeight
+        implicitHeight: brightnessMenu.implicitHeight + 40
         visible: root.menuVisible
         color: "transparent"
         
         BrightnessMenu {
             id: brightnessMenu
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             colors: root.colors
             brightness: root.brightness
+            menuVisible: root.menuVisible
             onMoved: (val) => {
                 if (val !== root.brightness) {
                     setBrightnessProcess.brightnessValue = val

@@ -39,17 +39,21 @@ Item {
         id: popup
         anchor.window: bar
         anchor.rect.x: {
-            let targetX = indicator.mapToItem(null, 0, 0).x - (popup.implicitWidth - indicator.width) / 2
-            return Math.max(6, Math.min(bar.width - popup.implicitWidth - 6, targetX))
+            let visibleDummy = popup.visible
+            let xDummy = root.x
+            let targetX = root.mapToItem(null, 0, 0).x - (btMenu.implicitWidth - root.width) / 2
+            return Math.max(6, Math.min(bar.width - btMenu.implicitWidth - 6, targetX))
         }
-        anchor.rect.y: bar.height + 4
+        anchor.rect.y: bar.height - 8
         implicitWidth: btMenu.implicitWidth
-        implicitHeight: btMenu.implicitHeight
+        implicitHeight: btMenu.implicitHeight + 40
         visible: root.menuVisible
         color: "transparent"
         
         BluetoothMenu {
             id: btMenu
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             colors: root.colors
             btState: root.state
             btScanning: root.scanning

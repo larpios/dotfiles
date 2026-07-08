@@ -43,18 +43,24 @@ Item {
         id: popup
         anchor.window: bar
         anchor.rect.x: {
-            let targetX = powerBtn.mapToItem(null, 0, 0).x - (popup.implicitWidth - powerBtn.width)
-            return Math.max(6, Math.min(bar.width - popup.implicitWidth - 6, targetX))
+            let visibleDummy = popup.visible
+            let xDummy = root.x
+            let targetX = root.mapToItem(null, 0, 0).x - (powerMenu.implicitWidth - root.width)
+            let windowX = targetX - 15
+            return Math.max(6, Math.min(bar.width - (powerMenu.implicitWidth + 30) - 6, windowX))
         }
-        anchor.rect.y: bar.height + 4
-        implicitWidth: powerMenu.implicitWidth
-        implicitHeight: powerMenu.implicitHeight
+        anchor.rect.y: bar.height - 8
+        implicitWidth: powerMenu.implicitWidth + 30
+        implicitHeight: powerMenu.implicitHeight + 60
         visible: root.menuVisible
         color: "transparent"
         
         PowerMenu {
             id: powerMenu
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             colors: root.colors
+            menuVisible: root.menuVisible
             onActionTriggered: (action) => {
                 actionProcess.run(action)
                 root.menuVisible = false
@@ -68,6 +74,7 @@ Item {
             samples: 16
             color: "#80000000"
             verticalOffset: 4
+            visible: popup.visible
         }
     }
 

@@ -6,6 +6,39 @@ import Qt5Compat.GraphicalEffects
 Rectangle {
     id: mediaDashboardContent
     property var colors: ({})
+    property bool menuVisible: false
+    
+    transform: Scale {
+        id: menuScale
+        origin.x: mediaDashboardContent.width / 2
+        origin.y: 0
+        yScale: 0.0
+    }
+    
+    NumberAnimation {
+        id: scaleInAnim
+        target: menuScale
+        property: "yScale"
+        from: 0.0
+        to: 1.0
+        duration: 320
+        easing.type: Easing.OutBack
+    }
+    
+    onMenuVisibleChanged: {
+        if (menuVisible) {
+            scaleInAnim.start();
+        } else {
+            scaleInAnim.stop();
+            menuScale.yScale = 0.0;
+        }
+    }
+    
+    Component.onCompleted: {
+        if (menuVisible) {
+            scaleInAnim.start();
+        }
+    }
     
     property string mediaTitle: ""
     property string mediaArtist: ""
@@ -23,18 +56,21 @@ Rectangle {
 
     implicitWidth: 340
     implicitHeight: mainLayout.implicitHeight + 40
-    color: colors.crust
-    radius: 20
-    border.color: colors.surface0
-    border.width: 1
+    color: "transparent"
+    border.width: 0
     
-    // Antialiasing for smooth rounded corners
-    antialiasing: true
-
+    MenuBackground {
+        colors: mediaDashboardContent.colors
+        radius: 12
+    }
+    
     ColumnLayout {
         id: mainLayout
         anchors.fill: parent
-        anchors.margins: 20
+        anchors.leftMargin: 20 + 12
+        anchors.rightMargin: 20 + 12
+        anchors.topMargin: 20 + 12
+        anchors.bottomMargin: 20
         spacing: 15
         
         Rectangle {

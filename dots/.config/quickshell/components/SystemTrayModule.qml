@@ -21,8 +21,8 @@ Item {
     
     function openItemMenu(item, data) {
         selectedItem = data;
-        itemMenuPopup.anchor.rect.x = item.mapToItem(null, 0, 0).x - (itemMenuPopup.implicitWidth - item.width) / 2;
-        itemMenuPopup.anchor.rect.y = bar ? bar.height + 4 : 0;
+        itemMenuPopup.anchor.rect.x = item.mapToItem(null, 0, 0).x - (menuContent.width - item.width) / 2 - 15;
+        itemMenuPopup.anchor.rect.y = bar ? bar.height - 8 : 0;
         itemMenuPopup.visible = true;
     }
 
@@ -71,8 +71,8 @@ Item {
     PopupWindow {
         id: itemMenuPopup
         anchor.window: bar
-        implicitWidth: 180
-        implicitHeight: menuContent.implicitHeight
+        implicitWidth: 180 + 30
+        implicitHeight: menuContent.implicitHeight + 20
         visible: false
         color: "transparent"
 
@@ -80,6 +80,8 @@ Item {
             id: menuContent
             width: 180
             implicitHeight: column.implicitHeight + 12
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             color: colors.mantle
             radius: 10
             border.color: colors.surface1
@@ -142,6 +144,7 @@ Item {
             samples: 16
             color: "#80000000"
             verticalOffset: 2
+            visible: itemMenuPopup.visible
         }
     }
 
@@ -162,7 +165,7 @@ Item {
         onClicked: (mouse) => {
             if (mouse.button === Qt.RightButton) {
                 shellMenuPopup.anchor.rect.x = root.mapToItem(null, 0, 0).x;
-                shellMenuPopup.anchor.rect.y = bar ? bar.height + 4 : 0;
+                shellMenuPopup.anchor.rect.y = bar ? bar.height - 8 : 0;
                 shellMenuPopup.visible = true;
             }
         }

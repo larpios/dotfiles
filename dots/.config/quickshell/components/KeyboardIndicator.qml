@@ -99,17 +99,21 @@ Item {
         id: popup
         anchor.window: bar
         anchor.rect.x: {
-            let targetX = indicator.mapToItem(null, 0, 0).x - (popup.implicitWidth - indicator.width) / 2
-            return Math.max(6, Math.min(bar.width - popup.implicitWidth - 6, targetX))
+            let visibleDummy = popup.visible
+            let xDummy = root.x
+            let targetX = root.mapToItem(null, 0, 0).x - (kbMenu.implicitWidth - root.width) / 2
+            return Math.max(6, Math.min(bar.width - kbMenu.implicitWidth - 6, targetX))
         }
-        anchor.rect.y: bar.height + 4
+        anchor.rect.y: bar.height - 8
         implicitWidth: kbMenu.implicitWidth
-        implicitHeight: kbMenu.implicitHeight
+        implicitHeight: kbMenu.implicitHeight + 40
         visible: root.menuVisible
         color: "transparent"
         
         KeyboardMenu {
             id: kbMenu
+            anchors.top: parent.top
+            anchors.horizontalCenter: parent.horizontalCenter
             colors: root.colors
             kbLayoutsList: root.kbLayoutsList
             kbMenuVisible: root.menuVisible

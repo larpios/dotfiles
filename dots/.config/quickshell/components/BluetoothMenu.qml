@@ -13,18 +13,55 @@ Rectangle {
     property var btPairedDevices: []
     property var btAvailableDevices: []
     property bool btMenuVisible: false
+    
+    transform: Scale {
+        id: menuScale
+        origin.x: btMenuContent.width / 2
+        origin.y: 0
+        yScale: 0.0
+    }
+    
+    NumberAnimation {
+        id: scaleInAnim
+        target: menuScale
+        property: "yScale"
+        from: 0.0
+        to: 1.0
+        duration: 320
+        easing.type: Easing.OutBack
+    }
+    
+    onBtMenuVisibleChanged: {
+        if (btMenuVisible) {
+            scaleInAnim.start();
+        } else {
+            scaleInAnim.stop();
+            menuScale.yScale = 0.0;
+        }
+    }
+    
+    Component.onCompleted: {
+        if (btMenuVisible) {
+            scaleInAnim.start();
+        }
+    }
 
     implicitWidth: 240
     implicitHeight: btMenuLayout.implicitHeight + 20
-    color: colors.mantle
-    radius: 12
-    border.color: colors.surface1
-    border.width: 1
+    color: "transparent"
+    border.width: 0
+    
+    MenuBackground {
+        colors: btMenuContent.colors
+    }
     
     ColumnLayout {
         id: btMenuLayout
         anchors.fill: parent
-        anchors.margins: 10
+        anchors.leftMargin: 10 + 12
+        anchors.rightMargin: 10 + 12
+        anchors.topMargin: 10 + 12
+        anchors.bottomMargin: 10
         spacing: 10
         
         // Toggle Switch

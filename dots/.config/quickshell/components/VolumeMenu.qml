@@ -8,16 +8,50 @@ Rectangle {
     property var colors: ({})
     property bool menuVisible: false
     
+    transform: Scale {
+        id: menuScale
+        origin.x: volMenuContent.width / 2
+        origin.y: 0
+        yScale: 0.0
+    }
+    
+    NumberAnimation {
+        id: scaleInAnim
+        target: menuScale
+        property: "yScale"
+        from: 0.0
+        to: 1.0
+        duration: 320
+        easing.type: Easing.OutBack
+    }
+    
+    onMenuVisibleChanged: {
+        if (menuVisible) {
+            scaleInAnim.start();
+        } else {
+            scaleInAnim.stop();
+            menuScale.yScale = 0.0;
+        }
+    }
+    
+    Component.onCompleted: {
+        if (menuVisible) {
+            scaleInAnim.start();
+        }
+    }
+    
     // Default system values
     property int volume: 0
     property bool muted: false
     
     implicitWidth: 320
     implicitHeight: 400
-    color: colors.mantle
-    radius: 12
-    border.color: colors.surface1
-    border.width: 1
+    color: "transparent"
+    border.width: 0
+    
+    MenuBackground {
+        colors: volMenuContent.colors
+    }
     
     // State
     property string activeTab: "outputs" // "outputs" or "inputs"
@@ -74,7 +108,10 @@ Rectangle {
     
     ColumnLayout {
         anchors.fill: parent
-        anchors.margins: 15
+        anchors.leftMargin: 15 + 12
+        anchors.rightMargin: 15 + 12
+        anchors.topMargin: 15 + 12
+        anchors.bottomMargin: 15
         spacing: 12
         
         // Header

@@ -10,18 +10,55 @@ Rectangle {
     // Properties passed from indicator
     property var kbLayoutsList: []
     property bool kbMenuVisible: false
+    
+    transform: Scale {
+        id: menuScale
+        origin.x: kbMenuContent.width / 2
+        origin.y: 0
+        yScale: 0.0
+    }
+    
+    NumberAnimation {
+        id: scaleInAnim
+        target: menuScale
+        property: "yScale"
+        from: 0.0
+        to: 1.0
+        duration: 320
+        easing.type: Easing.OutBack
+    }
+    
+    onKbMenuVisibleChanged: {
+        if (kbMenuVisible) {
+            scaleInAnim.start();
+        } else {
+            scaleInAnim.stop();
+            menuScale.yScale = 0.0;
+        }
+    }
+    
+    Component.onCompleted: {
+        if (kbMenuVisible) {
+            scaleInAnim.start();
+        }
+    }
 
     implicitWidth: 160
     implicitHeight: kbMenuLayout.implicitHeight + 20
-    color: colors.mantle
-    radius: 12
-    border.color: colors.surface1
-    border.width: 1
+    color: "transparent"
+    border.width: 0
+    
+    MenuBackground {
+        colors: kbMenuContent.colors
+    }
 
     ColumnLayout {
         id: kbMenuLayout
         anchors.fill: parent
-        anchors.margins: 10
+        anchors.leftMargin: 10 + 12
+        anchors.rightMargin: 10 + 12
+        anchors.topMargin: 10 + 12
+        anchors.bottomMargin: 10
         spacing: 4
         Repeater {
             model: kbMenuContent.kbLayoutsList
