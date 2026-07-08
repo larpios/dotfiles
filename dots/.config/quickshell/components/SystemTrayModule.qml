@@ -16,11 +16,16 @@ Item {
     implicitHeight: 26
     Layout.alignment: Qt.AlignVCenter
 
-    // Shared popup for all tray items
+    // Shared model opener for extracting native menu entries
     property var selectedItem: null
+    
+    QsMenuOpener {
+        id: menuOpener
+    }
     
     function openItemMenu(item, data) {
         selectedItem = data;
+        menuOpener.menu = data.menu;
         itemMenuPopup.anchor.rect.x = item.mapToItem(null, 0, 0).x - (menuContent.width - item.width) / 2 - 15;
         itemMenuPopup.anchor.rect.y = bar ? bar.height - 8 : 0;
         itemMenuPopup.visible = true;
@@ -71,14 +76,15 @@ Item {
     PopupWindow {
         id: itemMenuPopup
         anchor.window: bar
-        implicitWidth: 180 + 30
+        implicitWidth: 200 + 30
         implicitHeight: menuContent.implicitHeight + 20
         visible: false
+        grabFocus: true
         color: "transparent"
 
         Rectangle {
             id: menuContent
-            width: 180
+            width: 200
             implicitHeight: column.implicitHeight + 12
             anchors.top: parent.top
             anchors.horizontalCenter: parent.horizontalCenter
@@ -100,18 +106,85 @@ Item {
                     font.bold: true
                     Layout.alignment: Qt.AlignHCenter
                     Layout.bottomMargin: 4
+                    elide: Text.ElideRight
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
                 }
 
-                PowerOption {
-                    visible: root.selectedItem && root.selectedItem.hasMenu
-                    icon: "󰍜"
-                    label: "Open App Menu"
-                    optColor: colors.blue
-                    colors: root.colors
-                    onTriggered: {
-                        root.selectedItem.menu.open(null)
-                        itemMenuPopup.visible = false
+                // Dynamic Repeater for native menu entries (custom visual rendering of the app's menu!)
+                Repeater {
+                    model: menuOpener.children.values
+                    delegate: Item {
+                        id: entryItem
+                        required property var modelData
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: modelData.isSeparator ? 9 : 24
+                        
+                        // Separator line
+                        Rectangle {
+                            visible: modelData.isSeparator
+                            anchors.centerIn: parent
+                            width: parent.width - 12
+                            height: 1
+                            color: colors.surface1
+                        }
+                        
+                        // Action menu item button
+                        Rectangle {
+                            visible: !modelData.isSeparator
+                            anchors.fill: parent
+                            radius: 4
+                            color: mouseArea.containsMouse ? colors.surface0 : "transparent"
+                            border.color: mouseArea.containsMouse ? colors.surface1 : "transparent"
+                            border.width: 1
+                            
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.leftMargin: 8
+                                anchors.rightMargin: 8
+                                spacing: 6
+                                
+                                IconImage {
+                                    visible: modelData.icon !== ""
+                                    source: modelData.icon
+                                    Layout.preferredWidth: 12
+                                    Layout.preferredHeight: 12
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+                                
+                                Text {
+                                    text: modelData.text
+                                    color: modelData.enabled ? (mouseArea.containsMouse ? colors.text : colors.subtext1) : colors.surface2
+                                    font.pixelSize: 11
+                                    font.bold: true
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignVCenter
+                                    elide: Text.ElideRight
+                                }
+                            }
+                            
+                            MouseArea {
+                                id: mouseArea
+                                anchors.fill: parent
+                                hoverEnabled: modelData.enabled
+                                cursorShape: modelData.enabled ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                onClicked: {
+                                    if (modelData.enabled) {
+                                        modelData.triggered() // execute the native app command!
+                                        itemMenuPopup.visible = false
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
+
+                // Separator before fallback option if entries were shown
+                Rectangle {
+                    Layout.fillWidth: true
+                    height: 1
+                    color: colors.surface1
+                    visible: menuOpener.children.values.length > 0
                 }
 
                 PowerOption {
@@ -154,54 +227,6 @@ Item {
         function run(cmd) {
             command = cmd
             running = true
-        }
-    }
-
-    // Still keep the "Quit Quickshell" option but only on background right click
-    MouseArea {
-        anchors.fill: parent
-        z: -1 // Behind the Row
-        acceptedButtons: Qt.RightButton
-        onClicked: (mouse) => {
-            if (mouse.button === Qt.RightButton) {
-                shellMenuPopup.anchor.rect.x = root.mapToItem(null, 0, 0).x;
-                shellMenuPopup.anchor.rect.y = bar ? bar.height - 8 : 0;
-                shellMenuPopup.visible = true;
-            }
-        }
-    }
-
-    PopupWindow {
-        id: shellMenuPopup
-        anchor.window: bar
-        implicitWidth: 160
-        implicitHeight: shellMenuContent.implicitHeight
-        visible: false
-        color: "transparent"
-
-        Rectangle {
-            id: shellMenuContent
-            width: 160
-            implicitHeight: 44
-            color: colors.mantle
-            radius: 10
-            border.color: colors.surface1
-            border.width: 1
-            
-            ColumnLayout {
-                anchors.fill: parent
-                anchors.margins: 6
-                PowerOption {
-                    icon: "󰈆"
-                    label: "Quit Quickshell"
-                    optColor: colors.red
-                    colors: root.colors
-                    onTriggered: {
-                        Qt.quit()
-                        shellMenuPopup.visible = false
-                    }
-                }
-            }
         }
     }
 }

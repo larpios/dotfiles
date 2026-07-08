@@ -62,6 +62,8 @@ Item {
         implicitWidth: brightnessMenu.implicitWidth
         implicitHeight: brightnessMenu.implicitHeight + 40
         visible: root.menuVisible
+        grabFocus: true
+        onVisibleChanged: if (!visible) root.menuVisible = false
         color: "transparent"
         
         BrightnessMenu {

@@ -108,6 +108,8 @@ Item {
         implicitWidth: kbMenu.implicitWidth
         implicitHeight: kbMenu.implicitHeight + 40
         visible: root.menuVisible
+        grabFocus: true
+        onVisibleChanged: if (!visible) root.menuVisible = false
         color: "transparent"
         
         KeyboardMenu {

@@ -144,6 +144,8 @@ Item {
         implicitWidth: mediaDashboard.implicitWidth + 40
         implicitHeight: mediaDashboard.implicitHeight + 60
         visible: root.mediaDashboardVisible
+        grabFocus: true
+        onVisibleChanged: if (!visible) root.mediaDashboardVisible = false
         color: "transparent"
         
         DropShadow {

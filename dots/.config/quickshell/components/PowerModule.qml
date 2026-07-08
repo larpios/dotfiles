@@ -53,6 +53,8 @@ Item {
         implicitWidth: powerMenu.implicitWidth + 30
         implicitHeight: powerMenu.implicitHeight + 60
         visible: root.menuVisible
+        grabFocus: true
+        onVisibleChanged: if (!visible) root.menuVisible = false
         color: "transparent"
         
         PowerMenu {

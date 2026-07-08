@@ -48,6 +48,8 @@ Item {
         implicitWidth: volMenu.implicitWidth
         implicitHeight: volMenu.implicitHeight + 40
         visible: root.menuVisible
+        grabFocus: true
+        onVisibleChanged: if (!visible) root.menuVisible = false
         color: "transparent"
         
         VolumeMenu {
