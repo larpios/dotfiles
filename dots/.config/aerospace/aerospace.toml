@@ -252,6 +252,11 @@ run = 'move-node-to-workspace 2'
 check-further-callbacks = true
 
 [[on-window-detected]]
+if.app-id = 'com.brave.Browser'
+run = 'move-node-to-workspace 2'
+check-further-callbacks = true
+
+[[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 3'
 check-further-callbacks = true
