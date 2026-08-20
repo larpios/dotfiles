@@ -79,7 +79,7 @@ export def "main" [
         $data
     } else {
         let processed = $data
-        | select senses pos word lang etymology_text
+        | select -o senses pos word lang etymology_text
         | flatten 
         | group-by lang 
         | transpose lang entries
