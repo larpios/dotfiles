@@ -124,6 +124,8 @@ alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
 alt-f = 'layout floating tiling' # Toggle between floating and tiling layout
+alt-shift-f = 'fullscreen'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
 alt-shift-j = 'move down'
@@ -267,7 +269,7 @@ run = 'move-node-to-workspace 4'
 check-further-callbacks = true
 
 [[on-window-detected]]
-if.app-id = "net.ankiweb.launcher"
+if.app-name-regex-substring = "anki"
 run = 'move-node-to-workspace 6'
 check-further-callbacks = true
 
