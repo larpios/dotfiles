@@ -1,7 +1,7 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "ac82af3"
-hash = "6849444b7c2df08eace83f3f86fb55a3"
+rev = "4dc7f1b"
+hash = "5bb0bfab901d3601c370eafdd66edd31"
 
 [[plugin.deps]]
 use = "Adda0/jjui"
@@ -10,7 +10,7 @@ hash = "39a4bc4632509e4a68e26b3eed3c3217"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "ac82af3"
+rev = "4dc7f1b"
 hash = "187cc58ba7ac3befd49c342129e6f1b6"
 
 [[plugin.deps]]
