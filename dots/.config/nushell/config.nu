@@ -37,6 +37,7 @@ use github.nu *
 use license.nu *
 use windows.nu
 use cookies.nu *
+use fun.nu *
 
 use external/wezterm.nu *
 use external/bitwarden.nu *
