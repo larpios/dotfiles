@@ -25,6 +25,7 @@ keybind(
     { main_mod, 'M' },
     hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
 )
+keybind({ main_mod, 'TAB' }, hl.dsp.focus({ last = true }))
 keybind({ main_mod, 'E' }, hl.dsp.exec_cmd(apps.fileManager))
 keybind({ main_mod, 'F' }, hl.dsp.window.float({ action = 'toggle' }))
 keybind({ main_mod, 'SHIFT',  'F' }, hl.dsp.window.fullscreen({ action = 'toggle' }))
