@@ -43,30 +43,18 @@ ShellRoot {
             border.color: colors.surface1
             border.width: 1
 
-            // --- Absolute Center Window Title ---
-            Text {
-                id: windowTitleLabel
-                anchors.centerIn: parent
-                text: (Hyprland.activeToplevel && Hyprland.activeToplevel.title) ? Hyprland.activeToplevel.title : "Hyprland"
-                color: colors.subtext1
-                font.pixelSize: 11
-                font.bold: true
-                elide: Text.ElideRight
-                width: parent.width * 0.4
-                horizontalAlignment: Text.AlignHCenter
-                z: 10
-            }
+
 
             RowLayout {
                 anchors.fill: parent
-                anchors.leftMargin: 12
-                anchors.rightMargin: 12
+                anchors.leftMargin: 8
+                anchors.rightMargin: 8
                 spacing: 0
 
                 // --- Left Section ---
                 RowLayout {
                     Layout.alignment: Qt.AlignVCenter
-                    spacing: 16
+                    spacing: 8
 
                     Text {
                         text: "󰣇"
@@ -120,23 +108,54 @@ ShellRoot {
                         }
                     }
 
-                    MediaController {
-                        colors: colors
-                        bar: bar
+                    RowLayout {
+                        Layout.alignment: Qt.AlignVCenter
+                        spacing: 8
+
+                        // --- Separator ---
+                        Rectangle {
+                            width: 1
+                            height: 16
+                            color: colors.surface2
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+
+                        MediaController {
+                            colors: colors
+                            bar: bar
+                        }
                     }
-                }
-
-                Item { Layout.fillWidth: true }
-
-                // --- Right Section ---
-                RowLayout {
-                    Layout.alignment: Qt.AlignVCenter
-                    spacing: 16
 
                     KeyboardIndicator {
                         colors: colors
                         bar: bar
                     }
+
+                    SystemIndicator {
+                        colors: colors
+                        bar: bar
+                    }
+                }
+
+                // --- Center Section (Window Title) ---
+                Text {
+                    id: windowTitleLabel
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.leftMargin: 8
+                    Layout.rightMargin: 8
+                    text: (Hyprland.activeToplevel && Hyprland.activeToplevel.title) ? Hyprland.activeToplevel.title : "Hyprland"
+                    color: colors.subtext1
+                    font.pixelSize: 11
+                    font.bold: true
+                    elide: Text.ElideRight
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                // --- Right Section ---
+                RowLayout {
+                    Layout.alignment: Qt.AlignVCenter
+                    spacing: 8
 
                     BluetoothIndicator {
                         colors: colors
@@ -149,11 +168,6 @@ ShellRoot {
                     }
                     
                     VolumeIndicator {
-                        colors: colors
-                        bar: bar
-                    }
-
-                    SystemIndicator {
                         colors: colors
                         bar: bar
                     }
