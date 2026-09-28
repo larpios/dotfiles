@@ -28,7 +28,7 @@ keybind(
 keybind({ main_mod, 'TAB' }, hl.dsp.focus({ last = true }))
 keybind({ main_mod, 'E' }, hl.dsp.exec_cmd(apps.fileManager))
 keybind({ main_mod, 'F' }, hl.dsp.window.float({ action = 'toggle' }))
-keybind({ main_mod, 'SHIFT',  'F' }, hl.dsp.window.fullscreen({ action = 'toggle' }))
+keybind({ main_mod, 'SHIFT', 'F' }, hl.dsp.window.fullscreen({ action = 'toggle' }))
 keybind({ main_mod, 'Space' }, hl.dsp.exec_cmd(apps.app_menu))
 keybind({ main_mod, 'W' }, hl.dsp.exec_cmd(apps.window_menu))
 keybind({ main_mod, 'R' }, function()
@@ -83,9 +83,9 @@ keybind({ main_mod, 'ALT', 'L' }, function()
 end)
 -- Workspaces
 for i = 1, 10 do
-    local key = i % 10
-    keybind({ main_mod .. ' + ' .. key }, hl.dsp.focus({ workspace = i }))
-    keybind({ main_mod .. ' + SHIFT + ' .. key }, hl.dsp.window.move({ workspace = i }))
+    local key = tostring(i % 10)
+    keybind({ main_mod, key }, hl.dsp.focus({ workspace = i }))
+    keybind({ main_mod, 'SHIFT', key }, hl.dsp.window.move({ workspace = i }))
 end
 
 -- Mouse binds
@@ -109,6 +109,11 @@ keybind({ main_mod, 'SHIFT', 'S' }, function()
 end)
 keybind({ main_mod, 'ALT', 'SHIFT', 'S' }, function()
     utils.screenshot('region', 'clipboard')
+end)
+
+-- Clipboard
+keybind({ main_mod, 'V' }, function()
+    hl.exec_cmd('copyq show')
 end)
 
 -- Multimedia keys
