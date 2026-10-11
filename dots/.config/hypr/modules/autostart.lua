@@ -10,5 +10,5 @@ hl.on('hyprland.start', function()
     hl.exec_cmd('copyq')
     hl.exec_cmd('awww-daemon')
     hl.exec_cmd('awww img ' .. os.getenv('HOME') .. '.dotfiles/images/nanachi/923441.jpg')
-    
+    hl.exec_cmd('hyprctl setcursor niko-oneshot 24')
 end)
