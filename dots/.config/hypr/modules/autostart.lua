@@ -1,6 +1,7 @@
 local apps = require('modules.programs')
 
 hl.on('hyprland.start', function()
+    hl.exec_cmd('caelestia-shell -d')
     hl.exec_cmd(apps.terminal)
     hl.exec_cmd(apps.browser)
     hl.exec_cmd('nm-applet')
@@ -8,5 +9,6 @@ hl.on('hyprland.start', function()
     hl.exec_cmd('hypridle')
     hl.exec_cmd('copyq')
     hl.exec_cmd('awww-daemon')
-    hl.exec_cmd('awww img ' .. os.getenv('HOME') .. '/.dotfiles/images/hollow_knight/1184118.jpg')
+    hl.exec_cmd('awww img ' .. os.getenv('HOME') .. '.dotfiles/images/nanachi/923441.jpg')
+    
 end)
