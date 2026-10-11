@@ -9,6 +9,7 @@ require('modules.theme')
 require('modules.input')
 require('modules.binds')
 require('modules.rules')
+require('modules.noctalia')
 
 -- Utility notifications can be used here if needed
 local utils = require('utils')

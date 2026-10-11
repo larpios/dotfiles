@@ -1,7 +1,7 @@
 local apps = require('modules.programs')
 
 hl.on('hyprland.start', function()
-    hl.exec_cmd('caelestia-shell -d')
+    hl.exec_cmd('noctalia')
     hl.exec_cmd(apps.terminal)
     hl.exec_cmd(apps.browser)
     hl.exec_cmd('nm-applet')
