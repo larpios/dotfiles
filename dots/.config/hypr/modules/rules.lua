@@ -33,7 +33,7 @@ hl.window_rule({
 
 hl.window_rule({
     name = 'steam',
-    match = { class = '^steam' },
+    match = { class = '^steam$', title = '^Steam$' },
     workspace = 4,
     maximize = true,
     float = false,
@@ -42,11 +42,24 @@ hl.window_rule({
 hl.window_rule({
     name = 'steam-floats',
     match = {
-        class = '^steam',
-        title = 'negative:steam',
+        class = '^steam$',
+        title = 'negative:^Steam$',
     },
     workspace = 4,
     float = true,
+    center = true,
+})
+
+hl.window_rule({
+    name = 'steam-friends-list',
+    match = {
+        class = '^steam$',
+        title = '^Friend List$',
+    },
+    workspace = 4,
+    float = true,
+    center = true,
+    size = { 'monitor_w * 0.25', 'monitor_h * 0.60' },
 })
 
 hl.window_rule({
