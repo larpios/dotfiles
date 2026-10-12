@@ -8,7 +8,7 @@ hl.config({
             natural_scroll = false,
         },
         repeat_rate = 40,
-        repeat_delay = 150,
+        repeat_delay = 300,
     },
 })
 
