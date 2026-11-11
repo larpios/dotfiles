@@ -67,8 +67,8 @@ use misc.nu is-exe
 
 export def --wrapped wimgcat [
     ...files: path, # The names of the image file to be displayed
-    --width (-w): string, # Specify the display width
-    --height (-h): string, # Specify the display height
+    --width: string, # Specify the display width
+    --height: string, # Specify the display height
     --no-preserve-aspect-ratio, # Do not respect the aspect ratio
     --position (-p): string, # Set the cursor position prior to displaying the image. The default is to use the current cursor position
     --no-move-cursor, # Do not move the cursor after displaying the image. Note that when used like this from the shell, there is a very high chance that shell prompt will overwrite the image; you may wish to also use `--hold` in that case
