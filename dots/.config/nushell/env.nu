@@ -7,12 +7,12 @@ if not ($AUTOLOAD_DIR | path exists) {
 }
 
 const ENV_DIRS = [
+    '/nix/var/nix/profiles/default/bin',
+    '~/.nix-profile/bin',
     '/usr/bin',
     '/usr/local/bin',
     '/bin'
-    '/nix/var/nix/profiles/default/bin',
     '/opt/homebrew/bin'
-    '~/.nix-profile/bin',
     '~/.cargo/bin',
     '~/.local/bin',
     '~/.cache/.bun/bin',
