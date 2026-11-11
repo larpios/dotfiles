@@ -47,10 +47,7 @@ use external/bat.nu *
 
 let nu_config = {
     completions: {
-      external: {
-        enable: true
-        max_results: 200
-      }
+      external: { enable: true max_results: 200 }
       algorithm: 'fuzzy'
     }
     edit_mode: 'vi'
@@ -61,9 +58,7 @@ let nu_config = {
       vi_insert: 'line'
       vi_normal: 'block'
     }
-    display_errors: {
-      exit_code: true
-    }
+    display_errors: { exit_code: true }
     error_style: 'fancy'
     footer_mode: 'auto'
     history: {
@@ -71,120 +66,56 @@ let nu_config = {
       isolation: true
     }
     hooks: {
-        display_output: {
-          table -e
-        }
-        pre_execution: [
-            { ||
-                let cmd = (commandline)
-                let clean_cmd = ($cmd 
-                    | lines
-                    | str trim
-                    | str replace -r '^\$\s+' '' 
-                    | str replace -a '&&' ';'
-                    | str join "\n"
-                )
-            
-                if $cmd != $clean_cmd {
-                    commandline edit --replace $clean_cmd
-                }
-            }
-        ]
+        display_output: { table -e }
     }
-    keybindings: [
-        {
-            name: history_menu
-            modifier: control
-            keycode: char_y
-            mode: [vi_insert vi_normal]
-            event: {
-                until: [
-                    { send: menu name: history_menu }
-                    { send: menupagenext }
-                ]
-            }
-        }
-        {
-            name: sanitize_commands
-            modifier: control
-            keycode: char_t
-            mode: [vi_insert vi_normal]
-            event: {
-                send: executehostcommand,
-                cmd: `
-                let new_cmdline = commandline 
-                    | lines 
-                    | str trim 
-                    | str replace -r '^\$\s+' '' 
-                    | str replace -ar '\s*&&' '; ' 
-                    | str replace -ar '\|\|\s+(true)?' '| ignore; '
-                    | each { |line|
-                        let parsed = $line | parse 'export {key}={value}' | last
-                        if ($parsed | is-not-empty) {
-                            $"\$env.($parsed.key) = ($parsed.value)"
-                        } else {
-                            $line
-                        }
-                    }
-                    | str join "\n"
-
-                commandline edit --replace $new_cmdline
-                `
-            }
-        }
-    ],
-    menus: [
-        {
-            name: help_menu
-            only_buffer_difference: true # Search is done on the text written after activating the menu
-            marker: "? "                 # Indicator that appears with the menu is active
-            type: {
-                layout: description      # Type of menu
-                columns: 4               # Number of columns where the options are displayed
-                col_width: 20            # Optional value. If missing all the screen width is used to calculate column width
-                col_padding: 2           # Padding between columns
-                selection_rows: 4        # Number of rows allowed to display found options
-                description_rows: 10     # Number of rows allowed to display command description
-            }
-            style: {
-                text: green                   # Text style
-                selected_text: green_reverse  # Text style for selected option
-                description_text: yellow      # Text style for description
-            }
-        }
-        {
-            name: completion_menu
-            only_buffer_difference: false # Search is done on the text written after activating the menu
-            marker: "| "                  # Indicator that appears with the menu is active
-            type: {
-                layout: columnar          # Type of menu
-                columns: 4                # Number of columns where the options are displayed
-                col_width: 20             # Optional value. If missing all the screen width is used to calculate column width
-                col_padding: 2            # Padding between columns
-            }
-            style: {
-                text: green                   # Text style
-                selected_text: green_reverse  # Text style for selected option
-                description_text: yellow      # Text style for description
-            }
-        }
-        {
-            name: history_menu
-            only_buffer_difference: true # Search is done on the text written after activating the menu
-            marker: "? "                 # Indicator that appears with the menu is active
-            type: {
-                layout: list             # Type of menu
-                page_size: 10            # Number of entries that will presented when activating the menu
-            }
-            style: {
-                text: green                   # Text style
-                selected_text: green_reverse  # Text style for selected option
-                description_text: yellow      # Text style for description
-            }
-        }
-    ],
     use_kitty_protocol: true
 }
 
 $env.config = $env.config | merge $nu_config
 
+$env.config.keybindings ++= [
+     {
+         name: sanitize_commands
+         modifier: control
+         keycode: char_t
+         mode: [vi_insert vi_normal]
+         event: {
+             send: executehostcommand,
+             cmd: `
+                 let new_cmdline = commandline 
+                     | lines 
+                     | str trim 
+                     | str replace -r '^\$\s+' '' 
+                     | str replace -ar '\s*&&' '; ' 
+                     | str replace -ar '\|\|\s+(true)?' '| ignore; '
+                     | each { |line|
+                         let parsed = $line | parse 'export {key}={value}' | last
+                         if ($parsed | is-not-empty) {
+                             $"\$env.($parsed.key) = ($parsed.value)"
+                         } else {
+                             $line
+                         }
+                     }
+                     | str join "\n"
+                 commandline edit --replace $new_cmdline
+             `
+         }
+     }
+]
+
+$env.config.hooks.pre_execution ++= [
+    { ||
+        let cmd = (commandline)
+        let clean_cmd = ($cmd 
+            | lines
+            | str trim
+            | str replace -r '^\$\s+' '' 
+            | str replace -a '&&' ';'
+            | str join "\n"
+        )
+
+        if $cmd != $clean_cmd {
+            commandline edit --replace $clean_cmd
+        }
+    }
+]
