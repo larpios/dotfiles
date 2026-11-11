@@ -3,9 +3,6 @@ local theme = require("themes").catppuccin.mocha
 
 -- Seeding random numbers before generating for use
 math.randomseed(os.time())
-math.random()
-math.random()
-math.random()
 
 local GLOB_PATTERN = "*.{jpg,jpeg,png,gif,bmp,ico,tiff,pnm,dds,tga}"
 
@@ -70,7 +67,7 @@ function BackDrops:_gen_opts()
 		width = "120%",
 		vertical_offset = "-10%",
 		horizontal_offset = "-10%",
-		opacity = 0.7, -- Subtle overlay
+		opacity = 0.9,
 	})
 
 	return bg_opts

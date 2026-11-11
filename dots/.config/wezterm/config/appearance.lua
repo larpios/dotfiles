@@ -35,7 +35,7 @@ config.harfbuzz_features = { 'calt=1', 'clig=1', 'liga=1' }
 -- Window
 config.window_padding = { left = '3px', right = '3px', top = '3px', bottom = '3px' }
 config.background = require('utils.backdrops'):get_initial()
-config.inactive_pane_hsb = { saturation = 0.6, brightness = 0.4 }
+config.inactive_pane_hsb = { saturation = 0.6, brightness = 0.6 }
 config.macos_window_background_blur = 10
 config.native_macos_fullscreen_mode = true
 
